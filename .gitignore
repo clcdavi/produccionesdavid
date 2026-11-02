@@ -17,3 +17,7 @@ node_modules/
 _tmp_*.html
 *.log
 *.mp4
+
+# Sesiones de navegador y capturas locales
+mcp-tiktok/tiktok_user_session/
+mcp-tiktok/screenshots/
