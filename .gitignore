@@ -3,6 +3,7 @@
 claves_*.json
 *.env
 *.env.*
+.enfoco_config.json
 
 # Entornos virtuales y caches
 __pycache__/
