@@ -1,0 +1,116 @@
+{
+  "tasa_ars_usd": 1500,
+  "proyectos": [
+    {
+      "id": "producciones-david-avatares",
+      "cliente": "Producciones David (Reel Avatares Multiescenario)",
+      "fecha": "2026-11-01",
+      "proveedor": "APIMart (kling-3.0-turbo + 3 Voces IA)",
+      "estado": "Completado (Publicidad Propia)",
+      "items": [
+        {
+          "nombre": "Avatar 1 (5s 9:16)",
+          "task_id": "task_01M6CHY8K1VW4AGX4TJVQPMQE4",
+          "modelo": "kling-3.0-turbo",
+          "creditos": 5.72,
+          "usd": 0.572
+        },
+        {
+          "nombre": "Avatar 2 (5s 9:16)",
+          "task_id": "task_01M6CHY81S2PXBJEH76Z2V7296",
+          "modelo": "kling-3.0-turbo",
+          "creditos": 5.72,
+          "usd": 0.572
+        },
+        {
+          "nombre": "Avatar 3 (5s 9:16)",
+          "task_id": "task_01M6CHY865R3ERD9654Y3AK5VR",
+          "modelo": "kling-3.0-turbo",
+          "creditos": 5.72,
+          "usd": 0.572
+        }
+      ],
+      "total_creditos": 17.16,
+      "total_usd": 1.716,
+      "entregable": "/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/campana-lanzamiento-pd/reel_avatares_producciones_david.mp4"
+    },
+    {
+      "id": "sw-store-kling",
+      "cliente": "SW Store (@sw.store_ar)",
+      "fecha": "2026-10-31",
+      "proveedor": "APIMart (kling-3.0-turbo)",
+      "estado": "Entregado (Canje / Embajador de Clientes)",
+      "items": [
+        {
+          "nombre": "01_gancho.mp4 (5s 9:16)",
+          "task_id": "task_01M6A5VYET2W5DSK7WNQQ3RKNN",
+          "modelo": "kling-3.0-turbo",
+          "creditos": 5.72,
+          "usd": 0.572
+        },
+        {
+          "nombre": "02_kraft.mp4 (5s 9:16)",
+          "task_id": "task_01M6A5W15ZB5EDC3ARNNGTEFCN",
+          "modelo": "kling-3.0-turbo",
+          "creditos": 5.72,
+          "usd": 0.572
+        },
+        {
+          "nombre": "03_universitario.mp4 (5s 9:16)",
+          "task_id": "task_01M6A5W4AX21N2S54A9PHG0ERM",
+          "modelo": "kling-3.0-turbo",
+          "creditos": 5.72,
+          "usd": 0.572
+        },
+        {
+          "nombre": "Montaje HyperFrames + Música Mixkit + Logo HD",
+          "task_id": "local-render",
+          "modelo": "HyperFrames Local",
+          "creditos": 0,
+          "usd": 0.0
+        }
+      ],
+      "total_creditos": 17.16,
+      "total_usd": 1.716,
+      "entregable": "/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/sw-store/Entrega_SW_Store_Producciones_David"
+    },
+    {
+      "id": "pizza-ten-local",
+      "cliente": "Pizza Ten (@pizzaten_sanfer)",
+      "fecha": "2026-10-24",
+      "proveedor": "Pipeline Local Gratuito",
+      "estado": "Completado",
+      "items": [
+        {
+          "nombre": "Extracción Maps + Instagram + Montaje HyperFrames",
+          "task_id": "local",
+          "modelo": "Local 0 Costo",
+          "creditos": 0,
+          "usd": 0.0
+        }
+      ],
+      "total_creditos": 0,
+      "total_usd": 0.0,
+      "entregable": "/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/pizza-ten/anuncio"
+    },
+    {
+      "id": "parrilla-la-reja-local",
+      "cliente": "Parrilla La Reja",
+      "fecha": "2026-10-24",
+      "proveedor": "Pipeline Local Gratuito",
+      "estado": "Completado",
+      "items": [
+        {
+          "nombre": "Extracción Maps + Montaje HyperFrames",
+          "task_id": "local",
+          "modelo": "Local 0 Costo",
+          "creditos": 0,
+          "usd": 0.0
+        }
+      ],
+      "total_creditos": 0,
+      "total_usd": 0.0,
+      "entregable": "/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/parrilla-la-reja/anuncio"
+    }
+  ]
+}

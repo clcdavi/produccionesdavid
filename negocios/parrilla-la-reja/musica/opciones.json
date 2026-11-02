@@ -1,0 +1,200 @@
+[
+  {
+    "id": 1141,
+    "titulo": "Funky Triplets",
+    "artista": "Michael Ramir C.",
+    "genero": "Funk",
+    "duracion": 109,
+    "mp3": "https://assets.mixkit.co/music/1141/1141.mp3",
+    "generos": [
+      "funk",
+      "contemporary-r-and-b"
+    ],
+    "ritmo": {
+      "bpm": 99.99,
+      "pulso": 0.6001,
+      "compas": 2.4002,
+      "inicio": 79.142,
+      "caida": 81.542,
+      "compases": 10,
+      "fin": 105.545,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 2.37
+    },
+    "nota": 8.37
+  },
+  {
+    "id": 78,
+    "titulo": "Sports Rock",
+    "artista": "Ahjay Stelino",
+    "genero": "Rock",
+    "duracion": 102,
+    "mp3": "https://assets.mixkit.co/music/78/78.mp3",
+    "generos": [
+      "blues-rock",
+      "rock"
+    ],
+    "ritmo": {
+      "bpm": 130.0,
+      "pulso": 0.4615,
+      "compas": 1.8462,
+      "inicio": 69.626,
+      "caida": 71.472,
+      "compases": 15,
+      "fin": 99.164,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 3.2
+    },
+    "nota": 8.2
+  },
+  {
+    "id": 996,
+    "titulo": "Hit the Gas!",
+    "artista": "Michael Ramir C.",
+    "genero": "Funk Rock",
+    "duracion": 100,
+    "mp3": "https://assets.mixkit.co/music/996/996.mp3",
+    "generos": [
+      "funk-rock"
+    ],
+    "ritmo": {
+      "bpm": 120.0,
+      "pulso": 0.5,
+      "compas": 2.0,
+      "inicio": 66.941,
+      "caida": 68.941,
+      "compases": 14,
+      "fin": 96.941,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 2.0
+    },
+    "nota": 8.0
+  },
+  {
+    "id": 860,
+    "titulo": "Year 2001",
+    "artista": "Michael Ramir C.",
+    "genero": "Funk",
+    "duracion": 111,
+    "mp3": "https://assets.mixkit.co/music/860/860.mp3",
+    "generos": [
+      "funk",
+      "funk-rock"
+    ],
+    "ritmo": {
+      "bpm": 119.99,
+      "pulso": 0.5,
+      "compas": 2.0002,
+      "inicio": 75.471,
+      "caida": 77.471,
+      "compases": 14,
+      "fin": 105.473,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 2.9
+    },
+    "nota": 7.9
+  },
+  {
+    "id": 1092,
+    "titulo": "Cold Coffee",
+    "artista": "Michael Ramir C.",
+    "genero": "Rock",
+    "duracion": 131,
+    "mp3": "https://assets.mixkit.co/music/1092/1092.mp3",
+    "generos": [
+      "blues-rock",
+      "rock"
+    ],
+    "ritmo": {
+      "bpm": 105.0,
+      "pulso": 0.5714,
+      "compas": 2.2857,
+      "inicio": 99.182,
+      "caida": 101.468,
+      "compases": 12,
+      "fin": 128.897,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 2.55
+    },
+    "nota": 7.55
+  },
+  {
+    "id": 989,
+    "titulo": "Dirty Thinkin'",
+    "artista": "Michael Ramir C.",
+    "genero": "Funk",
+    "duracion": 89,
+    "mp3": "https://assets.mixkit.co/music/989/989.mp3",
+    "generos": [
+      "funk",
+      "jazz-funk"
+    ],
+    "ritmo": {
+      "bpm": 119.98,
+      "pulso": 0.5001,
+      "compas": 2.0003,
+      "inicio": 56.439,
+      "caida": 58.439,
+      "compases": 14,
+      "fin": 86.444,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 2.21
+    },
+    "nota": 7.21
+  },
+  {
+    "id": 1137,
+    "titulo": "Don't Fall Again",
+    "artista": "Michael Ramir C.",
+    "genero": "Pop",
+    "duracion": 139,
+    "mp3": "https://assets.mixkit.co/music/1137/1137.mp3",
+    "generos": [
+      "pop",
+      "rock"
+    ],
+    "ritmo": {
+      "bpm": 87.0,
+      "pulso": 0.6897,
+      "compas": 2.7586,
+      "inicio": 103.049,
+      "caida": 105.807,
+      "compases": 10,
+      "fin": 133.394,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 3.33
+    },
+    "nota": 6.33
+  },
+  {
+    "id": 1173,
+    "titulo": "Free Us",
+    "artista": "Michael Ramir C.",
+    "genero": "Blues Rock",
+    "duracion": 142,
+    "mp3": "https://assets.mixkit.co/music/1173/1173.mp3",
+    "generos": [
+      "blues-rock"
+    ],
+    "ritmo": {
+      "bpm": 80.0,
+      "pulso": 0.75,
+      "compas": 3.0,
+      "inicio": 108.685,
+      "caida": 111.685,
+      "compases": 9,
+      "fin": 138.685,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 2.81
+    },
+    "nota": 5.81
+  }
+]

@@ -1,0 +1,25 @@
+{
+  "titulo": "Cat Walk",
+  "artista": "Arulo",
+  "genero": "House",
+  "duracion": 124,
+  "fuente": "Mixkit",
+  "mp3": "https://assets.mixkit.co/music/371/371.mp3",
+  "licencia": "Mixkit Stock Music Free License",
+  "licencia_url": "https://mixkit.co/license/#musicFree",
+  "atribucion_obligatoria": false,
+  "archivo": "musica/musica.mp3",
+  "ritmo": {
+    "bpm": 130.01,
+    "pulso": 0.4615,
+    "compas": 1.846,
+    "inicio": 27.623,
+    "caida": 29.469,
+    "compases": 9,
+    "fin": 46.084,
+    "final_natural": true,
+    "caida_con_subida": true,
+    "claridad": 2.36
+  },
+  "creditos": "Música: «Cat Walk» de Arulo (Mixkit)"
+}

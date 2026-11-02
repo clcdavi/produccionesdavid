@@ -1,0 +1,149 @@
+<!-- Vignette & warm ember atmosphere across full video -->
+<div class="atmosfera"></div>
+<div class="marco-reja">
+  <div class="reja-top"></div>
+  <div class="reja-bottom"></div>
+</div>
+
+<!-- Persistent subtle header pill (visible after logo drop until closure) -->
+<div class="clip capa" data-start="{{P.salon.ini}}" data-duration="{{P.resena.fin - P.salon.ini}}" data-track-index="2">
+  <div class="cabecera-fija" id="cabecera-fija">
+    <span class="punto-brasa"></span>
+    <span class="cab-nombre">PARRILLA LA REJA</span>
+    <span class="cab-sep">·</span>
+    <span class="cab-ciudad">SAN FERNANDO</span>
+  </div>
+</div>
+
+<!-- 1. GANCHO -->
+<div class="clip capa" data-start="{{P.gancho.ini}}" data-duration="{{P.gancho.dur}}" data-track-index="3">
+  <div class="velo-abajo"></div>
+  <div class="bloque-gancho">
+    <div class="etiqueta-tiza" id="g-tag">HOY SE PRENDE EL FUEGO</div>
+    <h1 class="titular-brasa" id="g-tit" data-palabras>¿Hambre de <em>asado</em> de verdad?</h1>
+  </div>
+</div>
+
+<!-- Flash on beat drop -->
+<div class="clip capa" data-start="{{P.logo.ini}}" data-duration="0.45" data-track-index="18">
+  <div class="destello-fuego" id="destello-logo"></div>
+</div>
+
+<!-- 2. LOGO -->
+<div class="clip capa" data-start="{{P.logo.ini}}" data-duration="{{P.logo.dur + 0.35}}" data-track-index="4">
+  <div class="velo-centro"></div>
+  <div class="bloque-logo">
+    <div class="placa-logo" id="logo-caja" data-layout-allow-overflow>
+      <img class="img-logo" id="logo-img" src="{{archivo:anuncio/logo/logo-blanco.png}}" alt="Parrilla La Reja" data-layout-allow-overflow />
+    </div>
+    <div class="cinta-barrio" id="logo-sub">EL CLÁSICO DE AV. YRIGOYEN</div>
+  </div>
+</div>
+
+<!-- 3. SALON -->
+<div class="clip capa" data-start="{{P.salon.ini}}" data-duration="{{P.salon.dur + 0.35}}" data-track-index="5">
+  <div class="velo-abajo"></div>
+  <div class="bloque-inferior" id="s-bloque">
+    <div class="pildora-roja" id="s-pil">AMBIENTE FAMILIAR Y CÁLIDO</div>
+    <h2 class="tit-bodegon" id="s-tit" data-palabras>Tu bodegón de barrio en <em>San Fernando</em></h2>
+  </div>
+</div>
+
+<!-- 4. PARRILLA -->
+<div class="clip capa" data-start="{{P.parrilla.ini}}" data-duration="{{P.parrilla.dur}}" data-track-index="6">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="p-card" data-layout-allow-overflow>
+    <div class="piz-num">ESPECIALIDAD #01</div>
+    <div class="piz-titulo" id="p-tit" data-letras>PARRILLADA AL CARBÓN</div>
+    <div class="piz-desc" id="p-desc">Brasero en tu mesa para compartir en familia</div>
+  </div>
+</div>
+
+<!-- 5. ASADO -->
+<div class="clip capa" data-start="{{P.asado.ini}}" data-duration="{{P.asado.dur}}" data-track-index="7">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="a-card" data-layout-allow-overflow>
+    <div class="piz-num">CORTE BIEN ARGENTINO</div>
+    <div class="piz-titulo" id="a-tit" data-letras>ASADO Y VACÍO</div>
+    <div class="piz-desc" id="a-desc">Tierno, jugoso y recién salido de los fierros</div>
+  </div>
+</div>
+
+<!-- 6. ACHURAS -->
+<div class="clip capa" data-start="{{P.achuras.ini}}" data-duration="{{P.achuras.dur}}" data-track-index="8">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="ac-card" data-layout-allow-overflow>
+    <div class="piz-num">PARA ARRANCAR</div>
+    <div class="piz-titulo" id="ac-tit" data-letras>MIX DE ACHURAS</div>
+    <div class="piz-desc" id="ac-desc">Chinchulines, chorizo, morcilla y pollo al limón</div>
+  </div>
+</div>
+
+<!-- 7. MILA -->
+<div class="clip capa" data-start="{{P.mila.ini}}" data-duration="{{P.mila.dur}}" data-track-index="9">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="m-card" data-layout-allow-overflow>
+    <div class="piz-num">CLÁSICO DE BODEGÓN</div>
+    <div class="piz-titulo" id="m-tit" data-letras>MILANESA NAPOLITANA</div>
+    <div class="piz-desc" id="m-desc">Con jamón, mucho queso gratinado, tomate y puré</div>
+  </div>
+</div>
+
+<!-- 8. R1 (Fritas) -->
+<div class="clip capa" data-start="{{P.r1.ini}}" data-duration="{{P.r1.dur}}" data-track-index="10">
+  <div class="velo-centro-suave"></div>
+  <div class="sello-rapido" id="r1-sello" data-layout-allow-overflow>
+    <span class="sello-chico">GUARNICIÓN BIEN SERVIDA</span>
+    <span class="sello-grande">FRITAS DORADAS</span>
+  </div>
+</div>
+
+<!-- 9. R2 (Postres) -->
+<div class="clip capa" data-start="{{P.r2.ini}}" data-duration="{{P.r2.dur + 0.35}}" data-track-index="11">
+  <div class="velo-centro-suave"></div>
+  <div class="sello-rapido sello-dulce" id="r2-sello" data-layout-allow-overflow>
+    <span class="sello-chico">EL BROCHE DE ORO</span>
+    <span class="sello-grande">POSTRES CASEROS</span>
+  </div>
+</div>
+
+<!-- 10. RESENA -->
+<div class="clip capa" data-start="{{P.resena.ini}}" data-duration="{{P.resena.dur + 0.4}}" data-track-index="12">
+  <div class="velo-oscuro"></div>
+  <div class="tarjeta-resena" id="res-card" data-layout-allow-overflow>
+    <div class="res-cab">
+      <div class="res-estrellas">★★★★★</div>
+      <div class="res-total">4,2 ★ · 2.178 RESEÑAS EN GOOGLE</div>
+    </div>
+    <blockquote class="res-cita" id="res-cita" data-palabras>
+      “El servicio de 10, la atención excelente… el lugar muy familiar y cálido. Las empanadas riquísimas, una delicia.”
+    </blockquote>
+    <div class="res-pie">
+      <span class="res-fuente">Reseña en Google</span>
+      <span class="sello-efectivo" id="res-efec">PROMO EFECTIVO EN EL LOCAL</span>
+    </div>
+  </div>
+</div>
+
+<!-- 11. CIERRE -->
+<div class="clip capa" data-start="{{P.cierre.ini}}" data-duration="{{P.cierre.dur}}" data-track-index="13">
+  <div class="velo-cierre"></div>
+  <div class="panel-cierre" id="c-panel" data-layout-allow-overflow>
+    <img class="cierre-logo" id="c-logo" src="{{archivo:anuncio/logo/logo-blanco.png}}" alt="Parrilla La Reja" data-layout-allow-overflow />
+    <div class="cierre-cta" id="c-cta">VENÍ A COMER O PEDÍ TU DELIVERY</div>
+    <div class="cierre-datos" id="c-datos">
+      <div class="dato-fila">
+        <span class="dato-etiq">DIRECCIÓN</span>
+        <span class="dato-val">Av. Hipólito Yrigoyen 2393 · San Fernando</span>
+      </div>
+      <div class="dato-fila">
+        <span class="dato-etiq">HORARIOS</span>
+        <span class="dato-val">Mar y Mié 12–16 h · Jue a Dom 12–16 y 20–24 h</span>
+      </div>
+      <div class="dato-fila dato-tel">
+        <span class="dato-etiq">PEDIDOS</span>
+        <span class="dato-val">011 4549-2942 · Delivery y Salón</span>
+      </div>
+    </div>
+  </div>
+</div>

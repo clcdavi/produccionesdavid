@@ -1,0 +1,199 @@
+[
+  {
+    "id": 474,
+    "titulo": "What About Action?",
+    "artista": "Diego Nava",
+    "genero": "Dance-Pop",
+    "duracion": 117,
+    "mp3": "https://assets.mixkit.co/music/474/474.mp3",
+    "generos": [
+      "dance-pop",
+      "house"
+    ],
+    "ritmo": {
+      "bpm": 120.99,
+      "pulso": 0.4959,
+      "compas": 1.9836,
+      "inicio": 16.539,
+      "caida": 18.523,
+      "compases": 15,
+      "fin": 48.277,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 3.08
+    },
+    "nota": 9.08
+  },
+  {
+    "id": 828,
+    "titulo": "Don't Worry",
+    "artista": "Michael Ramir C.",
+    "genero": "Pop",
+    "duracion": 136,
+    "mp3": "https://assets.mixkit.co/music/828/828.mp3",
+    "generos": [
+      "pop"
+    ],
+    "ritmo": {
+      "bpm": 120.01,
+      "pulso": 0.5,
+      "compas": 1.9998,
+      "inicio": 107.038,
+      "caida": 109.037,
+      "compases": 12,
+      "fin": 133.035,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 2.33
+    },
+    "nota": 8.33
+  },
+  {
+    "id": 158,
+    "titulo": "Happy Times",
+    "artista": "Alejandro Magaña (A. M.)",
+    "genero": "Pop",
+    "duracion": 100,
+    "mp3": "https://assets.mixkit.co/music/158/158.mp3",
+    "generos": [
+      "pop",
+      "indie-pop"
+    ],
+    "ritmo": {
+      "bpm": 120.0,
+      "pulso": 0.5,
+      "compas": 2.0,
+      "inicio": 67.964,
+      "caida": 69.964,
+      "compases": 13,
+      "fin": 95.964,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 3.26
+    },
+    "nota": 8.26
+  },
+  {
+    "id": 935,
+    "titulo": "Disco Ain't Old School",
+    "artista": "Michael Ramir C.",
+    "genero": "Disco",
+    "duracion": 98,
+    "mp3": "https://assets.mixkit.co/music/935/935.mp3",
+    "generos": [
+      "pop",
+      "disco"
+    ],
+    "ritmo": {
+      "bpm": 125.0,
+      "pulso": 0.48,
+      "compas": 1.92,
+      "inicio": 67.618,
+      "caida": 69.538,
+      "compases": 14,
+      "fin": 96.418,
+      "final_natural": true,
+      "caida_con_subida": false,
+      "claridad": 2.98
+    },
+    "nota": 7.98
+  },
+  {
+    "id": 1044,
+    "titulo": "Thanks for another day",
+    "artista": "Michael Ramir C.",
+    "genero": "World",
+    "duracion": 126,
+    "mp3": "https://assets.mixkit.co/music/1044/1044.mp3",
+    "generos": [
+      "disco",
+      "world"
+    ],
+    "ritmo": {
+      "bpm": 115.0,
+      "pulso": 0.5217,
+      "compas": 2.087,
+      "inicio": 2.54,
+      "caida": 4.627,
+      "compases": 12,
+      "fin": 29.67,
+      "final_natural": false,
+      "caida_con_subida": false,
+      "claridad": 3.39
+    },
+    "nota": 5.39
+  },
+  {
+    "id": 288,
+    "titulo": "One More Dance",
+    "artista": "Arulo",
+    "genero": "Pop",
+    "duracion": 100,
+    "mp3": "https://assets.mixkit.co/music/288/288.mp3",
+    "generos": [
+      "pop",
+      "dance-pop"
+    ],
+    "ritmo": {
+      "bpm": 110.0,
+      "pulso": 0.5455,
+      "compas": 2.1818,
+      "inicio": 23.385,
+      "caida": 25.567,
+      "compases": 12,
+      "fin": 51.749,
+      "final_natural": false,
+      "caida_con_subida": false,
+      "claridad": 1.72
+    },
+    "nota": 3.72
+  },
+  {
+    "id": 854,
+    "titulo": "Old Letter",
+    "artista": "Michael Ramir C.",
+    "genero": "Pop",
+    "duracion": 165,
+    "mp3": "https://assets.mixkit.co/music/854/854.mp3",
+    "generos": [
+      "pop"
+    ],
+    "ritmo": {
+      "bpm": 140.01,
+      "pulso": 0.4285,
+      "compas": 1.7142,
+      "inicio": 12.243,
+      "caida": 13.957,
+      "compases": 15,
+      "fin": 39.67,
+      "final_natural": false,
+      "caida_con_subida": false,
+      "claridad": 2.56
+    },
+    "nota": 2.56
+  },
+  {
+    "id": 1115,
+    "titulo": "Party Like It's Your Birthday",
+    "artista": "Michael Ramir C.",
+    "genero": "Indie Pop",
+    "duracion": 103,
+    "mp3": "https://assets.mixkit.co/music/1115/1115.mp3",
+    "generos": [
+      "indie-pop"
+    ],
+    "ritmo": {
+      "bpm": 138.0,
+      "pulso": 0.4348,
+      "compas": 1.7391,
+      "inicio": 44.719,
+      "caida": 46.458,
+      "compases": 15,
+      "fin": 72.545,
+      "final_natural": false,
+      "caida_con_subida": false,
+      "claridad": 2.46
+    },
+    "nota": 2.46
+  }
+]

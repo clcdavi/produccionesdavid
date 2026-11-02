@@ -1,0 +1,81 @@
+{
+  "extraccion": {
+    "fecha": "2026-10-20 19:43",
+    "url_entrada": "https://www.google.com/maps/place/Parrilla+La+Reja/data=!4m7!3m6!1s0x95bca529a770d72f:0xee58326e16d2618a!8m2!3d-34.448636!4d-58.5658253!16s%2Fg%2F11bbrlpn1j!19sChIJL9dwpymlvJURimHSFm4yWO4",
+    "url_completa": "https://www.google.com/maps/place/Parrilla+La+Reja/data=!4m7!3m6!1s0x95bca529a770d72f:0xee58326e16d2618a!8m2!3d-34.448636!4d-58.5658253!16s%2Fg%2F11bbrlpn1j!19sChIJL9dwpymlvJURimHSFm4yWO4",
+    "fuente": "local"
+  },
+  "nombre": "Parrilla La Reja",
+  "categoria": "Restaurante",
+  "categorias": [
+    "Restaurante"
+  ],
+  "subtitulo_google": null,
+  "descripcion": null,
+  "direccion": "Av. Hipólito Yrigoyen 2393, B1646 San Fernando, Provincia de Buenos Aires",
+  "direccion_completa": {
+    "borough": "",
+    "street": "Av. Hipólito Yrigoyen 2393",
+    "city": "San Fernando",
+    "postal_code": "B1646",
+    "state": "Provincia de Buenos Aires",
+    "country": "AR"
+  },
+  "telefono": "011 4549-2942",
+  "web": null,
+  "emails": [],
+  "horarios": {
+    "lunes": "Cerrado",
+    "martes": "12–4 p. m.",
+    "miércoles": "12–4 p. m.",
+    "jueves": "12–4 p. m., 8 p. m.–12 a. m.",
+    "viernes": "12–4 p. m., 8 p. m.–12 a. m.",
+    "sábado": "12–4 p. m., 8 p. m.–12 a. m.",
+    "domingo": "12–4 p. m., 8 p. m.–12 a. m."
+  },
+  "rango_precios": null,
+  "valoracion": 4.2,
+  "num_resenas": 2178,
+  "reparto_estrellas": {
+    "5": 1256,
+    "4": 514,
+    "3": 217,
+    "2": 75,
+    "1": 116
+  },
+  "coordenadas": {
+    "lat": -34.448636,
+    "lng": -58.5658253
+  },
+  "plus_code": "HC2M+GM San Fernando, Provincia de Buenos Aires",
+  "zona_horaria": "America/Buenos_Aires",
+  "propietario": {
+    "id": "",
+    "name": "Parrilla La Reja (propietario)",
+    "link": ""
+  },
+  "carta": null,
+  "reservas": null,
+  "pedidos_online": null,
+  "tarjetas_aceptadas": null,
+  "atributos": {
+    "Accesibilidad": {
+      "si": [
+        "Entrada accesible para personas en silla de ruedas"
+      ],
+      "no": []
+    }
+  },
+  "horas_punta": {},
+  "miniatura": "https://lh3.googleusercontent.com/grass-cs/AABkmLfSNikLsJoYKR1ywyq4O4rVJb-ekSVNckkOHX3Gw-1TfKoRsbjDEruwvMXOMjVStNg-Oj_78VXIc4JRBCktaj7Q6Yp1u3jgLrQqZlbrPvCzMJQyZp6stV6_nlKjJPEuR5JMg0lu=w426-h240-k-no",
+  "ids": {
+    "place_id": "ChIJL9dwpymlvJURimHSFm4yWO4",
+    "cid": "17174532627388064138",
+    "data_id": "0x95bca529a770d72f:0xee58326e16d2618a"
+  },
+  "enlaces": {
+    "maps": "https://www.google.com/maps/place/Parrilla+La+Reja/@-34.448636,-58.5658253,17z/data=!3m1!4b1!4m6!3m5!1s0x95bca529a770d72f:0xee58326e16d2618a!8m2!3d-34.448636!4d-58.5658253!16s%2Fg%2F11bbrlpn1j?hl=es&hl=es&entry=ttu&g_ep=EgoyMDI2MTAxOC4wIKXMDSoASAFQAw%3D%3D",
+    "resenas": "https://search.google.com/local/reviews?placeid=ChIJL9dwpymlvJURimHSFm4yWO4&q=Parrilla+La+Reja&authuser=0&hl=es&gl=AR",
+    "street_view": null
+  }
+}

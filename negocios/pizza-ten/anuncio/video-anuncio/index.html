@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Pizza Ten</title>
+<script src="assets/gsap.min.js"></script>
+<style>@font-face { font-family: "Unbounded"; src: url("assets/fuentes/Unbounded.ttf") format("truetype"); font-weight: 200 900; font-style: normal; }
+@font-face { font-family: "Montserrat"; src: url("assets/fuentes/Montserrat.ttf") format("truetype"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Montserrat"; src: url("assets/fuentes/Montserrat-Italic.ttf") format("truetype"); font-weight: 100 900; font-style: italic; }
+@font-face { font-family: "Space Grotesk"; src: url("assets/fuentes/SpaceGrotesk.ttf") format("truetype"); font-weight: 300 700; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter.ttf") format("truetype"); font-weight: 100 900; font-style: normal; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Inter", sans-serif; }
+.plano { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; }
+.medio { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.l, .w { display: inline-block; white-space: pre; }
+:root {
+  --rojo-pizza: #d92b2b;
+  --verde-albahaca: #1b8a4b;
+  --amarillo-muzza: #ffbe0b;
+  --crema-masa: #fff9f0;
+  --negro-horno: #111114;
+}
+
+#root > .capa {
+  position: absolute;
+  inset: 0;
+  z-index: 65;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 165px 90px 295px 90px;
+}
+
+.atmosfera-pizza {
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 45%, rgba(10,10,12,0.58) 100%);
+}
+
+.borde-tricolor {
+  position: absolute;
+  top: 138px;
+  left: 90px;
+  right: 90px;
+  height: 8px;
+  z-index: 58;
+  display: flex;
+  border-radius: 99px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+}
+
+.franja-verde { flex: 1; background: var(--verde-albahaca); }
+.franja-blanca { flex: 1; background: var(--crema-masa); }
+.franja-roja { flex: 1; background: var(--rojo-pizza); }
+
+/* Top ticket */
+.top-ticket {
+  position: absolute;
+  top: 168px;
+  left: 90px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(17, 17, 20, 0.90);
+  border: 2px solid var(--crema-masa);
+  border-radius: 14px;
+  padding: 12px 26px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.55);
+}
+
+.top-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--verde-albahaca);
+  box-shadow: 0 0 10px var(--verde-albahaca);
+}
+
+.top-brand {
+  font-family: "Unbounded", sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--crema-masa);
+}
+
+.top-tag {
+  font-family: "Plex Mono", monospace;
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--amarillo-muzza);
+}
+
+/* Overlays */
+.sombra-piso {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.08) 40%, rgba(14,14,18,0.88) 80%, rgba(12,12,15,0.96) 100%);
+  z-index: -1;
+}
+
+.sombra-total {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 14, 18, 0.84);
+  z-index: -1;
+}
+
+.sombra-centro {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 55%, rgba(14,14,18,0.76) 0%, rgba(14,14,18,0.52) 100%);
+  z-index: -1;
+}
+
+.sombra-cierre {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14,14,18,0.86) 0%, rgba(14,14,18,0.95) 60%, rgba(10,10,12,0.98) 100%);
+  z-index: -1;
+}
+
+/* 1. GANCHO */
+.caja-gancho {
+  width: 100%;
+  text-align: left;
+}
+
+.sticker-amarillo {
+  display: inline-block;
+  font-family: "Unbounded", sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--negro-horno);
+  background: var(--amarillo-muzza);
+  padding: 12px 26px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+}
+
+.tit-pop {
+  font-family: "Unbounded", sans-serif;
+  font-size: 74px;
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--crema-masa);
+  margin: 0;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.9);
+}
+
+.tit-pop em {
+  font-style: normal;
+  color: var(--amarillo-muzza);
+  white-space: nowrap;
+}
+
+.destello-rojo {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(255, 190, 11, 0.95) 0%, rgba(217, 43, 43, 0.88) 60%, rgba(0,0,0,0) 100%);
+}
+
+/* 2. LOGO */
+.centro-logo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+}
+
+.medallon-logo {
+  background: var(--rojo-pizza);
+  border: 6px solid var(--crema-masa);
+  border-radius: 44px;
+  padding: 40px 54px;
+  box-shadow: 0 26px 64px rgba(0,0,0,0.88);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pt-logo-img {
+  width: 520px;
+  height: auto;
+  display: block;
+}
+
+.banda-verde {
+  font-family: "Unbounded", sans-serif;
+  font-size: 29px;
+  font-weight: 800;
+  color: var(--crema-masa);
+  background: var(--verde-albahaca);
+  border: 3px solid var(--crema-masa);
+  padding: 16px 32px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.65);
+}
+
+/* 3-6. ETIQUETA CAJA */
+.etiqueta-caja {
+  width: 100%;
+  background: rgba(17, 17, 20, 0.92);
+  border: 3px solid var(--crema-masa);
+  border-top: 12px solid var(--rojo-pizza);
+  border-radius: 26px;
+  padding: 34px 38px;
+  box-shadow: 0 22px 52px rgba(0,0,0,0.82);
+}
+
+.etiq-Sup {
+  font-family: "Plex Mono", monospace;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--amarillo-muzza);
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.etiq-Nom {
+  font-family: "Unbounded", sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--crema-masa);
+  margin-bottom: 14px;
+}
+
+.etiq-Sub {
+  font-family: "Montserrat", sans-serif;
+  font-size: 33px;
+  font-weight: 600;
+  line-height: 1.26;
+  color: #e2dcd5;
+}
+
+/* 7-9. PASTILLA POP */
+.pastilla-pop {
+  margin: auto 0;
+  width: 100%;
+  border: 5px solid var(--crema-masa);
+  border-radius: 32px;
+  padding: 40px 44px;
+  text-align: center;
+  box-shadow: 0 26px 60px rgba(0,0,0,0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pastilla-roja { background: var(--rojo-pizza); color: var(--crema-masa); }
+.pastilla-amarilla { background: var(--amarillo-muzza); color: var(--negro-horno); border-color: var(--negro-horno); }
+.pastilla-verde { background: var(--verde-albahaca); color: var(--crema-masa); }
+
+.pop-mini {
+  font-family: "Plex Mono", monospace;
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.pop-maxi {
+  font-family: "Unbounded", sans-serif;
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+/* 10. TICKET RESENA */
+.ticket-resena {
+  margin: auto 0;
+  width: 100%;
+  background: var(--crema-masa);
+  color: var(--negro-horno);
+  border: 4px solid var(--rojo-pizza);
+  border-radius: 28px;
+  padding: 44px 42px;
+  box-shadow: 0 28px 65px rgba(0,0,0,0.88);
+}
+
+.tr-top {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.tr-stars {
+  font-size: 46px;
+  color: var(--rojo-pizza);
+  letter-spacing: 5px;
+}
+
+.tr-score {
+  font-family: "Plex Mono", monospace;
+  font-size: 26px;
+  font-weight: 600;
+  color: #44403c;
+}
+
+.tr-quote {
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.28;
+  color: var(--negro-horno);
+  margin: 0 0 30px 0;
+}
+
+.tr-bot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px dashed rgba(17,17,20,0.25);
+  padding-top: 22px;
+}
+
+.tr-src {
+  font-family: "Montserrat", sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  color: #57534e;
+}
+
+.tr-badge {
+  font-family: "Unbounded", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--crema-masa);
+  background: var(--verde-albahaca);
+  padding: 10px 22px;
+  border-radius: 10px;
+}
+
+/* 11. CIERRE */
+.caja-cierre-pt {
+  margin: auto 0;
+  width: 100%;
+  background: rgba(17, 17, 20, 0.95);
+  border: 4px solid var(--crema-masa);
+  border-radius: 34px;
+  padding: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 28px 68px rgba(0,0,0,0.92);
+}
+
+.cierre-medallon {
+  background: var(--rojo-pizza);
+  border: 4px solid var(--crema-masa);
+  border-radius: 28px;
+  padding: 22px 36px;
+}
+
+.cierre-logo-img {
+  width: 340px;
+  height: auto;
+  display: block;
+}
+
+.pt-cta-btn {
+  font-family: "Unbounded", sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--negro-horno);
+  background: var(--amarillo-muzza);
+  padding: 16px 32px;
+  border-radius: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.pt-info-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pt-info-item {
+  background: rgba(255,255,255,0.06);
+  border-left: 8px solid var(--verde-albahaca);
+  border-radius: 14px;
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pt-highlight {
+  border-left-color: var(--rojo-pizza);
+  background: rgba(217, 43, 43, 0.18);
+}
+
+.pt-lbl {
+  font-family: "Plex Mono", monospace;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--amarillo-muzza);
+  letter-spacing: 1.5px;
+}
+
+.pt-val {
+  font-family: "Montserrat", sans-serif;
+  font-size: 31px;
+  font-weight: 800;
+  color: var(--crema-masa);
+  line-height: 1.22;
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="33.038" data-width="1080" data-height="1920">
+<div class="plano" id="plano-gancho" style="z-index:11"><div class="cam" id="cam-gancho" data-layout-allow-overflow><img id="medio-gancho" class="clip medio" src="assets/a01.jpg" alt="" data-start="0.0000" data-duration="1.9836" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-logo" style="z-index:12"><div class="cam" id="cam-logo" data-layout-allow-overflow><img id="medio-logo" class="clip medio" src="assets/a02.jpg" alt="" data-start="1.9836" data-duration="2.9755" data-track-index="0" style="object-position:55% 25%" /></div></div>
+<div class="plano" id="plano-napo" style="z-index:13"><div class="cam" id="cam-napo" data-layout-allow-overflow><img id="medio-napo" class="clip medio" src="assets/a03.jpg" alt="" data-start="4.6091" data-duration="4.3173" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-rucula" style="z-index:14"><div class="cam" id="cam-rucula" data-layout-allow-overflow><img id="medio-rucula" class="clip medio" src="assets/a04.jpg" alt="" data-start="8.9264" data-duration="2.9755" data-track-index="0" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-roquefort" style="z-index:15"><div class="cam" id="cam-roquefort" data-layout-allow-overflow><img id="medio-roquefort" class="clip medio" src="assets/a05.jpg" alt="" data-start="11.9018" data-duration="2.9755" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-emp1" style="z-index:16"><div class="cam" id="cam-emp1" data-layout-allow-overflow><img id="medio-emp1" class="clip medio" src="assets/a06.jpg" alt="" data-start="14.8773" data-duration="2.9755" data-track-index="0" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-r1" style="z-index:17"><div class="cam" id="cam-r1" data-layout-allow-overflow><img id="medio-r1" class="clip medio" src="assets/a07.jpg" alt="" data-start="17.8527" data-duration="1.9836" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-r2" style="z-index:18"><div class="cam" id="cam-r2" data-layout-allow-overflow><img id="medio-r2" class="clip medio" src="assets/a08.jpg" alt="" data-start="19.8364" data-duration="1.9836" data-track-index="0" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-r3" style="z-index:19"><div class="cam" id="cam-r3" data-layout-allow-overflow><img id="medio-r3" class="clip medio" src="assets/a09.jpg" alt="" data-start="21.8200" data-duration="1.9836" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-resena" style="z-index:20"><div class="cam" id="cam-resena" data-layout-allow-overflow><img id="medio-resena" class="clip medio" src="assets/a03.jpg" alt="" data-start="23.4536" data-duration="4.3173" data-track-index="0" style="object-position:50% 60%" /></div></div>
+<div class="plano" id="plano-cierre" style="z-index:21"><div class="cam" id="cam-cierre" data-layout-allow-overflow><img id="medio-cierre" class="clip medio" src="assets/a01.jpg" alt="" data-start="27.3709" data-duration="5.6673" data-track-index="1" style="object-position:50% 45%" /></div></div>
+<div class="atmosfera-pizza"></div>
+<div class="borde-tricolor">
+  <div class="franja-verde"></div>
+  <div class="franja-blanca"></div>
+  <div class="franja-roja"></div>
+</div>
+
+<!-- Persistent top badge (from napo to resena) -->
+<div class="clip capa" id="clip-top" data-start="4.9591" data-duration="22.8118" data-track-index="2">
+  <div class="top-ticket" id="top-ticket">
+    <span class="top-dot"></span>
+    <span class="top-brand">PIZZA TEN</span>
+    <span class="top-tag">SUIPACHA 1108 · SAN FERNANDO</span>
+  </div>
+</div>
+
+<!-- 1. GANCHO -->
+<div class="clip capa" id="clip-gancho" data-start="0" data-duration="1.9836" data-track-index="3">
+  <div class="sombra-piso"></div>
+  <div class="caja-gancho">
+    <div class="sticker-amarillo" id="pt-g-tag" data-layout-allow-overflow>NOCHE DE PIZZA EN SANFER</div>
+    <h1 class="tit-pop" id="pt-g-tit"><span class="w">¿Hoy</span> <span class="w">no</span> <span class="w">se</span> <em><span class="w">cocina</span></em> <span class="w">en</span> <span class="w">casa?</span></h1>
+  </div>
+</div>
+
+<!-- Flash on drop -->
+<div class="clip capa" id="clip-flash" data-start="1.9836" data-duration="0.4" data-track-index="18">
+  <div class="destello-rojo" id="pt-flash"></div>
+</div>
+
+<!-- 2. LOGO -->
+<div class="clip capa" id="clip-logo" data-start="1.9836" data-duration="3.3255" data-track-index="4">
+  <div class="sombra-total"></div>
+  <div class="centro-logo">
+    <div class="medallon-logo" id="pt-logo-box" data-layout-allow-overflow>
+      <img class="pt-logo-img" src="assets/a10.png" alt="Pizza Ten" data-layout-allow-overflow />
+    </div>
+    <div class="banda-verde" id="pt-logo-sub" data-layout-allow-overflow>PIZZAS Y EMPANADAS RECIÉN HORNEADAS</div>
+  </div>
+</div>
+
+<!-- 3. NAPOLITANA -->
+<div class="clip capa" id="clip-napo" data-start="4.9591" data-duration="3.9673" data-track-index="5">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-napo" data-layout-allow-overflow>
+    <div class="etiq-Sup">LA FAVORITA DE LAS RESEÑAS</div>
+    <div class="etiq-Nom" id="tit-napo"><span class="l">N</span><span class="l">A</span><span class="l">P</span><span class="l">O</span><span class="l">L</span><span class="l">I</span><span class="l">T</span><span class="l">A</span><span class="l">N</span><span class="l">A</span><span class="l">&nbsp;</span><span class="l">C</span><span class="l">O</span><span class="l">N</span><span class="l">&nbsp;</span><span class="l">J</span><span class="l">A</span><span class="l">M</span><span class="l">Ó</span><span class="l">N</span></div>
+    <div class="etiq-Sub" id="sub-napo">Tomate fresco, ajo, huevo rallado y muzzarella</div>
+  </div>
+</div>
+
+<!-- 4. RUCULA -->
+<div class="clip capa" id="clip-rucula" data-start="8.9264" data-duration="2.9755" data-track-index="6">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-rucula" data-layout-allow-overflow>
+    <div class="etiq-Sup">FRESCA Y BIEN CARGADA</div>
+    <div class="etiq-Nom" id="tit-rucula"><span class="l">R</span><span class="l">Ú</span><span class="l">C</span><span class="l">U</span><span class="l">L</span><span class="l">A</span><span class="l">&nbsp;</span><span class="l">Y</span><span class="l">&nbsp;</span><span class="l">P</span><span class="l">A</span><span class="l">R</span><span class="l">M</span><span class="l">E</span><span class="l">S</span><span class="l">A</span><span class="l">N</span><span class="l">O</span></div>
+    <div class="etiq-Sub" id="sub-rucula">Colchón verde con hebras de queso y aceitunas</div>
+  </div>
+</div>
+
+<!-- 5. ROQUEFORT -->
+<div class="clip capa" id="clip-roq" data-start="11.9018" data-duration="2.9755" data-track-index="7">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-roq" data-layout-allow-overflow>
+    <div class="etiq-Sup">PURO SABOR AL HORNO</div>
+    <div class="etiq-Nom" id="tit-roq"><span class="l">M</span><span class="l">U</span><span class="l">Z</span><span class="l">Z</span><span class="l">A</span><span class="l">&nbsp;</span><span class="l">Y</span><span class="l">&nbsp;</span><span class="l">R</span><span class="l">O</span><span class="l">Q</span><span class="l">U</span><span class="l">E</span><span class="l">F</span><span class="l">O</span><span class="l">R</span><span class="l">T</span></div>
+    <div class="etiq-Sub" id="sub-roq">Masa al punto justo, sin grasa y bien gratinada</div>
+  </div>
+</div>
+
+<!-- 6. EMPANADAS -->
+<div class="clip capa" id="clip-emp" data-start="14.8773" data-duration="2.9755" data-track-index="8">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-emp" data-layout-allow-overflow>
+    <div class="etiq-Sup">25 MENCIONES EN GOOGLE</div>
+    <div class="etiq-Nom" id="tit-emp"><span class="l">E</span><span class="l">M</span><span class="l">P</span><span class="l">A</span><span class="l">N</span><span class="l">A</span><span class="l">D</span><span class="l">A</span><span class="l">S</span><span class="l">&nbsp;</span><span class="l">B</span><span class="l">I</span><span class="l">E</span><span class="l">N</span><span class="l">&nbsp;</span><span class="l">D</span><span class="l">O</span><span class="l">R</span><span class="l">A</span><span class="l">D</span><span class="l">A</span><span class="l">S</span></div>
+    <div class="etiq-Sub" id="sub-emp">Variedad de gustos para sumar a tu pedido</div>
+  </div>
+</div>
+
+<!-- 7-9. RAFAGA (R1, R2, R3) -->
+<div class="clip capa" id="clip-r1" data-start="17.8527" data-duration="1.9836" data-track-index="9">
+  <div class="sombra-centro"></div>
+  <div class="pastilla-pop pastilla-roja" id="pop-r1" data-layout-allow-overflow>
+    <span class="pop-mini">VARIEDAD DE GUSTOS</span>
+    <span class="pop-maxi">JAMÓN Y RÚCULA</span>
+  </div>
+</div>
+
+<div class="clip capa" id="clip-r2" data-start="19.8364" data-duration="1.9836" data-track-index="10">
+  <div class="sombra-centro"></div>
+  <div class="pastilla-pop pastilla-amarilla" id="pop-r2" data-layout-allow-overflow>
+    <span class="pop-mini">PARA TODOS LOS GUSTOS</span>
+    <span class="pop-maxi">JAMÓN Y ANANÁ</span>
+  </div>
+</div>
+
+<div class="clip capa" id="clip-r3" data-start="21.82" data-duration="2.3336" data-track-index="11">
+  <div class="sombra-centro"></div>
+  <div class="pastilla-pop pastilla-verde" id="pop-r3" data-layout-allow-overflow>
+    <span class="pop-mini">RECIÉN SALIDAS</span>
+    <span class="pop-maxi">MASA CROCANTE</span>
+  </div>
+</div>
+
+<!-- 10. RESENA -->
+<div class="clip capa" id="clip-resena" data-start="23.8036" data-duration="4.3673" data-track-index="12">
+  <div class="sombra-total"></div>
+  <div class="ticket-resena" id="pt-res-card" data-layout-allow-overflow>
+    <div class="tr-top">
+      <span class="tr-stars">★★★★★</span>
+      <span class="tr-score">4,4 ★ · 156 RESEÑAS EN GOOGLE</span>
+    </div>
+    <blockquote class="tr-quote" id="pt-res-quote"><span class="w">“Pedimos</span> <span class="w">la</span> <span class="w">pizza</span> <span class="w">napolitana</span> <span class="w">con</span> <span class="w">jamón.</span> <span class="w">Llegó</span> <span class="w">súper</span> <span class="w">rápido…</span> <span class="w">¡Un</span> <span class="w">10</span> <span class="w">todo!</span> <span class="w">Muy</span> <span class="w">rica</span> <span class="w">pizza,</span> <span class="w">fresca</span> <span class="w">y</span> <span class="w">excelente</span> <span class="w">servicio.”</span></blockquote>
+    <div class="tr-bot">
+      <span class="tr-src">Reseña en Google</span>
+      <span class="tr-badge" id="pt-res-badge">ENVÍO A DOMICILIO</span>
+    </div>
+  </div>
+</div>
+
+<!-- 11. CIERRE -->
+<div class="clip capa" id="clip-cierre" data-start="27.7709" data-duration="5.2673" data-track-index="13">
+  <div class="sombra-cierre"></div>
+  <div class="caja-cierre-pt" id="pt-cierre-box" data-layout-allow-overflow>
+    <div class="cierre-medallon" id="pt-cierre-logo" data-layout-allow-overflow>
+      <img class="cierre-logo-img" src="assets/a10.png" alt="Pizza Ten" data-layout-allow-overflow />
+    </div>
+    <div class="pt-cta-btn" id="pt-cta">HACÉ TU PEDIDO HOY</div>
+    <div class="pt-info-grid" id="pt-info">
+      <div class="pt-info-item">
+        <span class="pt-lbl">DIRECCIÓN</span>
+        <span class="pt-val">Suipacha 1108 · San Fernando</span>
+      </div>
+      <div class="pt-info-item">
+        <span class="pt-lbl">HORARIO</span>
+        <span class="pt-val">Martes a Domingo de 19:30 a 22:30 h</span>
+      </div>
+      <div class="pt-info-item pt-highlight">
+        <span class="pt-lbl">TELÉFONO E INSTAGRAM</span>
+        <span class="pt-val">011 6623-7552 · @pizzaten_sanfer</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="musica" data-timeline-role="music" src="assets/a11.mp3" data-start="0" data-duration="33.038" data-media-start="16.539" data-track-index="20" data-volume="1" data-automation='{"version": 1, "lanes": [{"target": "volume", "points": [{"t": 0, "v": 0}, {"t": 0.08, "v": 0.95}, {"t": 31.64, "v": 0.95}, {"t": 33.04, "v": 0}]}]}'></audio>
+</div>
+<script>
+const P = {"gancho": {"ini": 0.0, "dur": 1.9836, "fin": 1.9836}, "logo": {"ini": 1.9836, "dur": 2.9755, "fin": 4.9591}, "napo": {"ini": 4.9591, "dur": 3.9673, "fin": 8.9264}, "rucula": {"ini": 8.9264, "dur": 2.9755, "fin": 11.9019}, "roquefort": {"ini": 11.9018, "dur": 2.9755, "fin": 14.8773}, "emp1": {"ini": 14.8773, "dur": 2.9755, "fin": 17.8528}, "r1": {"ini": 17.8527, "dur": 1.9836, "fin": 19.8363}, "r2": {"ini": 19.8364, "dur": 1.9836, "fin": 21.82}, "r3": {"ini": 21.82, "dur": 1.9836, "fin": 23.8036}, "resena": {"ini": 23.8036, "dur": 3.9673, "fin": 27.7709}, "cierre": {"ini": 27.7709, "dur": 5.2673, "fin": 33.0382}};
+const TOTAL = 33.038, COMPAS = 1.9836, PULSO = 0.4959, W = 1080, H = 1920;
+const tl = gsap.timeline({ paused: true });
+const ptIds = ["gancho", "logo", "napo", "rucula", "roquefort", "emp1", "r1", "r2", "r3", "resena", "cierre"];
+ptIds.forEach((id, idx) => {
+  const p = P[id];
+  const s0 = idx % 2 === 0 ? 1.13 : 1.03;
+  const s1 = idx % 2 === 0 ? 1.03 : 1.13;
+  tl.fromTo(`#cam-${id}`, { scale: s0 }, { scale: s1, duration: p.dur, ease: "none" }, p.ini);
+});
+
+// Crossfades
+tl.fromTo("#plano-napo",   { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "sine.inOut" }, P.napo.ini - 0.35);
+tl.fromTo("#plano-resena", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "sine.inOut" }, P.resena.ini - 0.35);
+tl.fromTo("#plano-cierre", { opacity: 0 }, { opacity: 1, duration: 0.40, ease: "sine.inOut" }, P.cierre.ini - 0.40);
+
+// Top badge
+tl.fromTo("#top-ticket", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(1.6)" }, P.napo.ini);
+
+// 1. GANCHO
+tl.fromTo("#pt-g-tag", { opacity: 0, scale: 1.3, rotation: -3 }, { opacity: 1, scale: 1, rotation: -1, duration: 0.35, ease: "back.out(1.8)" }, P.gancho.ini + 0.08);
+tl.fromTo("#pt-g-tit .w", { opacity: 0, y: 45 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.07, ease: "power3.out" }, P.gancho.ini + 0.22);
+
+// 2. LOGO
+tl.fromTo("#pt-flash", { opacity: 0.92 }, { opacity: 0, duration: 0.38, ease: "power2.out" }, P.logo.ini);
+tl.fromTo("#pt-logo-box", { opacity: 0, scale: 1.4, rotation: -4 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.45, ease: "back.out(1.7)" }, P.logo.ini);
+tl.fromTo("#pt-logo-sub", { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, P.logo.ini + PULSO);
+
+// 3-6. PIZZAS & EMPANADAS
+function animarCaja(cardSel, titSel, subSel, tIni) {
+  tl.fromTo(cardSel, { opacity: 0, y: 65, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.38, ease: "back.out(1.5)" }, tIni);
+  tl.fromTo(`${titSel} .l`, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.015, ease: "power2.out" }, tIni + 0.1);
+  tl.fromTo(subSel, { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, tIni + 0.32);
+}
+
+animarCaja("#card-napo",   "#tit-napo",   "#sub-napo",   P.napo.ini);
+animarCaja("#card-rucula", "#tit-rucula", "#sub-rucula", P.rucula.ini);
+animarCaja("#card-roq",    "#tit-roq",    "#sub-roq",    P.roquefort.ini);
+animarCaja("#card-emp",    "#tit-emp",    "#sub-emp",    P.emp1.ini);
+
+// 7-9. RAFAGA
+tl.fromTo("#pop-r1", { opacity: 0, scale: 1.35, rotation: -3 }, { opacity: 1, scale: 1, rotation: -1, duration: 0.32, ease: "back.out(1.8)" }, P.r1.ini);
+tl.fromTo("#pop-r2", { opacity: 0, scale: 1.35, rotation: 3 },  { opacity: 1, scale: 1, rotation: 1,  duration: 0.32, ease: "back.out(1.8)" }, P.r2.ini);
+tl.fromTo("#pop-r3", { opacity: 0, scale: 1.35, rotation: -2 }, { opacity: 1, scale: 1, rotation: 0,  duration: 0.32, ease: "back.out(1.8)" }, P.r3.ini);
+
+// 10. RESENA
+tl.fromTo("#pt-res-card", { opacity: 0, y: 55, rotation: -1 }, { opacity: 1, y: 0, rotation: 0, duration: 0.45, ease: "back.out(1.5)" }, P.resena.ini);
+tl.fromTo("#pt-res-quote .w", { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.28, stagger: 0.032, ease: "power2.out" }, P.resena.ini + 0.2);
+tl.fromTo("#pt-res-badge", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, P.resena.ini + PULSO * 2);
+
+// 11. CIERRE
+tl.fromTo("#pt-cierre-box",  { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, P.cierre.ini);
+tl.fromTo("#pt-cierre-logo", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.7)" }, P.cierre.ini + 0.15);
+tl.fromTo("#pt-cta",         { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, P.cierre.ini + 0.3);
+tl.fromTo("#pt-info .pt-info-item", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.12, ease: "power2.out" }, P.cierre.ini + 0.45);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

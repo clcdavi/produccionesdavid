@@ -1,0 +1,148 @@
+<div class="atmosfera-pizza"></div>
+<div class="borde-tricolor">
+  <div class="franja-verde"></div>
+  <div class="franja-blanca"></div>
+  <div class="franja-roja"></div>
+</div>
+
+<!-- Persistent top badge (from napo to resena) -->
+<div class="clip capa" id="clip-top" data-start="{{P.napo.ini}}" data-duration="{{P.resena.fin - P.napo.ini}}" data-track-index="2">
+  <div class="top-ticket" id="top-ticket">
+    <span class="top-dot"></span>
+    <span class="top-brand">PIZZA TEN</span>
+    <span class="top-tag">SUIPACHA 1108 · SAN FERNANDO</span>
+  </div>
+</div>
+
+<!-- 1. GANCHO -->
+<div class="clip capa" id="clip-gancho" data-start="{{P.gancho.ini}}" data-duration="{{P.gancho.dur}}" data-track-index="3">
+  <div class="sombra-piso"></div>
+  <div class="caja-gancho">
+    <div class="sticker-amarillo" id="pt-g-tag" data-layout-allow-overflow>NOCHE DE PIZZA EN SANFER</div>
+    <h1 class="tit-pop" id="pt-g-tit" data-palabras>¿Hoy no se <em>cocina</em> en casa?</h1>
+  </div>
+</div>
+
+<!-- Flash on drop -->
+<div class="clip capa" id="clip-flash" data-start="{{P.logo.ini}}" data-duration="0.4" data-track-index="18">
+  <div class="destello-rojo" id="pt-flash"></div>
+</div>
+
+<!-- 2. LOGO -->
+<div class="clip capa" id="clip-logo" data-start="{{P.logo.ini}}" data-duration="{{P.logo.dur + 0.35}}" data-track-index="4">
+  <div class="sombra-total"></div>
+  <div class="centro-logo">
+    <div class="medallon-logo" id="pt-logo-box" data-layout-allow-overflow>
+      <img class="pt-logo-img" src="{{archivo:anuncio/logo/logo-blanco.png}}" alt="Pizza Ten" data-layout-allow-overflow />
+    </div>
+    <div class="banda-verde" id="pt-logo-sub" data-layout-allow-overflow>PIZZAS Y EMPANADAS RECIÉN HORNEADAS</div>
+  </div>
+</div>
+
+<!-- 3. NAPOLITANA -->
+<div class="clip capa" id="clip-napo" data-start="{{P.napo.ini}}" data-duration="{{P.napo.dur}}" data-track-index="5">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-napo" data-layout-allow-overflow>
+    <div class="etiq-Sup">LA FAVORITA DE LAS RESEÑAS</div>
+    <div class="etiq-Nom" id="tit-napo" data-letras>NAPOLITANA CON JAMÓN</div>
+    <div class="etiq-Sub" id="sub-napo">Tomate fresco, ajo, huevo rallado y muzzarella</div>
+  </div>
+</div>
+
+<!-- 4. RUCULA -->
+<div class="clip capa" id="clip-rucula" data-start="{{P.rucula.ini}}" data-duration="{{P.rucula.dur}}" data-track-index="6">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-rucula" data-layout-allow-overflow>
+    <div class="etiq-Sup">FRESCA Y BIEN CARGADA</div>
+    <div class="etiq-Nom" id="tit-rucula" data-letras>RÚCULA Y PARMESANO</div>
+    <div class="etiq-Sub" id="sub-rucula">Colchón verde con hebras de queso y aceitunas</div>
+  </div>
+</div>
+
+<!-- 5. ROQUEFORT -->
+<div class="clip capa" id="clip-roq" data-start="{{P.roquefort.ini}}" data-duration="{{P.roquefort.dur}}" data-track-index="7">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-roq" data-layout-allow-overflow>
+    <div class="etiq-Sup">PURO SABOR AL HORNO</div>
+    <div class="etiq-Nom" id="tit-roq" data-letras>MUZZA Y ROQUEFORT</div>
+    <div class="etiq-Sub" id="sub-roq">Masa al punto justo, sin grasa y bien gratinada</div>
+  </div>
+</div>
+
+<!-- 6. EMPANADAS -->
+<div class="clip capa" id="clip-emp" data-start="{{P.emp1.ini}}" data-duration="{{P.emp1.dur}}" data-track-index="8">
+  <div class="sombra-piso"></div>
+  <div class="etiqueta-caja" id="card-emp" data-layout-allow-overflow>
+    <div class="etiq-Sup">25 MENCIONES EN GOOGLE</div>
+    <div class="etiq-Nom" id="tit-emp" data-letras>EMPANADAS BIEN DORADAS</div>
+    <div class="etiq-Sub" id="sub-emp">Variedad de gustos para sumar a tu pedido</div>
+  </div>
+</div>
+
+<!-- 7-9. RAFAGA (R1, R2, R3) -->
+<div class="clip capa" id="clip-r1" data-start="{{P.r1.ini}}" data-duration="{{P.r1.dur}}" data-track-index="9">
+  <div class="sombra-centro"></div>
+  <div class="pastilla-pop pastilla-roja" id="pop-r1" data-layout-allow-overflow>
+    <span class="pop-mini">VARIEDAD DE GUSTOS</span>
+    <span class="pop-maxi">JAMÓN Y RÚCULA</span>
+  </div>
+</div>
+
+<div class="clip capa" id="clip-r2" data-start="{{P.r2.ini}}" data-duration="{{P.r2.dur}}" data-track-index="10">
+  <div class="sombra-centro"></div>
+  <div class="pastilla-pop pastilla-amarilla" id="pop-r2" data-layout-allow-overflow>
+    <span class="pop-mini">PARA TODOS LOS GUSTOS</span>
+    <span class="pop-maxi">JAMÓN Y ANANÁ</span>
+  </div>
+</div>
+
+<div class="clip capa" id="clip-r3" data-start="{{P.r3.ini}}" data-duration="{{P.r3.dur + 0.35}}" data-track-index="11">
+  <div class="sombra-centro"></div>
+  <div class="pastilla-pop pastilla-verde" id="pop-r3" data-layout-allow-overflow>
+    <span class="pop-mini">RECIÉN SALIDAS</span>
+    <span class="pop-maxi">MASA CROCANTE</span>
+  </div>
+</div>
+
+<!-- 10. RESENA -->
+<div class="clip capa" id="clip-resena" data-start="{{P.resena.ini}}" data-duration="{{P.resena.dur + 0.4}}" data-track-index="12">
+  <div class="sombra-total"></div>
+  <div class="ticket-resena" id="pt-res-card" data-layout-allow-overflow>
+    <div class="tr-top">
+      <span class="tr-stars">★★★★★</span>
+      <span class="tr-score">4,4 ★ · 156 RESEÑAS EN GOOGLE</span>
+    </div>
+    <blockquote class="tr-quote" id="pt-res-quote" data-palabras>
+      “Pedimos la pizza napolitana con jamón. Llegó súper rápido… ¡Un 10 todo! Muy rica pizza, fresca y excelente servicio.”
+    </blockquote>
+    <div class="tr-bot">
+      <span class="tr-src">Reseña en Google</span>
+      <span class="tr-badge" id="pt-res-badge">ENVÍO A DOMICILIO</span>
+    </div>
+  </div>
+</div>
+
+<!-- 11. CIERRE -->
+<div class="clip capa" id="clip-cierre" data-start="{{P.cierre.ini}}" data-duration="{{P.cierre.dur}}" data-track-index="13">
+  <div class="sombra-cierre"></div>
+  <div class="caja-cierre-pt" id="pt-cierre-box" data-layout-allow-overflow>
+    <div class="cierre-medallon" id="pt-cierre-logo" data-layout-allow-overflow>
+      <img class="cierre-logo-img" src="{{archivo:anuncio/logo/logo-blanco.png}}" alt="Pizza Ten" data-layout-allow-overflow />
+    </div>
+    <div class="pt-cta-btn" id="pt-cta">HACÉ TU PEDIDO HOY</div>
+    <div class="pt-info-grid" id="pt-info">
+      <div class="pt-info-item">
+        <span class="pt-lbl">DIRECCIÓN</span>
+        <span class="pt-val">Suipacha 1108 · San Fernando</span>
+      </div>
+      <div class="pt-info-item">
+        <span class="pt-lbl">HORARIO</span>
+        <span class="pt-val">Martes a Domingo de 19:30 a 22:30 h</span>
+      </div>
+      <div class="pt-info-item pt-highlight">
+        <span class="pt-lbl">TELÉFONO E INSTAGRAM</span>
+        <span class="pt-val">011 6623-7552 · @pizzaten_sanfer</span>
+      </div>
+    </div>
+  </div>
+</div>

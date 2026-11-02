@@ -1,0 +1,19 @@
+# Credenciales y Secretos
+*credenciales*.json
+claves_*.json
+*.env
+*.env.*
+
+# Entornos virtuales y caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+node_modules/
+.DS_Store
+
+# Archivos temporales de render
+*.aac
+_tmp_*.html
+*.log
+*.mp4

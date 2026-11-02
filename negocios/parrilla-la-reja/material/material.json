@@ -1,0 +1,302 @@
+[
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0003.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SdRDCM9zVyI5uBq7FzaAOobRCuvIU_QERMMn6tdH30czGu8SKzF0S9nM-enfIxoq1Lz-qwuLwTIPNUsxJGYVaPKSWPt0zP_Q8SQFDxLvu2Raq061WGE0UpTqld9phXeAGri2v44SzTvFq7=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 1536,
+    "alto": 2048,
+    "nitidez": 971.6,
+    "brillo": 115.8,
+    "orientacion": "vertical",
+    "puntuacion": 3.0,
+    "id": "M001"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0005.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9Q41WH6eVQxJHDhKsTwwAMuFt6iwOh6b-vJWZMTScj42Dm8oeg10Dp5hZRMXFt7IXpCOPoXYQoBYll2pw1n2U3qBkENhBQsA9q33Z8u8zUMpb3iZ8dbSWk5XEVaqACnTz3AyugpYA=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 1536,
+    "alto": 2048,
+    "nitidez": 1326.6,
+    "brillo": 120.8,
+    "orientacion": "vertical",
+    "puntuacion": 3.0,
+    "id": "M002"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0007.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T8JMmX4FvhPKHAb2jjvfmtO1Gg1scu4VGDkC_xSiI0Uyp2KcZmfuMTNztP0hvY0xi4WCQw3V7niriWlKHdExDHIlBYAmTdTn19a-552CsVkdh2MHZ1NeDF9Q0GpfdqwXsZrtDS=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 2048,
+    "alto": 1536,
+    "nitidez": 1547.1,
+    "brillo": 70.6,
+    "orientacion": "horizontal",
+    "puntuacion": 3.0,
+    "id": "M003"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0009.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SohJWpFM25KFwn8m0tWqlbkBGshwXuLJB2QWHXnPuHWQG2NK2H0t7vDc36mfTj93Y-pUx7TUHE0HQGrotsSK_JZHhWcFfj3jejbJojLlkb0immjJrjl6O4AJRRcjRUmgqKFBKfXQ=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 1229,
+    "alto": 2048,
+    "nitidez": 2470.6,
+    "brillo": 95.5,
+    "orientacion": "vertical",
+    "puntuacion": 3.0,
+    "id": "M004"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0001.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9T2RGMt8ArfU9aKHwhSkjOE6mpX1s61MKPeiKSa8ffTg8unE33fnc-0ZwasBdVGpznplI8uPICcD_ZxaeoicQLN_q_JzLyR4FNoVaIfd5bnVkHLuAGa9dUXHHkqG_6JAXf2xM43=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 2048,
+    "alto": 1152,
+    "nitidez": 2923.8,
+    "brillo": 68.4,
+    "orientacion": "horizontal",
+    "puntuacion": 3.0,
+    "id": "M005"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0004.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhGGbxr86N75Wgr6USmZZTH4KEcqbngWNXuCCBH8WgfHkF22iedkOYtiz8BSeJWK_1WKKbnWwaA7iaHjkBolU9WfBM_GNGHHd-FVUyT71guNm0ee-R9j6cJOFBRsCQnKGC9TGf7sNaVfkxEQVNqJQbN2BKFxMgCIf0FEQ2vK3AhkJJpIaTb4MJHJZg=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 1440,
+    "alto": 1080,
+    "nitidez": 3046.0,
+    "brillo": 111.7,
+    "orientacion": "horizontal",
+    "puntuacion": 3.0,
+    "id": "M006"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0004_mariana-tortelli_3.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 1542,
+    "alto": 2048,
+    "nitidez": 1130.9,
+    "brillo": 82.3,
+    "orientacion": "vertical",
+    "puntuacion": 2.5,
+    "id": "M007"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0002_claudia-francalancia_1.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 1536,
+    "alto": 2048,
+    "nitidez": 1131.1,
+    "brillo": 111.8,
+    "orientacion": "vertical",
+    "puntuacion": 2.5,
+    "id": "M008"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0002_claudia-francalancia_2.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 1536,
+    "alto": 2048,
+    "nitidez": 1013.4,
+    "brillo": 114.8,
+    "orientacion": "vertical",
+    "puntuacion": 2.5,
+    "id": "M009"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0003_matias-romero_2.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 2048,
+    "alto": 1536,
+    "nitidez": 2613.3,
+    "brillo": 111.5,
+    "orientacion": "horizontal",
+    "puntuacion": 2.5,
+    "id": "M010"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0004_mariana-tortelli_1.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 1542,
+    "alto": 2048,
+    "nitidez": 858.3,
+    "brillo": 89.5,
+    "orientacion": "vertical",
+    "puntuacion": 2.435,
+    "id": "M011"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0008_video.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9SV02eDlVycOfLJywYplfHte_qxVUFOLB2ypl-xNpiUxp-ClDKPLVJKvH9vEzqquZMUcTR4supLoMxNJD2sczI6IHOh7GsMykX1a2-JO4CqaLiuKhRwgLyL0d9eqi0AfVjbF_fO=w2048-h2048-k-no",
+    "es_portada_video": true,
+    "ancho": 922,
+    "alto": 2048,
+    "nitidez": 695.6,
+    "brillo": 97.7,
+    "orientacion": "vertical",
+    "puntuacion": 2.136,
+    "id": "M012"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0006.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-proxy/ALd4DhEUMuwqjDK5ob-nem9x3ZOPtl_J9CRf7lPLfxjK-DyHKO6xwR_jhW4Zp_vQPJhGX_K3KMCI7ItQ7SdiB3eiNgP7qT4qWWSzwvXRaHSQlMtsIct4SbZrr7hl07k08IzSLvAUY4n2YnzrZi7-DhBBCEBNAgGLtxkSKMcyU-P_SoPri9XBw-aH4KLM=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 720,
+    "alto": 540,
+    "nitidez": 597.1,
+    "brillo": 157.7,
+    "orientacion": "horizontal",
+    "puntuacion": 2.029,
+    "id": "M013"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0010.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QaHsQvHZdTCXUMG_-MKJBlyxggX_gbPvWz-ezLYVSXT49RoivdsqE0sRD7KDfOI6Zl3FowSua9J7AX3VHL7B4ZQxuxXSn54k3XC1VBOA9y7Nd1gGKBttCD6s5UiC2SZ1A6zXI=w2048-h2048-k-no",
+    "es_portada_video": false,
+    "ancho": 1536,
+    "alto": 2048,
+    "nitidez": 189.2,
+    "brillo": 136.2,
+    "orientacion": "vertical",
+    "puntuacion": 1.894,
+    "id": "M014"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0003_matias-romero_1.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 946,
+    "alto": 2048,
+    "nitidez": 554.3,
+    "brillo": 122.1,
+    "orientacion": "vertical",
+    "puntuacion": 1.838,
+    "id": "M015"
+  },
+  {
+    "origen": "maps",
+    "archivo": "maps/fotos/0002_video.jpg",
+    "tipo": "foto",
+    "categorias": [
+      "Todas"
+    ],
+    "url": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9RO4YKObKaA6eBkpzBvIF8hBDm0MXVJdXDdsTOMnIAWHjvlpRx514W0gHe4W51IabpBMkELqFHysP7uOPGvD35UkasxyPzyKLlA-s_js1_NkMk4yfSd-lVkwthq7rqW-6miNH8=w2048-h2048-k-no",
+    "es_portada_video": true,
+    "ancho": 1080,
+    "alto": 1440,
+    "nitidez": 389.9,
+    "brillo": 127.3,
+    "orientacion": "vertical",
+    "puntuacion": 1.807,
+    "id": "M016"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0005_lorena-costilla_2.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 2048,
+    "alto": 1536,
+    "nitidez": 207.0,
+    "brillo": 121.9,
+    "orientacion": "horizontal",
+    "puntuacion": 1.422,
+    "id": "M017"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0004_mariana-tortelli_2.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 1542,
+    "alto": 2048,
+    "nitidez": 125.2,
+    "brillo": 99.0,
+    "orientacion": "vertical",
+    "puntuacion": 1.295,
+    "id": "M018"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0005_lorena-costilla_3.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 2048,
+    "alto": 1536,
+    "nitidez": 111.5,
+    "brillo": 104.9,
+    "orientacion": "horizontal",
+    "puntuacion": 1.273,
+    "id": "M019"
+  },
+  {
+    "origen": "maps-resena",
+    "archivo": "maps/fotos_reseñas/0005_lorena-costilla_1.jpg",
+    "tipo": "foto",
+    "categorias": [],
+    "ancho": 2048,
+    "alto": 1536,
+    "nitidez": 66.3,
+    "brillo": 128.2,
+    "orientacion": "horizontal",
+    "puntuacion": 1.203,
+    "id": "M020"
+  }
+]

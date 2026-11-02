@@ -1,0 +1,19 @@
+headless: true
+sort_by: relevance
+scrape_mode: full
+stop_threshold: 0
+max_reviews: 200
+max_scroll_attempts: 5000
+scroll_idle_limit: 15
+db_path: /Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/maps-iszcsjpt/pizza-ten/_raw/resenas/reviews.db
+convert_dates: true
+download_images: false
+use_mongodb: false
+use_s3: false
+backup_to_json: true
+json_path: /Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/maps-iszcsjpt/pizza-ten/_raw/resenas/google_reviews.json
+log_dir: /Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/maps-iszcsjpt/pizza-ten/_raw/resenas/logs
+businesses:
+- url: https://www.google.com/maps/place/Pizza+Ten/data=!4m7!3m6!1s0x95bca56a1b93afcd:0x3421ce1911fee756!8m2!3d-34.4515081!4d-58.5717899!16s%2Fg%2F1tdskzkx!19sChIJza-TG2qlvJURVuf-ERnOITQ?hl=es
+  custom_params:
+    company: Pizza Ten

@@ -1,0 +1,704 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>Parrilla La Reja</title>
+<script src="assets/gsap.min.js"></script>
+<style>@font-face { font-family: "Anton"; src: url("assets/fuentes/Anton.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Fraunces"; src: url("assets/fuentes/Fraunces.ttf") format("truetype"); font-weight: 100 900; font-style: normal; }
+@font-face { font-family: "Fraunces"; src: url("assets/fuentes/Fraunces-Italic.ttf") format("truetype"); font-weight: 100 900; font-style: italic; }
+@font-face { font-family: "Caveat"; src: url("assets/fuentes/Caveat.ttf") format("truetype"); font-weight: 400 700; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-Regular.ttf") format("truetype"); font-weight: 400; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-Medium.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-SemiBold.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Plex Mono"; src: url("assets/fuentes/IBMPlexMono-Italic.ttf") format("truetype"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter.ttf") format("truetype"); font-weight: 100 900; font-style: normal; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Inter", sans-serif; }
+.plano { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; }
+.medio { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.l, .w { display: inline-block; white-space: pre; }
+:root {
+  --carbon: #120f0d;
+  --pizarra: rgba(18, 14, 12, 0.88);
+  --ladrillo: #c83e2b;
+  --brasa: #f29f05;
+  --crema: #fbf5eb;
+  --gris-tiza: #dfd3c3;
+}
+
+#root > .capa {
+  position: absolute;
+  inset: 0;
+  z-index: 65;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 165px 90px 295px 90px;
+}
+
+.atmosfera {
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 45%, rgba(0, 0, 0, 0) 42%, rgba(8, 6, 5, 0.62) 100%),
+    linear-gradient(180deg, rgba(14, 10, 8, 0.55) 0%, rgba(0, 0, 0, 0) 20%, rgba(0, 0, 0, 0) 72%, rgba(12, 8, 6, 0.72) 100%);
+}
+
+.marco-reja {
+  position: absolute;
+  inset: 140px 64px 265px 64px;
+  z-index: 56;
+  pointer-events: none;
+  border-left: 2px solid rgba(251, 245, 235, 0.16);
+  border-right: 2px solid rgba(251, 245, 235, 0.16);
+}
+
+.reja-top, .reja-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(242, 159, 5, 0.5), rgba(251, 245, 235, 0.25), rgba(242, 159, 5, 0.5));
+}
+.reja-top { top: 0; }
+.reja-bottom { bottom: 0; }
+
+/* Persistent header pill */
+.cabecera-fija {
+  position: absolute;
+  top: 168px;
+  left: 90px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(16, 12, 10, 0.84);
+  border: 2px solid rgba(242, 159, 5, 0.55);
+  border-radius: 999px;
+  padding: 12px 28px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.55);
+}
+
+.punto-brasa {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--ladrillo);
+  box-shadow: 0 0 12px var(--brasa);
+}
+
+.cab-nombre {
+  font-family: "Anton", sans-serif;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  color: var(--crema);
+}
+
+.cab-sep {
+  color: var(--brasa);
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.cab-ciudad {
+  font-family: "Plex Mono", monospace;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--brasa);
+}
+
+/* Overlays for readability */
+.velo-abajo {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.08) 42%, rgba(12,9,7,0.88) 82%, rgba(10,7,5,0.96) 100%);
+  z-index: -1;
+}
+
+.velo-centro {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 48%, rgba(14,10,8,0.84) 0%, rgba(10,8,6,0.92) 100%);
+  z-index: -1;
+}
+
+.velo-centro-suave {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 55%, rgba(14,10,8,0.72) 0%, rgba(10,8,6,0.55) 100%);
+  z-index: -1;
+}
+
+.velo-oscuro {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 9, 7, 0.78);
+  z-index: -1;
+}
+
+.velo-cierre {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(12, 9, 7, 0.82) 0%, rgba(14, 10, 8, 0.94) 55%, rgba(10, 7, 5, 0.98) 100%);
+  z-index: -1;
+}
+
+/* 1. GANCHO */
+.bloque-gancho {
+  width: 100%;
+  text-align: left;
+}
+
+.etiqueta-tiza {
+  display: inline-block;
+  font-family: "Plex Mono", monospace;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--carbon);
+  background: var(--brasa);
+  padding: 10px 24px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45);
+}
+
+.titular-brasa {
+  font-family: "Fraunces", serif;
+  font-size: 92px;
+  font-weight: 800;
+  line-height: 1.04;
+  color: var(--crema);
+  margin: 0;
+  text-shadow: 0 10px 28px rgba(0,0,0,0.85);
+}
+
+.titular-brasa em {
+  font-style: italic;
+  color: var(--brasa);
+  white-space: nowrap;
+}
+
+/* Flash */
+.destello-fuego {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(255, 220, 140, 0.95) 0%, rgba(200, 62, 43, 0.85) 60%, rgba(18, 15, 13, 0) 100%);
+}
+
+/* 2. LOGO */
+.bloque-logo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+}
+
+.placa-logo {
+  background: rgba(18, 14, 12, 0.92);
+  border: 3px solid var(--brasa);
+  border-radius: 32px;
+  padding: 46px 56px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.img-logo {
+  width: 680px;
+  height: auto;
+  display: block;
+}
+
+.cinta-barrio {
+  font-family: "Anton", sans-serif;
+  font-size: 42px;
+  letter-spacing: 3px;
+  color: var(--crema);
+  background: var(--ladrillo);
+  padding: 14px 38px;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.65);
+}
+
+/* 3. SALON */
+.bloque-inferior {
+  width: 100%;
+  text-align: left;
+}
+
+.pildora-roja {
+  display: inline-block;
+  font-family: "Plex Mono", monospace;
+  font-size: 27px;
+  font-weight: 600;
+  color: var(--crema);
+  background: var(--ladrillo);
+  padding: 10px 24px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.tit-bodegon {
+  font-family: "Fraunces", serif;
+  font-size: 78px;
+  font-weight: 800;
+  line-height: 1.08;
+  color: var(--crema);
+  margin: 0;
+  text-shadow: 0 10px 28px rgba(0,0,0,0.85);
+}
+
+.tit-bodegon em {
+  color: var(--brasa);
+  font-style: italic;
+  white-space: nowrap;
+}
+
+/* 4-7. PIZARRA PLATO */
+.pizarra-plato {
+  width: 100%;
+  background: var(--pizarra);
+  border: 2px solid rgba(251, 245, 235, 0.24);
+  border-left: 12px solid var(--brasa);
+  border-radius: 22px;
+  padding: 34px 40px;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.8);
+}
+
+.piz-num {
+  font-family: "Plex Mono", monospace;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--brasa);
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.piz-titulo {
+  font-family: "Anton", sans-serif;
+  font-size: 74px;
+  line-height: 1.02;
+  letter-spacing: 1.5px;
+  color: var(--crema);
+  margin-bottom: 14px;
+}
+
+.piz-desc {
+  font-family: "Inter", sans-serif;
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.28;
+  color: var(--gris-tiza);
+}
+
+/* 8-9. SELLO RAPIDO */
+.sello-rapido {
+  margin: auto 0;
+  background: rgba(18, 14, 12, 0.92);
+  border: 4px solid var(--brasa);
+  border-radius: 26px;
+  padding: 36px 52px;
+  text-align: center;
+  box-shadow: 0 24px 55px rgba(0,0,0,0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sello-dulce {
+  border-color: var(--ladrillo);
+}
+
+.sello-chico {
+  font-family: "Caveat", cursive;
+  font-size: 46px;
+  font-weight: 700;
+  color: var(--brasa);
+}
+
+.sello-grande {
+  font-family: "Anton", sans-serif;
+  font-size: 82px;
+  line-height: 1;
+  letter-spacing: 2px;
+  color: var(--crema);
+}
+
+/* 10. RESENA */
+.tarjeta-resena {
+  margin: auto 0;
+  width: 100%;
+  background: rgba(18, 14, 12, 0.94);
+  border: 2px solid rgba(242, 159, 5, 0.5);
+  border-radius: 28px;
+  padding: 46px 44px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.85);
+}
+
+.res-cab {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+
+.res-estrellas {
+  font-size: 46px;
+  color: var(--brasa);
+  letter-spacing: 6px;
+}
+
+.res-total {
+  font-family: "Plex Mono", monospace;
+  font-size: 27px;
+  font-weight: 600;
+  color: var(--gris-tiza);
+}
+
+.res-cita {
+  font-family: "Fraunces", serif;
+  font-size: 46px;
+  font-weight: 600;
+  font-style: italic;
+  line-height: 1.26;
+  color: var(--crema);
+  margin: 0 0 32px 0;
+}
+
+.res-pie {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(251, 245, 235, 0.2);
+  padding-top: 24px;
+}
+
+.res-fuente {
+  font-family: "Inter", sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--gris-tiza);
+}
+
+.sello-efectivo {
+  font-family: "Anton", sans-serif;
+  font-size: 28px;
+  letter-spacing: 1.5px;
+  color: var(--carbon);
+  background: var(--brasa);
+  padding: 10px 22px;
+  border-radius: 10px;
+}
+
+/* 11. CIERRE */
+.panel-cierre {
+  margin: auto 0;
+  width: 100%;
+  background: rgba(16, 12, 10, 0.94);
+  border: 3px solid var(--brasa);
+  border-radius: 32px;
+  padding: 44px 42px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  box-shadow: 0 28px 68px rgba(0,0,0,0.9);
+}
+
+.cierre-logo {
+  width: 480px;
+  height: auto;
+  display: block;
+}
+
+.cierre-cta {
+  font-family: "Anton", sans-serif;
+  font-size: 44px;
+  letter-spacing: 2px;
+  color: var(--crema);
+  background: var(--ladrillo);
+  padding: 14px 34px;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.cierre-datos {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.dato-fila {
+  background: rgba(255, 255, 255, 0.05);
+  border-left: 6px solid var(--brasa);
+  border-radius: 12px;
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dato-tel {
+  border-left-color: var(--ladrillo);
+  background: rgba(200, 62, 43, 0.16);
+}
+
+.dato-etiq {
+  font-family: "Plex Mono", monospace;
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--brasa);
+  letter-spacing: 1.5px;
+}
+
+.dato-val {
+  font-family: "Inter", sans-serif;
+  font-size: 31px;
+  font-weight: 700;
+  color: var(--crema);
+  line-height: 1.22;
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="27.803" data-width="1080" data-height="1920">
+<div class="plano" id="plano-gancho" style="z-index:11"><div class="cam" id="cam-gancho" data-layout-allow-overflow><img id="medio-gancho" class="clip medio" src="assets/a01.jpg" alt="" data-start="0.0000" data-duration="2.4002" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-logo" style="z-index:12"><div class="cam" id="cam-logo" data-layout-allow-overflow><img id="medio-logo" class="clip medio" src="assets/a02.jpg" alt="" data-start="2.4002" data-duration="2.4002" data-track-index="0" style="object-position:50% 40%" /></div></div>
+<div class="plano" id="plano-salon" style="z-index:13"><div class="cam" id="cam-salon" data-layout-allow-overflow><img id="medio-salon" class="clip medio" src="assets/a03.jpg" alt="" data-start="4.4505" data-duration="2.7502" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-parrilla" style="z-index:14"><div class="cam" id="cam-parrilla" data-layout-allow-overflow><img id="medio-parrilla" class="clip medio" src="assets/a04.jpg" alt="" data-start="6.8507" data-duration="3.9504" data-track-index="0" style="object-position:50% 65%" /></div></div>
+<div class="plano" id="plano-asado" style="z-index:15"><div class="cam" id="cam-asado" data-layout-allow-overflow><img id="medio-asado" class="clip medio" src="assets/a05.jpg" alt="" data-start="10.8011" data-duration="2.4002" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-achuras" style="z-index:16"><div class="cam" id="cam-achuras" data-layout-allow-overflow><img id="medio-achuras" class="clip medio" src="assets/a06.jpg" alt="" data-start="13.2013" data-duration="2.4002" data-track-index="0" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-mila" style="z-index:17"><div class="cam" id="cam-mila" data-layout-allow-overflow><img id="medio-mila" class="clip medio" src="assets/a07.jpg" alt="" data-start="15.6016" data-duration="2.4002" data-track-index="1" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-r1" style="z-index:18"><div class="cam" id="cam-r1" data-layout-allow-overflow><img id="medio-r1" class="clip medio" src="assets/a08.jpg" alt="" data-start="18.0018" data-duration="1.2001" data-track-index="0" style="object-position:50% 60%" /></div></div>
+<div class="plano" id="plano-r2" style="z-index:19"><div class="cam" id="cam-r2" data-layout-allow-overflow><img id="medio-r2" class="clip medio" src="assets/a09.jpg" alt="" data-start="19.2019" data-duration="1.2001" data-track-index="1" style="object-position:50% 55%" /></div></div>
+<div class="plano" id="plano-resena" style="z-index:20"><div class="cam" id="cam-resena" data-layout-allow-overflow><img id="medio-resena" class="clip medio" src="assets/a10.jpg" alt="" data-start="20.0520" data-duration="3.9504" data-track-index="0" style="object-position:50% 50%" /></div></div>
+<div class="plano" id="plano-cierre" style="z-index:21"><div class="cam" id="cam-cierre" data-layout-allow-overflow><img id="medio-cierre" class="clip medio" src="assets/a11.jpg" alt="" data-start="23.6024" data-duration="4.2002" data-track-index="1" style="object-position:50% 35%" /></div></div>
+<!-- Vignette & warm ember atmosphere across full video -->
+<div class="atmosfera"></div>
+<div class="marco-reja">
+  <div class="reja-top"></div>
+  <div class="reja-bottom"></div>
+</div>
+
+<!-- Persistent subtle header pill (visible after logo drop until closure) -->
+<div class="clip capa" data-start="4.8005" data-duration="19.2019" data-track-index="2">
+  <div class="cabecera-fija" id="cabecera-fija">
+    <span class="punto-brasa"></span>
+    <span class="cab-nombre">PARRILLA LA REJA</span>
+    <span class="cab-sep">·</span>
+    <span class="cab-ciudad">SAN FERNANDO</span>
+  </div>
+</div>
+
+<!-- 1. GANCHO -->
+<div class="clip capa" data-start="0" data-duration="2.4002" data-track-index="3">
+  <div class="velo-abajo"></div>
+  <div class="bloque-gancho">
+    <div class="etiqueta-tiza" id="g-tag">HOY SE PRENDE EL FUEGO</div>
+    <h1 class="titular-brasa" id="g-tit"><span class="w">¿Hambre</span> <span class="w">de</span> <em><span class="w">asado</span></em> <span class="w">de</span> <span class="w">verdad?</span></h1>
+  </div>
+</div>
+
+<!-- Flash on beat drop -->
+<div class="clip capa" data-start="2.4002" data-duration="0.45" data-track-index="18">
+  <div class="destello-fuego" id="destello-logo"></div>
+</div>
+
+<!-- 2. LOGO -->
+<div class="clip capa" data-start="2.4002" data-duration="2.7502" data-track-index="4">
+  <div class="velo-centro"></div>
+  <div class="bloque-logo">
+    <div class="placa-logo" id="logo-caja" data-layout-allow-overflow>
+      <img class="img-logo" id="logo-img" src="assets/a12.png" alt="Parrilla La Reja" data-layout-allow-overflow />
+    </div>
+    <div class="cinta-barrio" id="logo-sub">EL CLÁSICO DE AV. YRIGOYEN</div>
+  </div>
+</div>
+
+<!-- 3. SALON -->
+<div class="clip capa" data-start="4.8005" data-duration="2.7502" data-track-index="5">
+  <div class="velo-abajo"></div>
+  <div class="bloque-inferior" id="s-bloque">
+    <div class="pildora-roja" id="s-pil">AMBIENTE FAMILIAR Y CÁLIDO</div>
+    <h2 class="tit-bodegon" id="s-tit"><span class="w">Tu</span> <span class="w">bodegón</span> <span class="w">de</span> <span class="w">barrio</span> <span class="w">en</span> <em><span class="w">San</span> <span class="w">Fernando</span></em></h2>
+  </div>
+</div>
+
+<!-- 4. PARRILLA -->
+<div class="clip capa" data-start="7.2007" data-duration="3.6004" data-track-index="6">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="p-card" data-layout-allow-overflow>
+    <div class="piz-num">ESPECIALIDAD #01</div>
+    <div class="piz-titulo" id="p-tit"><span class="l">P</span><span class="l">A</span><span class="l">R</span><span class="l">R</span><span class="l">I</span><span class="l">L</span><span class="l">L</span><span class="l">A</span><span class="l">D</span><span class="l">A</span><span class="l">&nbsp;</span><span class="l">A</span><span class="l">L</span><span class="l">&nbsp;</span><span class="l">C</span><span class="l">A</span><span class="l">R</span><span class="l">B</span><span class="l">Ó</span><span class="l">N</span></div>
+    <div class="piz-desc" id="p-desc">Brasero en tu mesa para compartir en familia</div>
+  </div>
+</div>
+
+<!-- 5. ASADO -->
+<div class="clip capa" data-start="10.8011" data-duration="2.4002" data-track-index="7">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="a-card" data-layout-allow-overflow>
+    <div class="piz-num">CORTE BIEN ARGENTINO</div>
+    <div class="piz-titulo" id="a-tit"><span class="l">A</span><span class="l">S</span><span class="l">A</span><span class="l">D</span><span class="l">O</span><span class="l">&nbsp;</span><span class="l">Y</span><span class="l">&nbsp;</span><span class="l">V</span><span class="l">A</span><span class="l">C</span><span class="l">Í</span><span class="l">O</span></div>
+    <div class="piz-desc" id="a-desc">Tierno, jugoso y recién salido de los fierros</div>
+  </div>
+</div>
+
+<!-- 6. ACHURAS -->
+<div class="clip capa" data-start="13.2013" data-duration="2.4002" data-track-index="8">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="ac-card" data-layout-allow-overflow>
+    <div class="piz-num">PARA ARRANCAR</div>
+    <div class="piz-titulo" id="ac-tit"><span class="l">M</span><span class="l">I</span><span class="l">X</span><span class="l">&nbsp;</span><span class="l">D</span><span class="l">E</span><span class="l">&nbsp;</span><span class="l">A</span><span class="l">C</span><span class="l">H</span><span class="l">U</span><span class="l">R</span><span class="l">A</span><span class="l">S</span></div>
+    <div class="piz-desc" id="ac-desc">Chinchulines, chorizo, morcilla y pollo al limón</div>
+  </div>
+</div>
+
+<!-- 7. MILA -->
+<div class="clip capa" data-start="15.6016" data-duration="2.4002" data-track-index="9">
+  <div class="velo-abajo"></div>
+  <div class="pizarra-plato" id="m-card" data-layout-allow-overflow>
+    <div class="piz-num">CLÁSICO DE BODEGÓN</div>
+    <div class="piz-titulo" id="m-tit"><span class="l">M</span><span class="l">I</span><span class="l">L</span><span class="l">A</span><span class="l">N</span><span class="l">E</span><span class="l">S</span><span class="l">A</span><span class="l">&nbsp;</span><span class="l">N</span><span class="l">A</span><span class="l">P</span><span class="l">O</span><span class="l">L</span><span class="l">I</span><span class="l">T</span><span class="l">A</span><span class="l">N</span><span class="l">A</span></div>
+    <div class="piz-desc" id="m-desc">Con jamón, mucho queso gratinado, tomate y puré</div>
+  </div>
+</div>
+
+<!-- 8. R1 (Fritas) -->
+<div class="clip capa" data-start="18.0018" data-duration="1.2001" data-track-index="10">
+  <div class="velo-centro-suave"></div>
+  <div class="sello-rapido" id="r1-sello" data-layout-allow-overflow>
+    <span class="sello-chico">GUARNICIÓN BIEN SERVIDA</span>
+    <span class="sello-grande">FRITAS DORADAS</span>
+  </div>
+</div>
+
+<!-- 9. R2 (Postres) -->
+<div class="clip capa" data-start="19.2019" data-duration="1.5501" data-track-index="11">
+  <div class="velo-centro-suave"></div>
+  <div class="sello-rapido sello-dulce" id="r2-sello" data-layout-allow-overflow>
+    <span class="sello-chico">EL BROCHE DE ORO</span>
+    <span class="sello-grande">POSTRES CASEROS</span>
+  </div>
+</div>
+
+<!-- 10. RESENA -->
+<div class="clip capa" data-start="20.402" data-duration="4.0004" data-track-index="12">
+  <div class="velo-oscuro"></div>
+  <div class="tarjeta-resena" id="res-card" data-layout-allow-overflow>
+    <div class="res-cab">
+      <div class="res-estrellas">★★★★★</div>
+      <div class="res-total">4,2 ★ · 2.178 RESEÑAS EN GOOGLE</div>
+    </div>
+    <blockquote class="res-cita" id="res-cita"><span class="w">“El</span> <span class="w">servicio</span> <span class="w">de</span> <span class="w">10,</span> <span class="w">la</span> <span class="w">atención</span> <span class="w">excelente…</span> <span class="w">el</span> <span class="w">lugar</span> <span class="w">muy</span> <span class="w">familiar</span> <span class="w">y</span> <span class="w">cálido.</span> <span class="w">Las</span> <span class="w">empanadas</span> <span class="w">riquísimas,</span> <span class="w">una</span> <span class="w">delicia.”</span></blockquote>
+    <div class="res-pie">
+      <span class="res-fuente">Reseña en Google</span>
+      <span class="sello-efectivo" id="res-efec">PROMO EFECTIVO EN EL LOCAL</span>
+    </div>
+  </div>
+</div>
+
+<!-- 11. CIERRE -->
+<div class="clip capa" data-start="24.0024" data-duration="3.8002" data-track-index="13">
+  <div class="velo-cierre"></div>
+  <div class="panel-cierre" id="c-panel" data-layout-allow-overflow>
+    <img class="cierre-logo" id="c-logo" src="assets/a12.png" alt="Parrilla La Reja" data-layout-allow-overflow />
+    <div class="cierre-cta" id="c-cta">VENÍ A COMER O PEDÍ TU DELIVERY</div>
+    <div class="cierre-datos" id="c-datos">
+      <div class="dato-fila">
+        <span class="dato-etiq">DIRECCIÓN</span>
+        <span class="dato-val">Av. Hipólito Yrigoyen 2393 · San Fernando</span>
+      </div>
+      <div class="dato-fila">
+        <span class="dato-etiq">HORARIOS</span>
+        <span class="dato-val">Mar y Mié 12–16 h · Jue a Dom 12–16 y 20–24 h</span>
+      </div>
+      <div class="dato-fila dato-tel">
+        <span class="dato-etiq">PEDIDOS</span>
+        <span class="dato-val">011 4549-2942 · Delivery y Salón</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<audio id="musica" data-timeline-role="music" src="assets/a13.mp3" data-start="0" data-duration="27.803" data-media-start="79.142" data-track-index="20" data-volume="1" data-automation='{"version": 1, "lanes": [{"target": "volume", "points": [{"t": 0, "v": 0}, {"t": 0.08, "v": 0.95}, {"t": 26.4, "v": 0.95}, {"t": 27.8, "v": 0}]}]}'></audio>
+</div>
+<script>
+const P = {"gancho": {"ini": 0.0, "dur": 2.4002, "fin": 2.4002}, "logo": {"ini": 2.4002, "dur": 2.4002, "fin": 4.8004}, "salon": {"ini": 4.8005, "dur": 2.4002, "fin": 7.2007}, "parrilla": {"ini": 7.2007, "dur": 3.6004, "fin": 10.8011}, "asado": {"ini": 10.8011, "dur": 2.4002, "fin": 13.2013}, "achuras": {"ini": 13.2013, "dur": 2.4002, "fin": 15.6015}, "mila": {"ini": 15.6016, "dur": 2.4002, "fin": 18.0018}, "r1": {"ini": 18.0018, "dur": 1.2001, "fin": 19.2019}, "r2": {"ini": 19.2019, "dur": 1.2001, "fin": 20.402}, "resena": {"ini": 20.402, "dur": 3.6004, "fin": 24.0024}, "cierre": {"ini": 24.0024, "dur": 3.8002, "fin": 27.8026}};
+const TOTAL = 27.803, COMPAS = 2.4002, PULSO = 0.6001, W = 1080, H = 1920;
+const tl = gsap.timeline({ paused: true });
+// Camera movements for every shot (gives life to real photos)
+const ids = ["gancho", "logo", "salon", "parrilla", "asado", "achuras", "mila", "r1", "r2", "resena", "cierre"];
+ids.forEach((id, idx) => {
+  const p = P[id];
+  const s0 = idx % 2 === 0 ? 1.14 : 1.04;
+  const s1 = idx % 2 === 0 ? 1.04 : 1.14;
+  tl.fromTo(`#cam-${id}`, { scale: s0 }, { scale: s1, duration: p.dur, ease: "none" }, p.ini);
+});
+
+// Crossfade transitions for shots that have "antes"
+tl.fromTo("#plano-salon",    { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "sine.inOut" }, P.salon.ini - 0.35);
+tl.fromTo("#plano-parrilla", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "sine.inOut" }, P.parrilla.ini - 0.35);
+tl.fromTo("#plano-resena",   { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "sine.inOut" }, P.resena.ini - 0.35);
+tl.fromTo("#plano-cierre",   { opacity: 0 }, { opacity: 1, duration: 0.40, ease: "sine.inOut" }, P.cierre.ini - 0.40);
+
+// Persistent header pill
+tl.fromTo("#cabecera-fija", { opacity: 0, y: -30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, P.salon.ini);
+
+// 1. GANCHO
+tl.fromTo("#g-tag", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, P.gancho.ini + 0.1);
+tl.fromTo("#g-tit .w", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.45, stagger: 0.08, ease: "power3.out" }, P.gancho.ini + 0.25);
+
+// 2. LOGO (Beat drop!)
+tl.fromTo("#destello-logo", { opacity: 0.9 }, { opacity: 0, duration: 0.4, ease: "power2.out" }, P.logo.ini);
+tl.fromTo("#logo-caja", { opacity: 0, scale: 1.35 }, { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out" }, P.logo.ini);
+tl.fromTo("#logo-sub", { opacity: 0, y: 35 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(1.6)" }, P.logo.ini + PULSO);
+
+// 3. SALON
+tl.fromTo("#s-pil", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, ease: "power3.out" }, P.salon.ini + 0.1);
+tl.fromTo("#s-tit .w", { opacity: 0, y: 36 }, { opacity: 1, y: 0, duration: 0.4, stagger: 0.07, ease: "power3.out" }, P.salon.ini + 0.2);
+
+// 4-7. DISH CARDS
+function animarPlato(cardSel, titSel, descSel, tIni) {
+  tl.fromTo(cardSel, { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, tIni);
+  tl.fromTo(`${titSel} .l`, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.35, stagger: 0.018, ease: "power2.out" }, tIni + 0.1);
+  tl.fromTo(descSel, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.35, ease: "power2.out" }, tIni + 0.35);
+}
+
+animarPlato("#p-card",  "#p-tit",  "#p-desc",  P.parrilla.ini);
+animarPlato("#a-card",  "#a-tit",  "#a-desc",  P.asado.ini);
+animarPlato("#ac-card", "#ac-tit", "#ac-desc", P.achuras.ini);
+animarPlato("#m-card",  "#m-tit",  "#m-desc",  P.mila.ini);
+
+// 8-9. RAPID BEATS (R1, R2)
+tl.fromTo("#r1-sello", { opacity: 0, scale: 1.3, rotation: -3 }, { opacity: 1, scale: 1, rotation: -1, duration: 0.3, ease: "back.out(1.8)" }, P.r1.ini);
+tl.fromTo("#r2-sello", { opacity: 0, scale: 1.3, rotation: 3 },  { opacity: 1, scale: 1, rotation: 1,  duration: 0.3, ease: "back.out(1.8)" }, P.r2.ini);
+
+// 10. RESENA
+tl.fromTo("#res-card", { opacity: 0, y: 50, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "power3.out" }, P.resena.ini);
+tl.fromTo("#res-cita .w", { opacity: 0, y: 18 }, { opacity: 1, y: 0, duration: 0.3, stagger: 0.035, ease: "power2.out" }, P.resena.ini + 0.2);
+tl.fromTo("#res-efec", { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, P.resena.ini + PULSO * 2);
+
+// 11. CIERRE
+tl.fromTo("#c-panel", { opacity: 0, y: 50 }, { opacity: 1, y: 0, duration: 0.45, ease: "power3.out" }, P.cierre.ini);
+tl.fromTo("#c-logo",  { opacity: 0, scale: 1.18 }, { opacity: 1, scale: 1, duration: 0.45, ease: "expo.out" }, P.cierre.ini + 0.15);
+tl.fromTo("#c-cta",   { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, P.cierre.ini + 0.3);
+tl.fromTo("#c-datos .dato-fila", { opacity: 0, x: -30 }, { opacity: 1, x: 0, duration: 0.35, stagger: 0.12, ease: "power2.out" }, P.cierre.ini + 0.45);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>
