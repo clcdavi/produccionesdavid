@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
-Generador Rediseñado del Carrusel Publicitario Oficial — PRODUCCIONES DAVID
+Generador Perfeccionado del Carrusel Publicitario Oficial — PRODUCCIONES DAVID
 100% fiel al manual de marca:
 - Diseño Editorial Suizo / High-End Minimalista
 - Sin fotos de clientes ni elementos deformados
-- Márgenes amplios, tipografía Montserrat de alta jerarquía y acentos terracota
+- Márgenes amplios de 90 px, tipografía geométrica Montserrat, acento terracota
+- Cero superposiciones de texto: cálculo dinámico de saltos de línea (wrap_text_pixels)
 - Paleta oficial: Marfil #F5F2EC, Carbón #191919, Terracota #CD563C
 """
 from pathlib import Path
@@ -46,12 +47,30 @@ def draw_header(canvas: Image.Image, draw: ImageDraw.Draw, page_num: int, total:
     logo_s = logo_src.resize((lw, lh), Image.Resampling.LANCZOS)
     canvas.paste(logo_s, (90, 80), logo_s)
     
-    # Paginación
+    # Paginación alineada al margen derecho (990 px)
     color_num = (200, 200, 200, 255) if dark else COLOR_MUTED
     draw.text((990, 95), f"{page_num:02d} / {total:02d}", font=font_bold(20), fill=color_num, anchor="rt")
 
+def wrap_text_pixels(text: str, font: ImageFont.FreeTypeFont, max_width: int):
+    """Ajuste de líneas por píxeles para evitar cualquier desborde o superposición."""
+    words = text.split()
+    lines = []
+    curr = []
+    for w in words:
+        test = " ".join(curr + [w])
+        bbox = font.getbbox(test)
+        if (bbox[2] - bbox[0]) <= max_width:
+            curr.append(w)
+        else:
+            if curr:
+                lines.append(" ".join(curr))
+            curr = [w]
+    if curr:
+        lines.append(" ".join(curr))
+    return lines
+
 # ==============================================================
-# SLIDE 1: PORTADA EDITORIAL
+# SLIDE 1: PORTADA EDITORIAL (ENCUADRE MILIMÉTRICO Y SIN OVERFLOW)
 # ==============================================================
 def create_slide_1():
     canvas = Image.new("RGBA", (1080, 1080), COLOR_MARFIL)
@@ -72,33 +91,39 @@ def create_slide_1():
     draw.text((90, 560), "para empresas, comercios y marcas que buscan comunicar", font=font_medium(26), fill=COLOR_CARBON)
     draw.text((90, 600), "con la calidad y el impacto visual de una productora de cine.", font=font_medium(26), fill=COLOR_CARBON)
     
-    # Card Bento de Pilares
-    card = Image.new("RGBA", (900, 210), COLOR_WHITE)
-    c_draw = ImageDraw.Draw(card)
-    c_draw.rounded_rectangle([(0, 0), (900, 210)], radius=20, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+    # Card Bento de Pilares (Dibujado directamente en canvas para anti-aliasing perfecto)
+    card_x = 90
+    card_y = 695
+    card_w = 900
+    card_h = 210
     
-    # 3 Columnas
+    draw.rounded_rectangle(
+        [(card_x, card_y), (card_x + card_w, card_y + card_h)],
+        radius=20,
+        fill=COLOR_WHITE,
+        outline=COLOR_BORDER,
+        width=2
+    )
+    
+    # 3 Columnas perfectamente contenidas dentro de sus cajas
     cols = [
-        ("ENTREGA 48 HS", "De la idea al video publicado sin semanas de espera."),
-        ("CALIDAD 4K", "Iluminación de cine y definición hiperrealista."),
-        ("FOCO EN VENTAS", "Estructura narrativa diseñada para convertir visitas.")
+        ("ENTREGA 48 HS", ["De la idea al video final", "sin semanas de espera."]),
+        ("CALIDAD 4K", ["Iluminación de cine y", "definición hiperrealista."]),
+        ("FOCO EN VENTAS", ["Estructura pensada para", "convertir visitas en ventas."])
     ]
-    for i, (col_t, col_d) in enumerate(cols):
-        cx = 40 + i * 290
-        c_draw.text((cx, 40), col_t, font=font_extrabold(20), fill=COLOR_TERRACOTA)
-        words = col_d.split()
-        mid = len(words) // 2
-        l1 = " ".join(words[:mid])
-        l2 = " ".join(words[mid:])
-        c_draw.text((cx, 80), l1, font=font_regular(18), fill=COLOR_CARBON)
-        c_draw.text((cx, 110), l2, font=font_regular(18), fill=COLOR_CARBON)
+    
+    for i, (col_t, lines) in enumerate(cols):
+        cx = card_x + 40 + i * 290
+        draw.text((cx, card_y + 40), col_t, font=font_extrabold(20), fill=COLOR_TERRACOTA)
+        draw.text((cx, card_y + 82), lines[0], font=font_medium(17), fill=COLOR_CARBON)
+        draw.text((cx, card_y + 114), lines[1], font=font_medium(17), fill=COLOR_CARBON)
         if i < 2:
-            c_draw.line([(cx + 265, 40), (cx + 265, 160)], fill=COLOR_BORDER, width=1)
+            div_x = cx + 255
+            draw.line([(div_x, card_y + 38), (div_x, card_y + 165)], fill=COLOR_BORDER, width=1)
             
-    canvas.paste(card, (90, 690))
     paste_corner_shard(draw, 1080, 1080, 180)
     canvas.convert("RGB").save(OUT_DIR / "slide_01_portada.png", quality=98)
-    print("Slide 1 generado.")
+    print("Slide 1 generado con encuadre corregido.")
 
 # ==============================================================
 # SLIDE 2: EL MODELO TRADICIONAL VS NUEVA ERA
@@ -116,28 +141,24 @@ def create_slide_2():
     
     draw.text((90, 365), "Las marcas modernas no pueden esperar 20 días ni pagar fortunas por un solo reel.", font=font_medium(22), fill=COLOR_MUTED)
     
-    # Card 1: Modelo Tradicional (Gris con borde)
-    card1 = Image.new("RGBA", (900, 230), COLOR_WHITE)
-    c1_draw = ImageDraw.Draw(card1)
-    c1_draw.rounded_rectangle([(0, 0), (900, 230)], radius=18, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
-    c1_draw.text((45, 30), "EL MODELO ANTIGUO", font=font_bold(22), fill=(160, 60, 50, 255))
-    c1_draw.text((45, 75), "— Semanas coordinando permisos, locaciones y actores.", font=font_medium(20), fill=COLOR_CARBON)
-    c1_draw.text((45, 115), "— Costos que superan el presupuesto mensual de un negocio.", font=font_medium(20), fill=COLOR_CARBON)
-    c1_draw.text((45, 155), "— Postproducción lenta que hace perder el momento de tendencia.", font=font_medium(20), fill=COLOR_CARBON)
-    canvas.paste(card1, (90, 420))
+    # Card 1: Modelo Tradicional
+    card1_y = 420
+    draw.rounded_rectangle([(90, card1_y), (990, card1_y + 230)], radius=18, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+    draw.text((135, card1_y + 30), "EL MODELO ANTIGUO", font=font_bold(22), fill=(160, 60, 50, 255))
+    draw.text((135, card1_y + 75), "— Semanas coordinando permisos, locaciones y actores.", font=font_medium(20), fill=COLOR_CARBON)
+    draw.text((135, card1_y + 115), "— Costos que superan el presupuesto mensual de un negocio.", font=font_medium(20), fill=COLOR_CARBON)
+    draw.text((135, card1_y + 155), "— Postproducción lenta que hace perder el momento de tendencia.", font=font_medium(20), fill=COLOR_CARBON)
     
-    # Card 2: Con Producciones David (Carbón #191919)
-    card2 = Image.new("RGBA", (900, 290), COLOR_CARBON)
-    c2_draw = ImageDraw.Draw(card2)
-    c2_draw.rounded_rectangle([(0, 0), (900, 290)], radius=18, fill=COLOR_CARBON)
-    c2_draw.rectangle([(0, 0), (900, 6)], fill=COLOR_TERRACOTA)
+    # Card 2: Con Producciones David
+    card2_y = 680
+    draw.rounded_rectangle([(90, card2_y), (990, card2_y + 290)], radius=18, fill=COLOR_CARBON)
+    draw.rectangle([(90, card2_y), (990, card2_y + 6)], fill=COLOR_TERRACOTA)
     
-    c2_draw.text((45, 35), "CON PRODUCCIONES DAVID (IA)", font=font_extrabold(24), fill=COLOR_MARFIL)
-    c2_draw.text((45, 85), "✓ Producción express con entrega en 48 a 72 horas.", font=font_medium(20), fill=COLOR_MARFIL)
-    c2_draw.text((45, 125), "✓ Cualquier locación del mundo generada con realismo cinematográfico.", font=font_medium(20), fill=COLOR_MARFIL)
-    c2_draw.text((45, 165), "✓ Diseñado desde cero para rendimiento y pauta en Meta Ads y TikTok.", font=font_medium(20), fill=COLOR_MARFIL)
-    c2_draw.text((45, 205), "✓ Costos accesibles que permiten publicar contenido continuo.", font=font_bold(20), fill=COLOR_TERRACOTA)
-    canvas.paste(card2, (90, 680))
+    draw.text((135, card2_y + 35), "CON PRODUCCIONES DAVID (IA)", font=font_extrabold(24), fill=COLOR_MARFIL)
+    draw.text((135, card2_y + 85), "✓ Producción express con entrega en 48 a 72 horas.", font=font_medium(20), fill=COLOR_MARFIL)
+    draw.text((135, card2_y + 125), "✓ Cualquier locación del mundo generada con realismo cinematográfico.", font=font_medium(20), fill=COLOR_MARFIL)
+    draw.text((135, card2_y + 165), "✓ Diseñado desde cero para rendimiento y pauta en Meta Ads y TikTok.", font=font_medium(20), fill=COLOR_MARFIL)
+    draw.text((135, card2_y + 205), "✓ Costos accesibles que permiten publicar contenido continuo.", font=font_bold(20), fill=COLOR_TERRACOTA)
     
     paste_corner_shard(draw, 1080, 1080, 180)
     canvas.convert("RGB").save(OUT_DIR / "slide_02_problema_solucion.png", quality=98)
@@ -170,19 +191,15 @@ def create_slide_3():
     
     card_y = 425
     for title, desc in cards:
-        c = Image.new("RGBA", (900, 160), COLOR_WHITE)
-        cd = ImageDraw.Draw(c)
-        cd.rounded_rectangle([(0, 0), (900, 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
-        cd.rectangle([(0, 25), (6, 135)], fill=COLOR_TERRACOTA)
-        cd.text((40, 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
+        draw.rounded_rectangle([(90, card_y), (990, card_y + 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+        draw.rectangle([(90, card_y + 25), (96, card_y + 135)], fill=COLOR_TERRACOTA)
+        draw.text((130, card_y + 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
         
-        words = desc.split()
-        l1 = " ".join(words[:11])
-        l2 = " ".join(words[11:])
-        cd.text((40, 75), l1, font=font_regular(19), fill=COLOR_MUTED)
-        cd.text((40, 108), l2, font=font_regular(19), fill=COLOR_MUTED)
-        
-        canvas.paste(c, (90, card_y))
+        lines = wrap_text_pixels(desc, font_regular(19), 810)
+        draw.text((130, card_y + 75), lines[0], font=font_regular(19), fill=COLOR_MUTED)
+        if len(lines) > 1:
+            draw.text((130, card_y + 108), lines[1], font=font_regular(19), fill=COLOR_MUTED)
+            
         card_y += 185
         
     paste_corner_shard(draw, 1080, 1080, 180)
@@ -216,19 +233,15 @@ def create_slide_4():
     
     card_y = 425
     for title, desc in cards:
-        c = Image.new("RGBA", (900, 160), COLOR_WHITE)
-        cd = ImageDraw.Draw(c)
-        cd.rounded_rectangle([(0, 0), (900, 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
-        cd.rectangle([(0, 25), (6, 135)], fill=COLOR_TERRACOTA)
-        cd.text((40, 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
+        draw.rounded_rectangle([(90, card_y), (990, card_y + 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+        draw.rectangle([(90, card_y + 25), (96, card_y + 135)], fill=COLOR_TERRACOTA)
+        draw.text((130, card_y + 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
         
-        words = desc.split()
-        l1 = " ".join(words[:11])
-        l2 = " ".join(words[11:])
-        cd.text((40, 75), l1, font=font_regular(19), fill=COLOR_MUTED)
-        cd.text((40, 108), l2, font=font_regular(19), fill=COLOR_MUTED)
-        
-        canvas.paste(c, (90, card_y))
+        lines = wrap_text_pixels(desc, font_regular(19), 810)
+        draw.text((130, card_y + 75), lines[0], font=font_regular(19), fill=COLOR_MUTED)
+        if len(lines) > 1:
+            draw.text((130, card_y + 108), lines[1], font=font_regular(19), fill=COLOR_MUTED)
+            
         card_y += 185
         
     paste_corner_shard(draw, 1080, 1080, 180)
@@ -262,19 +275,15 @@ def create_slide_5():
     
     card_y = 425
     for title, desc in cards:
-        c = Image.new("RGBA", (900, 160), COLOR_WHITE)
-        cd = ImageDraw.Draw(c)
-        cd.rounded_rectangle([(0, 0), (900, 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
-        cd.rectangle([(0, 25), (6, 135)], fill=COLOR_TERRACOTA)
-        cd.text((40, 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
+        draw.rounded_rectangle([(90, card_y), (990, card_y + 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+        draw.rectangle([(90, card_y + 25), (96, card_y + 135)], fill=COLOR_TERRACOTA)
+        draw.text((130, card_y + 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
         
-        words = desc.split()
-        l1 = " ".join(words[:11])
-        l2 = " ".join(words[11:])
-        cd.text((40, 75), l1, font=font_regular(19), fill=COLOR_MUTED)
-        cd.text((40, 108), l2, font=font_regular(19), fill=COLOR_MUTED)
-        
-        canvas.paste(c, (90, card_y))
+        lines = wrap_text_pixels(desc, font_regular(19), 810)
+        draw.text((130, card_y + 75), lines[0], font=font_regular(19), fill=COLOR_MUTED)
+        if len(lines) > 1:
+            draw.text((130, card_y + 108), lines[1], font=font_regular(19), fill=COLOR_MUTED)
+            
         card_y += 185
         
     paste_corner_shard(draw, 1080, 1080, 180)
@@ -304,11 +313,11 @@ def create_slide_6():
     draw.text((540, 615), "ESCRIBINOS POR WHATSAPP O DM", font=font_black(28), fill=COLOR_CARBON, anchor="mm")
     draw.text((540, 655), "Coordinamos una asesoría estratégica y muestra sin cargo", font=font_bold(20), fill=COLOR_TERRACOTA, anchor="mm")
     
-    # Filas de Beneficios
+    # Filas de Beneficios perfectamente espaciadas con márgenes simétricos
     b_y = 750
     draw.text((90, b_y), "✓ Entrega en 48 hs", font=font_bold(22), fill=COLOR_MARFIL)
-    draw.text((390, b_y), "✓ Calidad Cinematográfica", font=font_bold(22), fill=COLOR_MARFIL)
-    draw.text((740, b_y), "✓ Enfoque en Conversión", font=font_bold(22), fill=COLOR_MARFIL)
+    draw.text((365, b_y), "✓ Calidad Cinematográfica", font=font_bold(22), fill=COLOR_MARFIL)
+    draw.text((700, b_y), "✓ Enfoque en Conversión", font=font_bold(22), fill=COLOR_MARFIL)
     
     # Línea divisoria
     draw.line([(90, 830), (990, 830)], fill=(50, 50, 50, 255), width=1)
@@ -327,4 +336,4 @@ if __name__ == "__main__":
     create_slide_4()
     create_slide_5()
     create_slide_6()
-    print("🎉 Carrusel rediseñado con éxito en:", OUT_DIR)
+    print("🎉 Carrusel perfeccionado con éxito en:", OUT_DIR)
