@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Generador del Carrusel Publicitario Oficial — PRODUCCIONES DAVID
-6 Placas (1080x1080) con la identidad visual oficial:
-Paleta: Carbón #191919, Marfil #F5F2EC, Terracota #CD563C.
-Tipografía: Montserrat (Black, Bold, Medium, Regular).
+Generador Rediseñado del Carrusel Publicitario Oficial — PRODUCCIONES DAVID
+100% fiel al manual de marca:
+- Diseño Editorial Suizo / High-End Minimalista
+- Sin fotos de clientes ni elementos deformados
+- Márgenes amplios, tipografía Montserrat de alta jerarquía y acentos terracota
+- Paleta oficial: Marfil #F5F2EC, Carbón #191919, Terracota #CD563C
 """
-import os
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
@@ -20,26 +21,34 @@ COLOR_CARBON = (25, 25, 25, 255)       # #191919
 COLOR_MARFIL = (245, 242, 236, 255)    # #F5F2EC
 COLOR_TERRACOTA = (205, 86, 60, 255)   # #CD563C
 COLOR_WHITE = (255, 255, 255, 255)
-COLOR_MUTED = (110, 110, 110, 255)
+COLOR_MUTED = (115, 115, 115, 255)
+COLOR_BORDER = (222, 217, 209, 255)
 
-# Cargar fuentes
+# Cargar fuentes oficiales
 font_black = lambda s: ImageFont.truetype(str(FONTS_DIR / "Montserrat-Black.ttf"), s)
+font_extrabold = lambda s: ImageFont.truetype(str(FONTS_DIR / "Montserrat-ExtraBold.ttf"), s)
 font_bold = lambda s: ImageFont.truetype(str(FONTS_DIR / "Montserrat-Bold.ttf"), s)
 font_medium = lambda s: ImageFont.truetype(str(FONTS_DIR / "Montserrat-Medium.ttf"), s)
 font_regular = lambda s: ImageFont.truetype(str(FONTS_DIR / "Montserrat-Regular.ttf"), s)
 
 logo_horiz = Image.open(BRAND_DIR / "logo-horizontal.png").convert("RGBA")
-logo_princ = Image.open(BRAND_DIR / "logo-principal.png").convert("RGBA")
 logo_inv = Image.open(BRAND_DIR / "watermark-blanco.png").convert("RGBA")
 
-def paste_corner_shard(draw: ImageDraw.Draw, w=1080, h=1080, size=200):
+def paste_corner_shard(draw: ImageDraw.Draw, w=1080, h=1080, size=180):
     """Corte diagonal terracota en esquina inferior derecha según manual."""
     draw.polygon([(w - size, h), (w, h - size), (w, h)], fill=COLOR_TERRACOTA)
 
-def draw_pagination(draw: ImageDraw.Draw, current: int, total: int = 6, dark: bool = False):
-    f = font_bold(22)
-    color = COLOR_MUTED if not dark else (180, 180, 180, 255)
-    draw.text((980, 75), f"{current:02d} / {total:02d}", font=f, fill=color, anchor="rt")
+def draw_header(canvas: Image.Image, draw: ImageDraw.Draw, page_num: int, total: int = 6, dark: bool = False):
+    """Encabezado oficial con logo y paginación."""
+    lw = 380
+    logo_src = logo_inv if dark else logo_horiz
+    lh = int(logo_src.height * (lw / logo_src.width))
+    logo_s = logo_src.resize((lw, lh), Image.Resampling.LANCZOS)
+    canvas.paste(logo_s, (90, 80), logo_s)
+    
+    # Paginación
+    color_num = (200, 200, 200, 255) if dark else COLOR_MUTED
+    draw.text((990, 95), f"{page_num:02d} / {total:02d}", font=font_bold(20), fill=color_num, anchor="rt")
 
 # ==============================================================
 # SLIDE 1: PORTADA EDITORIAL
@@ -47,192 +56,227 @@ def draw_pagination(draw: ImageDraw.Draw, current: int, total: int = 6, dark: bo
 def create_slide_1():
     canvas = Image.new("RGBA", (1080, 1080), COLOR_MARFIL)
     draw = ImageDraw.Draw(canvas)
+    draw_header(canvas, draw, 1, 6)
     
-    # Header Logo
-    lw = 440
-    lh = int(logo_horiz.height * (lw / logo_horiz.width))
-    logo_s = logo_horiz.resize((lw, lh), Image.Resampling.LANCZOS)
-    canvas.paste(logo_s, (80, 70), logo_s)
-    draw_pagination(draw, 1, 6)
+    # Tag de categoría
+    draw.rectangle([90, 200, 140, 204], fill=COLOR_TERRACOTA)
+    draw.text((155, 192), "MANIFIESTO AUDIOVISUAL · 2026", font=font_bold(18), fill=COLOR_TERRACOTA)
     
-    # Titular de Alto Impacto
-    draw.text((80, 220), "EL FUTURO DEL", font=font_black(64), fill=COLOR_CARBON)
-    draw.text((80, 295), "VIDEO PUBLICITARIO", font=font_black(64), fill=COLOR_CARBON)
-    draw.text((80, 370), "ES HOY.", font=font_black(64), fill=COLOR_TERRACOTA)
+    # Titular Masivo
+    draw.text((90, 250), "HACEMOS", font=font_black(72), fill=COLOR_CARBON)
+    draw.text((90, 330), "VIDEOS QUE", font=font_black(72), fill=COLOR_CARBON)
+    draw.text((90, 410), "DESTACAN.", font=font_black(72), fill=COLOR_TERRACOTA)
     
-    # Subtítulo explicativo
-    draw.text((80, 465), "Comerciales cinematográficos, spots de producto y avatares con IA.", font=font_medium(26), fill=COLOR_CARBON)
-    draw.text((80, 505), "Sin rodajes lentos. Sin costos desmedidos. Entrega en 48 hs.", font=font_regular(24), fill=COLOR_MUTED)
+    # Párrafo descriptivo
+    draw.text((90, 520), "Producción audiovisual profesional con Inteligencia Artificial", font=font_medium(26), fill=COLOR_CARBON)
+    draw.text((90, 560), "para empresas, comercios y marcas que buscan comunicar", font=font_medium(26), fill=COLOR_CARBON)
+    draw.text((90, 600), "con la calidad y el impacto visual de una productora de cine.", font=font_medium(26), fill=COLOR_CARBON)
     
-    # Imagen inferior con corte cinematográfico
-    bg_img = Image.open(BRAND_DIR / "templates" / "backgrounds" / "bg_cinema_camera.jpg").convert("RGBA")
-    bg_crop = bg_img.crop((0, 600, 1080, 1140)).resize((920, 460), Image.Resampling.LANCZOS)
+    # Card Bento de Pilares
+    card = Image.new("RGBA", (900, 210), COLOR_WHITE)
+    c_draw = ImageDraw.Draw(card)
+    c_draw.rounded_rectangle([(0, 0), (900, 210)], radius=20, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
     
-    # Máscara de esquinas redondeadas
-    mask = Image.new("L", (920, 460), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([(0, 0), (920, 460)], radius=24, fill=255)
-    canvas.paste(bg_crop, (80, 560), mask)
-    
-    # Badge sobre la imagen
-    badge_overlay = Image.new("RGBA", (920, 460), (0, 0, 0, 0))
-    b_draw = ImageDraw.Draw(badge_overlay)
-    b_draw.rounded_rectangle([(30, 370), (420, 425)], radius=12, fill=(25, 25, 25, 230))
-    b_draw.text((50, 385), "CALIDAD 4K · INTELIGENCIA ARTIFICIAL", font=font_bold(18), fill=COLOR_MARFIL)
-    canvas.paste(badge_overlay, (80, 560), badge_overlay)
-    
-    paste_corner_shard(draw, 1080, 1080, 200)
+    # 3 Columnas
+    cols = [
+        ("ENTREGA 48 HS", "De la idea al video publicado sin semanas de espera."),
+        ("CALIDAD 4K", "Iluminación de cine y definición hiperrealista."),
+        ("FOCO EN VENTAS", "Estructura narrativa diseñada para convertir visitas.")
+    ]
+    for i, (col_t, col_d) in enumerate(cols):
+        cx = 40 + i * 290
+        c_draw.text((cx, 40), col_t, font=font_extrabold(20), fill=COLOR_TERRACOTA)
+        words = col_d.split()
+        mid = len(words) // 2
+        l1 = " ".join(words[:mid])
+        l2 = " ".join(words[mid:])
+        c_draw.text((cx, 80), l1, font=font_regular(18), fill=COLOR_CARBON)
+        c_draw.text((cx, 110), l2, font=font_regular(18), fill=COLOR_CARBON)
+        if i < 2:
+            c_draw.line([(cx + 265, 40), (cx + 265, 160)], fill=COLOR_BORDER, width=1)
+            
+    canvas.paste(card, (90, 690))
+    paste_corner_shard(draw, 1080, 1080, 180)
     canvas.convert("RGB").save(OUT_DIR / "slide_01_portada.png", quality=98)
     print("Slide 1 generado.")
 
 # ==============================================================
-# SLIDE 2: EL PROBLEMA VS LA REVOLUCIÓN IA
+# SLIDE 2: EL MODELO TRADICIONAL VS NUEVA ERA
 # ==============================================================
 def create_slide_2():
     canvas = Image.new("RGBA", (1080, 1080), COLOR_MARFIL)
     draw = ImageDraw.Draw(canvas)
+    draw_header(canvas, draw, 2, 6)
     
-    # Header
-    draw.text((80, 75), "PRODUCCIONES DAVID", font=font_bold(24), fill=COLOR_CARBON)
-    draw_pagination(draw, 2, 6)
+    draw.rectangle([90, 195, 140, 199], fill=COLOR_TERRACOTA)
+    draw.text((155, 187), "CAMBIO DE PARADIGMA", font=font_bold(18), fill=COLOR_TERRACOTA)
     
-    # Titular
-    draw.text((80, 150), "¿POR QUÉ EL MODELO TRADICIONAL", font=font_black(46), fill=COLOR_CARBON)
-    draw.text((80, 210), "YA NO FUNCIONA?", font=font_black(46), fill=COLOR_TERRACOTA)
+    draw.text((90, 235), "EL RODAJE TRADICIONAL", font=font_black(48), fill=COLOR_CARBON)
+    draw.text((90, 295), "QUEDÓ EN EL PASADO.", font=font_black(48), fill=COLOR_CARBON)
     
-    # Bento Card 1: El Pasado Tradicional (Gris / Advertencia)
-    card1 = Image.new("RGBA", (920, 310), (235, 230, 222, 255))
+    draw.text((90, 365), "Las marcas modernas no pueden esperar 20 días ni pagar fortunas por un solo reel.", font=font_medium(22), fill=COLOR_MUTED)
+    
+    # Card 1: Modelo Tradicional (Gris con borde)
+    card1 = Image.new("RGBA", (900, 230), COLOR_WHITE)
     c1_draw = ImageDraw.Draw(card1)
-    c1_draw.rounded_rectangle([(0, 0), (920, 310)], radius=20, outline=(210, 200, 190, 255), width=2)
-    c1_draw.text((40, 35), "RODAJES TRADICIONALES", font=font_bold(26), fill=(140, 50, 40, 255))
-    c1_draw.text((40, 85), "❌ Semanas de planificación, permisos y locaciones.", font=font_medium(22), fill=COLOR_CARBON)
-    c1_draw.text((40, 135), "❌ Equipos de filmación carísimos y actores.", font=font_medium(22), fill=COLOR_CARBON)
-    c1_draw.text((40, 185), "❌ Presupuestos de cientos de miles de pesos por 1 solo video.", font=font_medium(22), fill=COLOR_CARBON)
-    c1_draw.text((40, 235), "❌ Tiempos muertos de postproducción de más de 20 días.", font=font_medium(22), fill=COLOR_CARBON)
-    canvas.paste(card1, (80, 300))
+    c1_draw.rounded_rectangle([(0, 0), (900, 230)], radius=18, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+    c1_draw.text((45, 30), "EL MODELO ANTIGUO", font=font_bold(22), fill=(160, 60, 50, 255))
+    c1_draw.text((45, 75), "— Semanas coordinando permisos, locaciones y actores.", font=font_medium(20), fill=COLOR_CARBON)
+    c1_draw.text((45, 115), "— Costos que superan el presupuesto mensual de un negocio.", font=font_medium(20), fill=COLOR_CARBON)
+    c1_draw.text((45, 155), "— Postproducción lenta que hace perder el momento de tendencia.", font=font_medium(20), fill=COLOR_CARBON)
+    canvas.paste(card1, (90, 420))
     
-    # Bento Card 2: Con Producciones David (Carbón Premium)
-    card2 = Image.new("RGBA", (920, 360), COLOR_CARBON)
+    # Card 2: Con Producciones David (Carbón #191919)
+    card2 = Image.new("RGBA", (900, 290), COLOR_CARBON)
     c2_draw = ImageDraw.Draw(card2)
-    c2_draw.rounded_rectangle([(0, 0), (920, 360)], radius=20, fill=COLOR_CARBON)
-    # Filete terracota superior
-    c2_draw.rectangle([(0, 0), (920, 8)], fill=COLOR_TERRACOTA)
-    c2_draw.text((40, 45), "CON PRODUCCIONES DAVID (IA)", font=font_black(28), fill=COLOR_MARFIL)
-    c2_draw.text((40, 105), "✅ Entrega en 48 a 72 horas listo para publicar y pautar.", font=font_medium(22), fill=COLOR_MARFIL)
-    c2_draw.text((40, 155), "✅ Cualquier escenario del mundo generado con fotorrealismo.", font=font_medium(22), fill=COLOR_MARFIL)
-    c2_draw.text((40, 205), "✅ Calidad visual de productora de cine sin costos ocultos.", font=font_medium(22), fill=COLOR_MARFIL)
-    c2_draw.text((40, 255), "✅ Packs mensuales pensados para negocios que quieren vender.", font=font_bold(22), fill=COLOR_TERRACOTA)
-    canvas.paste(card2, (80, 650))
+    c2_draw.rounded_rectangle([(0, 0), (900, 290)], radius=18, fill=COLOR_CARBON)
+    c2_draw.rectangle([(0, 0), (900, 6)], fill=COLOR_TERRACOTA)
+    
+    c2_draw.text((45, 35), "CON PRODUCCIONES DAVID (IA)", font=font_extrabold(24), fill=COLOR_MARFIL)
+    c2_draw.text((45, 85), "✓ Producción express con entrega en 48 a 72 horas.", font=font_medium(20), fill=COLOR_MARFIL)
+    c2_draw.text((45, 125), "✓ Cualquier locación del mundo generada con realismo cinematográfico.", font=font_medium(20), fill=COLOR_MARFIL)
+    c2_draw.text((45, 165), "✓ Diseñado desde cero para rendimiento y pauta en Meta Ads y TikTok.", font=font_medium(20), fill=COLOR_MARFIL)
+    c2_draw.text((45, 205), "✓ Costos accesibles que permiten publicar contenido continuo.", font=font_bold(20), fill=COLOR_TERRACOTA)
+    canvas.paste(card2, (90, 680))
     
     paste_corner_shard(draw, 1080, 1080, 180)
     canvas.convert("RGB").save(OUT_DIR / "slide_02_problema_solucion.png", quality=98)
     print("Slide 2 generado.")
 
 # ==============================================================
-# SLIDE 3: SERVICIO 1 - SPOTS DE PRODUCTO Y E-COMMERCE
+# SLIDE 3: SERVICIO 01 - SPOTS DE PRODUCTO Y E-COMMERCE
 # ==============================================================
 def create_slide_3():
     canvas = Image.new("RGBA", (1080, 1080), COLOR_MARFIL)
     draw = ImageDraw.Draw(canvas)
+    draw_header(canvas, draw, 3, 6)
     
-    draw.text((80, 75), "SERVICIO 01 / 03", font=font_bold(22), fill=COLOR_TERRACOTA)
-    draw_pagination(draw, 3, 6)
+    draw.rectangle([90, 195, 140, 199], fill=COLOR_TERRACOTA)
+    draw.text((155, 187), "SERVICIO 01 / 03", font=font_bold(18), fill=COLOR_TERRACOTA)
     
-    draw.text((80, 140), "SPOTS DE PRODUCTO", font=font_black(48), fill=COLOR_CARBON)
-    draw.text((80, 205), "Y E-COMMERCE", font=font_black(48), fill=COLOR_CARBON)
+    draw.text((90, 235), "SPOTS DE PRODUCTO", font=font_black(48), fill=COLOR_CARBON)
+    draw.text((90, 295), "Y E-COMMERCE.", font=font_black(48), fill=COLOR_CARBON)
     
-    draw.text((80, 280), "Colocamos tus productos en escenarios imposibles:", font=font_bold(24), fill=COLOR_CARBON)
-    draw.text((80, 320), "Iluminación de estudio, primeros planos macro y tomas dinámicas", font=font_regular(22), fill=COLOR_MUTED)
-    draw.text((80, 355), "que multiplican la conversión de tu tienda online y tus anuncios.", font=font_regular(22), fill=COLOR_MUTED)
+    draw.text((90, 365), "Elevamos la percepción de valor de tu marca al nivel de las grandes firmas globales.", font=font_medium(22), fill=COLOR_MUTED)
     
-    # Imagen de muestra de producto
-    sw_img = Image.open(BASE_DIR / "negocios" / "sw-store" / "anuncio" / "planos" / "revision_kling.jpg").convert("RGBA")
-    sw_crop = sw_img.resize((920, 520), Image.Resampling.LANCZOS)
+    cards = [
+        ("01 · DETALLE Y MACRO CINEMATOGRÁFICO",
+         "Primeros planos hiperrealistas que exhiben texturas, brillos, materiales y acabados de tu producto con precisión milimétrica."),
+        ("02 · ESCENARIOS Y FONDOS DE ENSUEÑO",
+         "Situamos tu packaging en entornos naturales, arquitectónicos o abstractos de lujo sin alquilar estudios físicos."),
+        ("03 · ITERACIONES PARA PERFORMANCE ADS",
+         "Generamos variantes de ganchos visuales para testear en campañas publicitarias (A/B testing) y maximizar tu retorno.")
+    ]
     
-    mask = Image.new("L", (920, 520), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([(0, 0), (920, 520)], radius=20, fill=255)
-    canvas.paste(sw_crop, (80, 440), mask)
-    
-    # Badge flotante
-    b_card = Image.new("RGBA", (520, 70), (25, 25, 25, 230))
-    b_d = ImageDraw.Draw(b_card)
-    b_d.text((30, 22), "IDEAL PARA MARCAS Y TIENDAS ONLINE", font=font_bold(20), fill=COLOR_MARFIL)
-    canvas.paste(b_card, (110, 850), b_card)
-    
+    card_y = 425
+    for title, desc in cards:
+        c = Image.new("RGBA", (900, 160), COLOR_WHITE)
+        cd = ImageDraw.Draw(c)
+        cd.rounded_rectangle([(0, 0), (900, 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+        cd.rectangle([(0, 25), (6, 135)], fill=COLOR_TERRACOTA)
+        cd.text((40, 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
+        
+        words = desc.split()
+        l1 = " ".join(words[:11])
+        l2 = " ".join(words[11:])
+        cd.text((40, 75), l1, font=font_regular(19), fill=COLOR_MUTED)
+        cd.text((40, 108), l2, font=font_regular(19), fill=COLOR_MUTED)
+        
+        canvas.paste(c, (90, card_y))
+        card_y += 185
+        
     paste_corner_shard(draw, 1080, 1080, 180)
     canvas.convert("RGB").save(OUT_DIR / "slide_03_producto.png", quality=98)
     print("Slide 3 generado.")
 
 # ==============================================================
-# SLIDE 4: SERVICIO 2 - LOCALES Y GASTRONOMÍA
+# SLIDE 4: SERVICIO 02 - LOCALES Y GASTRONOMÍA
 # ==============================================================
 def create_slide_4():
     canvas = Image.new("RGBA", (1080, 1080), COLOR_MARFIL)
     draw = ImageDraw.Draw(canvas)
+    draw_header(canvas, draw, 4, 6)
     
-    draw.text((80, 75), "SERVICIO 02 / 03", font=font_bold(22), fill=COLOR_TERRACOTA)
-    draw_pagination(draw, 4, 6)
+    draw.rectangle([90, 195, 140, 199], fill=COLOR_TERRACOTA)
+    draw.text((155, 187), "SERVICIO 02 / 03", font=font_bold(18), fill=COLOR_TERRACOTA)
     
-    draw.text((80, 140), "REELS PARA LOCALES", font=font_black(48), fill=COLOR_CARBON)
-    draw.text((80, 205), "Y GASTRONOMÍA", font=font_black(48), fill=COLOR_CARBON)
+    draw.text((90, 235), "REELS PARA COMERCIOS", font=font_black(48), fill=COLOR_CARBON)
+    draw.text((90, 295), "Y GASTRONOMÍA.", font=font_black(48), fill=COLOR_CARBON)
     
-    draw.text((80, 280), "Videos virales diseñados para despertar el deseo:", font=font_bold(24), fill=COLOR_CARBON)
-    draw.text((80, 320), "Texturas en primer plano, humo, dinamismo y música en tendencia.", font=font_regular(22), fill=COLOR_MUTED)
-    draw.text((80, 355), "Hacé que la gente de tu zona elija tu local este fin de semana.", font=font_regular(22), fill=COLOR_MUTED)
+    draw.text((90, 365), "Videos verticales pensados para despertar el deseo y llenar tu local este fin de semana.", font=font_medium(22), fill=COLOR_MUTED)
     
-    # Imagen de gastronomía (Parrilla La Reja / Pizza)
-    gastro_path = BASE_DIR / "negocios" / "parrilla-la-reja" / "anuncio" / "video-anuncio" / "assets" / "a04.jpg"
-    if not gastro_path.exists():
-        gastro_path = BRAND_DIR / "templates" / "backgrounds" / "bg_mountain_landscape.jpg"
-    g_img = Image.open(gastro_path).convert("RGBA")
-    g_crop = g_img.resize((920, 520), Image.Resampling.LANCZOS)
+    cards = [
+        ("01 · RETENCIÓN EN LOS PRIMEROS 3 SEGUNDOS",
+         "Ganchos visuales de alto impacto diseñados para frenar el scroll del usuario antes de que deslice al siguiente video."),
+        ("02 · ESTRATEGIA DE ATRACCIÓN LOCAL",
+         "Contenido optimizado para conectar con vecinos de San Fernando, Zona Norte y público en tu radio de influencia."),
+        ("03 · FORMATO VERTICAL 9:16 NATIVO",
+         "Composiciones calibradas con zonas de seguridad oficiales para que ningún elemento tape tus promociones ni tu llamado a la acción.")
+    ]
     
-    mask = Image.new("L", (920, 520), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([(0, 0), (920, 520)], radius=20, fill=255)
-    canvas.paste(g_crop, (80, 440), mask)
-    
-    # Badge flotante
-    b_card = Image.new("RGBA", (480, 70), (25, 25, 25, 230))
-    b_d = ImageDraw.Draw(b_card)
-    b_d.text((30, 22), "REELS DE ALTO TRÁFICO LOCAL", font=font_bold(20), fill=COLOR_MARFIL)
-    canvas.paste(b_card, (110, 850), b_card)
-    
+    card_y = 425
+    for title, desc in cards:
+        c = Image.new("RGBA", (900, 160), COLOR_WHITE)
+        cd = ImageDraw.Draw(c)
+        cd.rounded_rectangle([(0, 0), (900, 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+        cd.rectangle([(0, 25), (6, 135)], fill=COLOR_TERRACOTA)
+        cd.text((40, 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
+        
+        words = desc.split()
+        l1 = " ".join(words[:11])
+        l2 = " ".join(words[11:])
+        cd.text((40, 75), l1, font=font_regular(19), fill=COLOR_MUTED)
+        cd.text((40, 108), l2, font=font_regular(19), fill=COLOR_MUTED)
+        
+        canvas.paste(c, (90, card_y))
+        card_y += 185
+        
     paste_corner_shard(draw, 1080, 1080, 180)
     canvas.convert("RGB").save(OUT_DIR / "slide_04_gastronomia.png", quality=98)
     print("Slide 4 generado.")
 
 # ==============================================================
-# SLIDE 5: SERVICIO 3 - AVATARES Y VOCES INSTITUCIONALES
+# SLIDE 5: SERVICIO 03 - VOCEROS Y AVATARES INSTITUCIONALES
 # ==============================================================
 def create_slide_5():
     canvas = Image.new("RGBA", (1080, 1080), COLOR_MARFIL)
     draw = ImageDraw.Draw(canvas)
+    draw_header(canvas, draw, 5, 6)
     
-    draw.text((80, 75), "SERVICIO 03 / 03", font=font_bold(22), fill=COLOR_TERRACOTA)
-    draw_pagination(draw, 5, 6)
+    draw.rectangle([90, 195, 140, 199], fill=COLOR_TERRACOTA)
+    draw.text((155, 187), "SERVICIO 03 / 03", font=font_bold(18), fill=COLOR_TERRACOTA)
     
-    draw.text((80, 140), "AVATARES Y VOCES", font=font_black(48), fill=COLOR_CARBON)
-    draw.text((80, 205), "HIPERREALISTAS", font=font_black(48), fill=COLOR_CARBON)
+    draw.text((90, 235), "VOCEROS Y AVATARES", font=font_black(48), fill=COLOR_CARBON)
+    draw.text((90, 295), "HIPERREALISTAS.", font=font_black(48), fill=COLOR_CARBON)
     
-    draw.text((80, 280), "Comunicación corporativa sin coordinar días de rodaje:", font=font_bold(24), fill=COLOR_CARBON)
-    draw.text((80, 320), "Voceros profesionales con acento argentino nativo y lip-sync exacto.", font=font_regular(22), fill=COLOR_MUTED)
-    draw.text((80, 355), "Perfecto para anuncios, cursos, efemérides y capacitaciones.", font=font_regular(22), fill=COLOR_MUTED)
+    draw.text((90, 365), "Comunicación empresarial e institucional continua sin depender de rodajes ni cámaras.", font=font_medium(22), fill=COLOR_MUTED)
     
-    # Imagen de presentadores IA
-    av_path = BASE_DIR / "campana-lanzamiento-pd" / "c1_03_avatares_y_voces.jpg"
-    if not av_path.exists():
-        av_path = BRAND_DIR / "templates" / "backgrounds" / "bg_studio_spotlight.jpg"
-    a_img = Image.open(av_path).convert("RGBA")
-    a_crop = a_img.resize((920, 520), Image.Resampling.LANCZOS)
+    cards = [
+        ("01 · LOCUCIÓN EN ESPAÑOL RIOPLATENSE",
+         "Acento argentino nativo y entonación profesional creíble que conecta genuinamente con tu audiencia sin sonar artificial."),
+        ("02 · SINCRONIZACIÓN LABIAL Y GESTUAL",
+         "Lip-sync milimétrico y micro-expresiones que transmiten el prestigio y la seriedad que tu institución requiere."),
+        ("03 · ESCALABILIDAD INSTITUCIONAL",
+         "Comunica anuncios oficiales, capacitaciones, efemérides y lanzamientos en horas en lugar de semanas.")
+    ]
     
-    mask = Image.new("L", (920, 520), 0)
-    ImageDraw.Draw(mask).rounded_rectangle([(0, 0), (920, 520)], radius=20, fill=255)
-    canvas.paste(a_crop, (80, 440), mask)
-    
-    b_card = Image.new("RGBA", (500, 70), (25, 25, 25, 230))
-    b_d = ImageDraw.Draw(b_card)
-    b_d.text((30, 22), "VOCES Y PRESENTADORES NATIVOS", font=font_bold(20), fill=COLOR_MARFIL)
-    canvas.paste(b_card, (110, 850), b_card)
-    
+    card_y = 425
+    for title, desc in cards:
+        c = Image.new("RGBA", (900, 160), COLOR_WHITE)
+        cd = ImageDraw.Draw(c)
+        cd.rounded_rectangle([(0, 0), (900, 160)], radius=16, fill=COLOR_WHITE, outline=COLOR_BORDER, width=2)
+        cd.rectangle([(0, 25), (6, 135)], fill=COLOR_TERRACOTA)
+        cd.text((40, 28), title, font=font_extrabold(22), fill=COLOR_CARBON)
+        
+        words = desc.split()
+        l1 = " ".join(words[:11])
+        l2 = " ".join(words[11:])
+        cd.text((40, 75), l1, font=font_regular(19), fill=COLOR_MUTED)
+        cd.text((40, 108), l2, font=font_regular(19), fill=COLOR_MUTED)
+        
+        canvas.paste(c, (90, card_y))
+        card_y += 185
+        
     paste_corner_shard(draw, 1080, 1080, 180)
     canvas.convert("RGB").save(OUT_DIR / "slide_05_avatares.png", quality=98)
     print("Slide 5 generado.")
@@ -243,37 +287,36 @@ def create_slide_5():
 def create_slide_6():
     canvas = Image.new("RGBA", (1080, 1080), COLOR_CARBON)
     draw = ImageDraw.Draw(canvas)
+    draw_header(canvas, draw, 6, 6, dark=True)
     
-    # Header logo blanco
-    lw = 400
-    lh = int(logo_inv.height * (lw / logo_inv.width))
-    logo_s = logo_inv.resize((lw, lh), Image.Resampling.LANCZOS)
-    canvas.paste(logo_s, (80, 80), logo_s)
-    draw_pagination(draw, 6, 6, dark=True)
+    draw.rectangle([90, 205, 140, 209], fill=COLOR_TERRACOTA)
+    draw.text((155, 197), "PROPUESTA DE VALOR", font=font_bold(18), fill=COLOR_TERRACOTA)
     
     # Gran titular de cierre
-    draw.text((80, 260), "IMPULSÁ TU MARCA", font=font_black(62), fill=COLOR_MARFIL)
-    draw.text((80, 335), "CON VIDEO DE IMPACTO.", font=font_black(62), fill=COLOR_TERRACOTA)
+    draw.text((90, 260), "LLEVÁ TU MARCA", font=font_black(62), fill=COLOR_MARFIL)
+    draw.text((90, 335), "AL SIGUIENTE NIVEL.", font=font_black(62), fill=COLOR_TERRACOTA)
     
-    # Párrafo
-    draw.text((80, 450), "Tenemos planes mensuales a medida para que tu negocio", font=font_medium(26), fill=COLOR_MARFIL)
-    draw.text((80, 490), "tenga presencia continua, profesional y con retorno real.", font=font_medium(26), fill=COLOR_MARFIL)
+    draw.text((90, 440), "Diseñamos packs mensuales a medida para que tu negocio", font=font_medium(26), fill=COLOR_MARFIL)
+    draw.text((90, 480), "mantenga una presencia activa, estética y con retorno real.", font=font_medium(26), fill=COLOR_MARFIL)
     
-    # Botón CTA Central
-    draw.rounded_rectangle([(80, 590), (1000, 710)], radius=20, fill=COLOR_MARFIL)
-    draw.text((540, 630), "ESCRIBINOS POR WHATSAPP O DM", font=font_black(30), fill=COLOR_CARBON, anchor="mm")
-    draw.text((540, 670), "Coordinamos una asesoría estratégica sin cargo", font=font_bold(20), fill=COLOR_TERRACOTA, anchor="mm")
+    # Gran Botón CTA Central
+    draw.rounded_rectangle([(90, 570), (990, 700)], radius=20, fill=COLOR_MARFIL)
+    draw.text((540, 615), "ESCRIBINOS POR WHATSAPP O DM", font=font_black(28), fill=COLOR_CARBON, anchor="mm")
+    draw.text((540, 655), "Coordinamos una asesoría estratégica y muestra sin cargo", font=font_bold(20), fill=COLOR_TERRACOTA, anchor="mm")
     
-    # Beneficios clave en footer
-    draw.text((80, 780), "⚡ Entrega en 48 hs", font=font_bold(22), fill=COLOR_MARFIL)
-    draw.text((400, 780), "🎬 Calidad Cinematográfica", font=font_bold(22), fill=COLOR_MARFIL)
-    draw.text((750, 780), "📈 Enfoque en Conversión", font=font_bold(22), fill=COLOR_MARFIL)
+    # Filas de Beneficios
+    b_y = 750
+    draw.text((90, b_y), "✓ Entrega en 48 hs", font=font_bold(22), fill=COLOR_MARFIL)
+    draw.text((390, b_y), "✓ Calidad Cinematográfica", font=font_bold(22), fill=COLOR_MARFIL)
+    draw.text((740, b_y), "✓ Enfoque en Conversión", font=font_bold(22), fill=COLOR_MARFIL)
     
-    # Redes / Ubicación
-    draw.text((80, 880), "📍 San Fernando, Buenos Aires · Producción para todo el país", font=font_regular(20), fill=(160, 160, 160, 255))
-    draw.text((80, 915), "Instagram: @produccionesdavid.ar", font=font_bold(22), fill=COLOR_TERRACOTA)
+    # Línea divisoria
+    draw.line([(90, 830), (990, 830)], fill=(50, 50, 50, 255), width=1)
     
-    paste_corner_shard(draw, 1080, 1080, 220)
+    draw.text((90, 875), "📍 San Fernando, Buenos Aires · Producción para todo el país", font=font_regular(20), fill=(160, 160, 160, 255))
+    draw.text((90, 915), "Instagram: @produccionesdavid.ar", font=font_bold(22), fill=COLOR_TERRACOTA)
+    
+    paste_corner_shard(draw, 1080, 1080, 200)
     canvas.convert("RGB").save(OUT_DIR / "slide_06_cta.png", quality=98)
     print("Slide 6 generado.")
 
@@ -284,4 +327,4 @@ if __name__ == "__main__":
     create_slide_4()
     create_slide_5()
     create_slide_6()
-    print("🎉 Carrusel completo de 6 placas generado con éxito en:", OUT_DIR)
+    print("🎉 Carrusel rediseñado con éxito en:", OUT_DIR)
