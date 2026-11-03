@@ -18,6 +18,7 @@ node_modules/
 _tmp_*.html
 *.log
 *.mp4
+!assets/branding/producciones-david/outro-logo*.mp4
 
 # Sesiones de navegador y capturas locales
 mcp-tiktok/tiktok_user_session/

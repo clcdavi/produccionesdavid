@@ -12,6 +12,14 @@ import time
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
+# Integración con Brand Identity Engine
+try:
+    sys.path.insert(0, str(Path(__file__).parent.parent.resolve()))
+    from brand_engine import BrandIdentityEngine
+    BRAND_ENGINE_AVAILABLE = True
+except Exception:
+    BRAND_ENGINE_AVAILABLE = False
+
 SESSION_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/mcp-tiktok/tiktok_user_session")
 SCREENSHOT_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/mcp-tiktok/screenshots")
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
@@ -37,10 +45,25 @@ def limpiar_overlays(page):
     except Exception as e:
         print("Aviso limpiando overlays:", e)
 
-def publicar_video_tiktok(video_path: str, caption: str, publico: bool = True):
+def publicar_video_tiktok(video_path: str, caption: str, publico: bool = True, es_propio: bool = True, aplicar_branding: bool = False):
     video = Path(video_path)
     if not video.exists():
         raise FileNotFoundError(f"No existe el archivo de video: {video_path}")
+
+    # Aplicar identidad visual corporativa si corresponde
+    if aplicar_branding and BRAND_ENGINE_AVAILABLE:
+        if es_propio:
+            print("🎨 [Brand Engine] Aplicando identidad visual corporativa de Producciones David...")
+            engine = BrandIdentityEngine()
+            branded_video_path = video.parent / f"{video.stem}_branded.mp4"
+            report = engine.process_video_complete(str(video), str(branded_video_path), is_own_content=True)
+            if report.is_valid and branded_video_path.exists():
+                print(f"✅ Video procesado con identidad oficial: {branded_video_path.name}")
+                video = branded_video_path
+            else:
+                print("⚠️ Aviso en Brand Engine:", report.errors)
+        else:
+            print("🛡️ [Brand Engine] Contenido de cliente: se respeta identidad del cliente sin marca de agencia.")
 
     print(f"🎬 [TikTok Autónomo] Iniciando publicación de: {video.name}")
 
@@ -166,5 +189,12 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--video", required=True)
     parser.add_argument("--caption", required=True)
+    parser.add_argument("--brand", action="store_true", help="Aplica automáticamente marca de agua y outro oficial")
+    parser.add_argument("--client-content", action="store_true", help="Indica que es contenido de cliente para no aplicar marca de agua de la agencia")
     args = parser.parse_args()
-    publicar_video_tiktok(args.video, args.caption)
+    publicar_video_tiktok(
+        video_path=args.video,
+        caption=args.caption,
+        es_propio=not args.client_content,
+        aplicar_branding=args.brand
+    )

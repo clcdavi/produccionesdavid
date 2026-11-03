@@ -16,6 +16,14 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
+# Integración con Brand Identity Engine
+try:
+    sys.path.insert(0, str(Path(__file__).parent.parent.resolve()))
+    from brand_engine import BrandIdentityEngine
+    BRAND_ENGINE_AVAILABLE = True
+except Exception:
+    BRAND_ENGINE_AVAILABLE = False
+
 BASE_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando")
 CONFIG_FILE = BASE_DIR / "instagram_credenciales.json"
 EXTRACTOR_SCRIPT = Path("/Users/davidcorrea/.gemini/config/skills/adrian-saenz-video-negocio/scripts/extraer_instagram.py")
@@ -135,6 +143,8 @@ TOOLS = [
                 "caption": {"type": "string", "description": "Texto del Reel (incluyendo gancho inicial, cuerpo y hashtags)"},
                 "share_to_feed": {"type": "boolean", "description": "Si es true (por defecto), también aparece en la grilla principal del perfil", "default": True},
                 "thumb_offset_ms": {"type": "integer", "description": "Milisegundos del fotograma que se usará como portada (ej. 2000 para el segundo 2)", "default": 1500},
+                "es_contenido_propio": {"type": "boolean", "description": "True si es de Producciones David, False si es contenido de un cliente", "default": True},
+                "aplicar_branding": {"type": "boolean", "description": "Si es True, aplica automáticamente la marca de agua y outro corporativo oficial", "default": False},
             },
             "required": ["video_path", "caption"],
         },
@@ -278,6 +288,17 @@ def handle_tool_call(name: str, args: dict) -> str:
         caption = args["caption"]
         share_to_feed = args.get("share_to_feed", True)
         thumb_offset = args.get("thumb_offset_ms", 1500)
+
+        # Aplicar Brand Identity Engine si fue solicitado y no es URL remota
+        if args.get("aplicar_branding") and BRAND_ENGINE_AVAILABLE and not video_path.startswith("http"):
+            es_propio = args.get("es_contenido_propio", True)
+            if es_propio:
+                engine = BrandIdentityEngine()
+                v_path = Path(video_path)
+                branded_v = v_path.parent / f"{v_path.stem}_ig_branded.mp4"
+                rep = engine.process_video_complete(str(v_path), str(branded_v), is_own_content=True)
+                if rep.is_valid and branded_v.exists():
+                    video_path = str(branded_v)
 
         video_url = video_path if video_path.startswith("http") else upload_to_catbox(video_path)
         uid = cfg.get("ig_user_id") or "me"

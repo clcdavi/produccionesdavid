@@ -1,0 +1,151 @@
+{
+  "brand_name": "PRODUCCIONES DAVID",
+  "activity": "Producción de contenido audiovisual profesional mediante inteligencia artificial",
+  "tagline": "Videos profesionales con IA para empresas e instituciones",
+  "personality": [
+    "profesional",
+    "creativa",
+    "elegante",
+    "moderna",
+    "confiable",
+    "cinematográfica",
+    "minimalista"
+  ],
+  "colors": {
+    "carbon": {
+      "name": "Carbón",
+      "hex": "#191919",
+      "rgb": [25, 25, 25],
+      "usage": "Fondos oscuros, tipografía principal, placas cinematográficas"
+    },
+    "marfil": {
+      "name": "Marfil",
+      "hex": "#F5F2EC",
+      "rgb": [245, 242, 236],
+      "usage": "Fondos claros, composiciones editoriales, contraste institucional"
+    },
+    "terracota": {
+      "name": "Terracota",
+      "hex": "#CD563C",
+      "rgb": [205, 86, 60],
+      "usage": "Detalle diagonal de la letra V, acentos gráficos, indicadores visuales"
+    }
+  },
+  "typography": {
+    "family": "Montserrat",
+    "fallbacks": ["Manrope", "Inter", "sans-serif"],
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "bold": 700,
+      "extrabold": 800,
+      "black": 900
+    },
+    "letter_spacing": {
+      "producciones": "0.45em",
+      "david": "0.02em"
+    }
+  },
+  "assets": {
+    "base_dir": "assets/branding/producciones-david",
+    "logos": {
+      "principal_svg": "assets/branding/producciones-david/logo-principal.svg",
+      "principal_png": "assets/branding/producciones-david/logo-principal.png",
+      "inverso_svg": "assets/branding/producciones-david/logo-inverso.svg",
+      "inverso_png": "assets/branding/producciones-david/logo-inverso.png",
+      "horizontal_svg": "assets/branding/producciones-david/logo-horizontal.svg",
+      "isotipo_svg": "assets/branding/producciones-david/isotipo.svg",
+      "isotipo_perfil": "assets/branding/producciones-david/isotipo-perfil.png"
+    },
+    "watermark": {
+      "blanco_png": "assets/branding/producciones-david/watermark-blanco.png",
+      "oscuro_png": "assets/branding/producciones-david/watermark-oscuro.png",
+      "default_position": "top-right",
+      "scale_percent": 18,
+      "opacity": 0.85,
+      "margin_px": 48
+    },
+    "outro": {
+      "video_vertical": "assets/branding/producciones-david/outro-logo.mp4",
+      "video_horizontal": "assets/branding/producciones-david/outro-logo-16x9.mp4",
+      "duration_seconds": 2.0,
+      "fade_in_seconds": 0.3,
+      "fade_out_seconds": 0.3
+    }
+  },
+  "ownership_rules": {
+    "producciones_david": {
+      "apply_branding": true,
+      "watermark_enabled": true,
+      "outro_enabled": true,
+      "templates_allowed": true
+    },
+    "cliente": {
+      "apply_branding": false,
+      "watermark_enabled": false,
+      "outro_enabled": false,
+      "agency_credits_only_if_requested": true
+    }
+  },
+  "platforms": {
+    "instagram": {
+      "reels": {
+        "width": 1080,
+        "height": 1920,
+        "aspect_ratio": "9:16",
+        "safe_zone": {
+          "top": 120,
+          "bottom": 280,
+          "left": 50,
+          "right": 140
+        },
+        "max_size_mb": 250,
+        "recommended_fps": 30
+      },
+      "stories": {
+        "width": 1080,
+        "height": 1920,
+        "safe_zone": {
+          "top": 200,
+          "bottom": 220,
+          "left": 50,
+          "right": 50
+        }
+      },
+      "feed_square": {
+        "width": 1080,
+        "height": 1080,
+        "aspect_ratio": "1:1"
+      },
+      "feed_portrait": {
+        "width": 1080,
+        "height": 1350,
+        "aspect_ratio": "4:5"
+      }
+    },
+    "tiktok": {
+      "vertical": {
+        "width": 1080,
+        "height": 1920,
+        "aspect_ratio": "9:16",
+        "safe_zone": {
+          "top": 140,
+          "bottom": 320,
+          "left": 40,
+          "right": 160
+        },
+        "max_size_mb": 287,
+        "recommended_fps": 30
+      }
+    }
+  },
+  "quality_control": {
+    "min_video_bitrate_kbps": 4000,
+    "max_video_bitrate_kbps": 16000,
+    "audio_codec": "aac",
+    "video_codec": "h264",
+    "color_space": "bt709",
+    "check_double_watermark": true,
+    "prevent_distortions": true
+  }
+}
