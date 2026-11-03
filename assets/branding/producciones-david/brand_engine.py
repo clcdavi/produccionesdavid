@@ -81,12 +81,14 @@ class BrandIdentityEngine:
 
         # Assets paths
         self.logo_principal = self.base_dir / "logo-principal.png"
+        self.logo_horizontal = self.base_dir / "logo-horizontal.png"
         self.logo_inverso = self.base_dir / "logo-inverso.png"
         self.watermark_blanco = self.base_dir / "watermark-blanco.png"
         self.watermark_oscuro = self.base_dir / "watermark-oscuro.png"
         self.outro_vert = self.base_dir / "outro-logo.mp4"
         self.outro_horiz = self.base_dir / "outro-logo-16x9.mp4"
         self.isotipo_perfil = self.base_dir / "isotipo-perfil.png"
+        self.isotipo_squircle = self.base_dir / "isotipo-squircle.png"
 
         # Fonts
         self.font_bold_path = FONTS_DIR / "Montserrat-Bold.ttf"
@@ -366,78 +368,83 @@ class BrandIdentityEngine:
     def generate_reel_cover(
         self,
         background_image: str,
-        title: str,
-        output_path: str,
+        title: str = "DETRÁS\nDE CÁMARAS",
+        output_path: str = "",
         subtitle: str = ""
     ) -> str:
         """
         Genera Portada Oficial 9:16 para Reels y TikTok (1080x1920)
-        siguiendo el manual: logotipo superior, degradé cinematográfico,
-        título con acento terracota y detalle diagonal inferior derecho.
+        siguiendo con precisión milimétrica el manual de marca (Hoja 2):
+        Logotipo superior, viñeta cinematográfica, título con acento terracota
+        y corte diagonal terracota inferior derecho.
         """
-        out = Path(output_path).resolve()
+        out = Path(output_path).resolve() if output_path else self.base_dir / "templates" / "template-portada-reel-9x16.png"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        
         bg = Image.open(background_image).convert("RGBA")
         bg = bg.resize((1080, 1920), Image.Resampling.LANCZOS)
 
-        # Crear capa de degradé oscuro
+        # Viñeta oscura cinematográfica para garantizar contraste
         overlay = Image.new("RGBA", (1080, 1920), (0, 0, 0, 0))
         draw = ImageDraw.Draw(overlay)
 
-        # Viñeta oscura superior e inferior
-        for y in range(500):
-            a = int(180 * (1.0 - (y / 500.0)))
+        for y in range(450):
+            a = int(180 * (1.0 - (y / 450.0)))
             draw.line([(0, y), (1080, y)], fill=(25, 25, 25, a))
-        for y in range(1300, 1920):
-            a = int(220 * ((y - 1300.0) / 620.0))
+        for y in range(1100, 1920):
+            a = int(220 * ((y - 1100.0) / 820.0))
             draw.line([(0, y), (1080, y)], fill=(25, 25, 25, a))
 
         # Detalle diagonal terracota inferior derecho (según manual)
         draw.polygon(
-            [(920, 1920), (1080, 1760), (1080, 1920)],
+            [(860, 1920), (1080, 1700), (1080, 1920)],
             fill=(205, 86, 60, 255)
         )
 
         composite = Image.alpha_composite(bg, overlay)
 
         # Insertar logotipo blanco superior centrado
-        logo = Image.open(self.logo_inverso).convert("RGBA")
-        logo_w = 440
+        logo = Image.open(self.watermark_blanco).convert("RGBA")
+        logo_w = 460
         logo_h = int(logo.height * (logo_w / logo.width))
         logo_scaled = logo.resize((logo_w, logo_h), Image.Resampling.LANCZOS)
-        composite.paste(logo_scaled, ((1080 - logo_w) // 2, 220), logo_scaled)
+        composite.paste(logo_scaled, ((1080 - logo_w) // 2, 180), logo_scaled)
 
-        # Título principal en el tercio medio con sombra sutil para legibilidad
+        # Título principal (soporta salto de línea como 'DETRÁS\nDE CÁMARAS')
         draw_comp = ImageDraw.Draw(composite)
-        font_title = self._get_font("extrabold", 76)
-        font_sub = self._get_font("medium", 36)
+        font_title = self._get_font("bold", 72)
+        
+        lines = [line.strip().upper() for line in title.split("\n") if line.strip()]
+        start_y = 660
+        line_height = 86
+        text_x = 100
 
-        title_y = 660
-        # Sombra de contraste
-        draw_comp.text((1080 // 2 + 2, title_y + 2), title.upper(), font=font_title, fill=(0, 0, 0, 180), anchor="mm")
-        draw_comp.text((1080 // 2, title_y), title.upper(), font=font_title, fill=(245, 242, 236, 255), anchor="mm")
+        for i, l in enumerate(lines):
+            curr_y = start_y + (i * line_height)
+            # Sombra suave
+            draw_comp.text((text_x + 2, curr_y + 2), l, font=font_title, fill=(0, 0, 0, 180))
+            draw_comp.text((text_x, curr_y), l, font=font_title, fill=(245, 242, 236, 255))
 
         # Línea de acento terracota bajo el título
-        draw_comp.rectangle([480, title_y + 60, 600, title_y + 66], fill=(205, 86, 60, 255))
+        bar_y = start_y + (len(lines) * line_height) + 15
+        draw_comp.rectangle([text_x, bar_y, text_x + 130, bar_y + 6], fill=(205, 86, 60, 255))
 
-        if subtitle:
-            draw_comp.text((1080 // 2 + 1, title_y + 111), subtitle.upper(), font=font_sub, fill=(0, 0, 0, 160), anchor="mm")
-            draw_comp.text((1080 // 2, title_y + 110), subtitle.upper(), font=font_sub, fill=(245, 242, 236, 255), anchor="mm")
-
-        composite.convert("RGB").save(out, quality=95)
+        composite.convert("RGB").save(out, quality=98)
         return str(out)
 
     def generate_story(
         self,
         background_image: str,
-        headline: str,
-        output_path: str,
-        tag: str = "NUEVO PROYECTO"
+        headline: str = "NUEVO\nPROYECTO",
+        output_path: str = ""
     ) -> str:
         """
         Genera Historia / Story vertical 9:16 (1080x1920) según manual de marca:
-        Logo superior, etiqueta de categoría con línea terracota y detalle diagonal inferior.
+        Logo superior, texto inferior izquierdo con línea terracota y detalle diagonal inferior.
         """
-        out = Path(output_path).resolve()
+        out = Path(output_path).resolve() if output_path else self.base_dir / "templates" / "template-historia-9x16.png"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        
         bg = Image.open(background_image).convert("RGBA")
         bg = bg.resize((1080, 1920), Image.Resampling.LANCZOS)
 
@@ -448,77 +455,97 @@ class BrandIdentityEngine:
         for y in range(400):
             a = int(160 * (1.0 - (y / 400.0)))
             draw.line([(0, y), (1080, y)], fill=(25, 25, 25, a))
-        for y in range(1500, 1920):
-            a = int(180 * ((y - 1500.0) / 420.0))
+        for y in range(1200, 1920):
+            a = int(220 * ((y - 1200.0) / 720.0))
             draw.line([(0, y), (1080, y)], fill=(25, 25, 25, a))
 
         # Detalle diagonal terracota inferior derecho
-        draw.polygon([(920, 1920), (1080, 1760), (1080, 1920)], fill=(205, 86, 60, 255))
+        draw.polygon([(860, 1920), (1080, 1700), (1080, 1920)], fill=(205, 86, 60, 255))
 
         composite = Image.alpha_composite(bg, overlay)
 
-        # Logo superior
-        logo = Image.open(self.logo_inverso).convert("RGBA")
-        logo_w = 420
+        # Logo superior blanco
+        logo = Image.open(self.watermark_blanco).convert("RGBA")
+        logo_w = 440
         logo_h = int(logo.height * (logo_w / logo.width))
         logo_scaled = logo.resize((logo_w, logo_h), Image.Resampling.LANCZOS)
-        composite.paste(logo_scaled, ((1080 - logo_w) // 2, 200), logo_scaled)
+        composite.paste(logo_scaled, ((1080 - logo_w) // 2, 180), logo_scaled)
 
         draw_comp = ImageDraw.Draw(composite)
-        font_tag = self._get_font("bold", 54)
-        tag_y = 960
+        font_tag = self._get_font("bold", 72)
+        
+        lines = [line.strip().upper() for line in headline.split("\n") if line.strip()]
+        start_y = 1420
+        line_height = 86
+        text_x = 100
 
-        draw_comp.text((1080 // 2 + 2, tag_y + 2), tag.upper(), font=font_tag, fill=(0, 0, 0, 180), anchor="mm")
-        draw_comp.text((1080 // 2, tag_y), tag.upper(), font=font_tag, fill=(245, 242, 236, 255), anchor="mm")
+        for i, l in enumerate(lines):
+            curr_y = start_y + (i * line_height)
+            draw_comp.text((text_x + 2, curr_y + 2), l, font=font_tag, fill=(0, 0, 0, 180))
+            draw_comp.text((text_x, curr_y), l, font=font_tag, fill=(245, 242, 236, 255))
 
-        # Línea de acento terracota bajo el tag
-        draw_comp.rectangle([490, tag_y + 45, 590, tag_y + 51], fill=(205, 86, 60, 255))
+        # Línea de acento terracota bajo el titular
+        bar_y = start_y + (len(lines) * line_height) + 15
+        draw_comp.rectangle([text_x, bar_y, text_x + 130, bar_y + 6], fill=(205, 86, 60, 255))
 
-        composite.convert("RGB").save(out, quality=95)
+        composite.convert("RGB").save(out, quality=98)
         return str(out)
 
     def generate_post_cuadrado(
         self,
         photo_image: str,
-        title: str,
-        category: str,
-        output_path: str
+        title: str = "PRODUCCIÓN\nAUDIOVISUAL",
+        subtitle: str = "VIDEO  /  FOTO  /  CONTENIDO",
+        output_path: str = ""
     ) -> str:
         """
-        Genera Post Cuadrado 1:1 (1080x1080) según el manual de marca:
-        Fondo Marfil superior con PRODUCCIONES DAVID, foto inferior y corte diagonal terracota.
+        Genera Post Cuadrado 1:1 (1080x1080) según el manual de marca (Hoja 2):
+        Mitad superior Marfil (#F5F2EC) con PRODUCCIONES DAVID centrado,
+        titular en dos líneas con acento terracota, subtítulo categorizado,
+        y mitad inferior fotográfica con corte diagonal terracota en la esquina inferior derecha.
         """
-        out = Path(output_path).resolve()
+        out = Path(output_path).resolve() if output_path else self.base_dir / "templates" / "template-post-cuadrado-1x1.png"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        
         canvas = Image.new("RGBA", (1080, 1080), (245, 242, 236, 255))
         draw = ImageDraw.Draw(canvas)
 
-        # Foto inferior
+        # Foto inferior (560px de alto)
         photo = Image.open(photo_image).convert("RGBA")
         photo_h = 560
         photo = photo.resize((1080, photo_h), Image.Resampling.LANCZOS)
         canvas.paste(photo, (0, 1080 - photo_h), photo)
 
         # Corte diagonal terracota en esquina inferior derecha
-        draw.polygon([(880, 1080), (1080, 880), (1080, 1080)], fill=(205, 86, 60, 255))
+        draw.polygon([(860, 1080), (1080, 860), (1080, 1080)], fill=(205, 86, 60, 255))
 
-        # Logotipo principal superior (carbón #191919)
-        logo = Image.open(self.logo_principal).convert("RGBA")
-        logo_w = 420
+        # Logotipo principal superior (carbón #191919 con acento terracota)
+        logo = Image.open(self.logo_horizontal).convert("RGBA")
+        logo_w = 430
         logo_h = int(logo.height * (logo_w / logo.width))
         logo_scaled = logo.resize((logo_w, logo_h), Image.Resampling.LANCZOS)
-        canvas.paste(logo_scaled, ((1080 - logo_w) // 2, 80), logo_scaled)
+        canvas.paste(logo_scaled, ((1080 - logo_w) // 2, 70), logo_scaled)
 
-        # Título y categoría en tipografía Montserrat
-        font_title = self._get_font("extrabold", 52)
-        font_cat = self._get_font("medium", 28)
+        # Titular en tipografía Montserrat Bold / ExtraBold
+        font_title = self._get_font("bold", 54)
+        font_sub = self._get_font("medium", 24)
 
-        draw.text((1080 // 2, 280), title.upper(), font=font_title, fill=(25, 25, 25, 255), anchor="mm")
-        draw.text((1080 // 2, 350), category.upper(), font=font_cat, fill=(100, 100, 100, 255), anchor="mm")
+        lines = [line.strip().upper() for line in title.split("\n") if line.strip()]
+        start_y = 230
+        line_height = 64
+        for i, l in enumerate(lines):
+            curr_y = start_y + (i * line_height)
+            draw.text((1080 // 2, curr_y), l, font=font_title, fill=(25, 25, 25, 255), anchor="mm")
 
-        # Línea divisoria sutil
-        draw.line([(460, 400), (620, 400)], fill=(205, 86, 60, 255), width=3)
+        # Línea de acento terracota bajo el título
+        bar_y = start_y + (len(lines) * line_height) - 10
+        draw.rectangle([540 - 55, bar_y, 540 + 55, bar_y + 4], fill=(205, 86, 60, 255))
 
-        canvas.convert("RGB").save(out, quality=95)
+        # Subtítulo (VIDEO / FOTO / CONTENIDO)
+        if subtitle:
+            draw.text((1080 // 2, bar_y + 45), subtitle.upper(), font=font_sub, fill=(90, 90, 90, 255), anchor="mm")
+
+        canvas.convert("RGB").save(out, quality=98)
         return str(out)
 
 

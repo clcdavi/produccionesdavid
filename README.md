@@ -18,13 +18,26 @@ anuncios-san-fernando/
 
 ---
 
-## 🚀 1. Identidad de Marca Oficial (`marca-producciones-david`)
-- **Logo Oficial:** Monograma *PD* fusionado con diafragma de cámara y botón Play en oro puro cepillado y blanco.
-- **Archivos maestros:**
-  - `logo_oficial_producciones_david.jpg` (Fondo negro)
-  - `avatar_perfil_ig_tiktok.jpg` (Formato optimizado para perfiles)
-  - `logo_color_sin_fondo.png` (Transparente para marcas de agua)
-  - `app_icon_1024.jpg` (Requisito 1024x1024 para plataformas de desarrolladores)
+## 🚀 1. Identidad Visual Corporativa Oficial (`assets/branding/producciones-david`)
+
+La marca se rige por su **Manual Oficial de Identidad Visual**:
+- **Logotipo:** Construcción geométrica en **Montserrat Black** (`DAVID`) con corte diagonal terracota característico en la letra V, acompañado de `PRODUCCIONES` en espaciado amplio superior y bajada institucional: *"Videos profesionales con IA para empresas e instituciones"*.
+- **Paleta Cromática Oficial:**
+  - **Carbón (`#191919`):** Fondos oscuros, tipografía principal y placas cinematográficas.
+  - **Marfil (`#F5F2EC`):** Fondos claros editoriales, contraste y aplicaciones institucionales.
+  - **Terracota (`#CD563C`):** Detalle distintivo en la V, cortes diagonales de esquinas y líneas de acento.
+- **Suite de Recursos Vectoriales y Master 4K:**
+  - `logo-principal.svg` / `.png`: Isologotipo completo con bajada y filetes terracota.
+  - `logo-horizontal.svg` / `.png`: Versión limpia horizontal.
+  - `logo-inverso.svg` / `.png`: Placa corporativa sobre fondo carbón.
+  - `isotipo.svg` / `isotipo-perfil.png`: Avatar circular 2048x2048 con el corte terracota sobre la letra D (para Instagram, TikTok y WhatsApp).
+  - `isotipo-squircle.svg` / `isotipo-squircle.png`: Isotipo squircle (para App Icons y web).
+  - `watermark-blanco.png` y `watermark-oscuro.png`: Marcas de agua transparentes calibradas.
+  - `outro-logo.mp4` (9:16) y `outro-logo-16x9.mp4` (16:9): Cierres audiovisuales de 2.0s con audio estéreo AAC silencioso.
+- **Brand Identity Engine (`brand_engine.py`):**
+  - Distinción automática: Contenido propio (aplica marca) vs. Contenido de cliente (100% limpio).
+  - Inyección de marca de agua con respeto estricto de zonas seguras en Reels/TikTok.
+  - Generador de plantillas: Portadas de Reel 9:16 (*Detrás de Cámaras*), Post Cuadrado 1:1 (*Producción Audiovisual*) e Historias 9:16 (*Nuevo Proyecto*).
 
 ---
 
