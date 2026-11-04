@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Reel Ad 01 — Costos y Tiempo (Producciones David)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    @font-face {
+      font-family: 'Montserrat';
+      src: local('Montserrat-Black'), local('Montserrat Black');
+      font-weight: 900;
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      src: local('Montserrat-Bold'), local('Montserrat Bold');
+      font-weight: 700;
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      src: local('Montserrat-SemiBold'), local('Montserrat SemiBold');
+      font-weight: 600;
+    }
+    @font-face {
+      font-family: 'Montserrat';
+      src: local('Montserrat-Regular'), local('Montserrat');
+      font-weight: 400;
+    }
+
+    body {
+      background-color: #121212;
+      color: #F5F2EC;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    #stage {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      background: radial-gradient(circle at 50% 25%, #222222 0%, #121212 70%);
+      overflow: hidden;
+    }
+
+    /* Grid sutil de fondo */
+    .bg-grid {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      pointer-events: none;
+    }
+
+    /* Brillos ambientales de marca */
+    .glow-top {
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(205, 86, 60, 0.22) 0%, transparent 70%);
+      filter: blur(50px);
+      pointer-events: none;
+    }
+    .glow-bottom {
+      position: absolute;
+      bottom: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(205, 86, 60, 0.15) 0%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+
+    /* Shard inferior derecho institucional */
+    .brand-shard {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 200px;
+      height: 200px;
+      background: #CD563C;
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+      opacity: 0.9;
+    }
+
+    /* Header superior */
+    .top-bar {
+      position: absolute;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      padding: 0 80px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+    }
+    .brand-tag {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #CD563C;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-tag-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #CD563C;
+      box-shadow: 0 0 12px #CD563C;
+    }
+    .edition-tag {
+      font-size: 19px;
+      font-weight: 600;
+      color: #8E8A83;
+      letter-spacing: 0.1em;
+    }
+
+    /* Contenedor de Escenas */
+    .scene-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+    }
+
+    /* ============================================================
+       ESCENA 1: EL GANCHO (0.0s - 3.2s)
+       ============================================================ */
+    #scene1 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+      opacity: 1;
+    }
+
+    .hook-badge {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 10px;
+      padding: 10px 22px;
+      background: rgba(205, 86, 60, 0.15);
+      border: 1px solid rgba(205, 86, 60, 0.4);
+      border-radius: 999px;
+      color: #CD563C;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 35px;
+    }
+
+    .hook-main-title {
+      font-size: 86px;
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      color: #FFFFFF;
+      margin-bottom: 25px;
+    }
+
+    .hook-main-title .highlight-terracota {
+      color: #CD563C;
+      display: inline-block;
+    }
+
+    .hook-main-title .highlight-marfil {
+      color: #F5F2EC;
+      text-decoration: underline;
+      text-decoration-color: #CD563C;
+      text-underline-offset: 14px;
+    }
+
+    .hook-description {
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.45;
+      color: #B5AFA6;
+      max-width: 880px;
+      margin-top: 20px;
+    }
+
+    .hook-metric-bar {
+      margin-top: 60px;
+      display: flex;
+      gap: 20px;
+    }
+
+    .metric-pill {
+      flex: 1;
+      padding: 24px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .metric-pill-val {
+      font-size: 44px;
+      font-weight: 900;
+      color: #CD563C;
+    }
+    .metric-pill-lbl {
+      font-size: 20px;
+      font-weight: 600;
+      color: #8E8A83;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ============================================================
+       ESCENA 2: LA COMPARATIVA (3.2s - 6.8s)
+       ============================================================ */
+    #scene2 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 80px;
+      opacity: 0;
+    }
+
+    .compare-title {
+      font-size: 64px;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+    .compare-title span {
+      color: #CD563C;
+    }
+
+    .compare-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+      width: 100%;
+    }
+
+    .card-row {
+      display: flex;
+      gap: 24px;
+    }
+
+    .card-col {
+      flex: 1;
+      padding: 40px 32px;
+      border-radius: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .card-col.traditional {
+      background: rgba(35, 30, 30, 0.6);
+      border: 1px solid rgba(255, 80, 80, 0.2);
+    }
+
+    .card-col.ai {
+      background: linear-gradient(145deg, rgba(45, 30, 28, 0.8), rgba(25, 20, 20, 0.9));
+      border: 2px solid #CD563C;
+      position: relative;
+    }
+
+    .card-header-badge {
+      font-size: 18px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 6px 14px;
+      border-radius: 999px;
+      align-self: flex-start;
+    }
+    .badge-trad {
+      background: rgba(255, 80, 80, 0.15);
+      color: #FF7B7B;
+    }
+    .badge-ai {
+      background: #CD563C;
+      color: #FFFFFF;
+    }
+
+    .card-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: #FFFFFF;
+    }
+
+    .card-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .card-item {
+      font-size: 22px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .item-trad { color: #A69E96; }
+    .item-ai { color: #F5F2EC; }
+
+    /* ============================================================
+       ESCENA 3: OUTRO & CTA (6.8s - 10.0s)
+       ============================================================ */
+    #scene3 {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1920px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 80px;
+      text-align: center;
+      opacity: 0;
+    }
+
+    .outro-logo-wrap {
+      margin-bottom: 40px;
+    }
+    .logo-main-text {
+      font-size: 105px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #FFFFFF;
+      line-height: 0.9;
+    }
+    .logo-main-text span {
+      color: #CD563C;
+    }
+    .logo-sub-text {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #8E8A83;
+      margin-top: 18px;
+    }
+
+    .features-pill-row {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 55px;
+    }
+
+    .feature-chip {
+      padding: 14px 26px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #F5F2EC;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cta-card {
+      width: 100%;
+      max-width: 920px;
+      padding: 50px 40px;
+      background: #FFFFFF;
+      color: #191919;
+      border-radius: 32px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .cta-pre {
+      font-size: 22px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #CD563C;
+    }
+
+    .cta-title {
+      font-size: 46px;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .cta-button {
+      margin-top: 10px;
+      padding: 22px 50px;
+      background: #CD563C;
+      color: #FFFFFF;
+      font-size: 26px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(205, 86, 60, 0.4);
+    }
+
+    .cta-foot {
+      font-size: 20px;
+      font-weight: 600;
+      color: #666666;
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div class="bg-grid"></div>
+    <div class="glow-top"></div>
+    <div class="glow-bottom"></div>
+    <div class="brand-shard"></div>
+
+    <!-- Header permanente -->
+    <div class="top-bar">
+      <div class="brand-tag">
+        <div class="brand-tag-dot"></div>
+        PRODUCCIONES DAVID
+      </div>
+      <div class="edition-tag">ZONA NORTE · BS AS</div>
+    </div>
+
+    <!-- ESCENA 1: EL GANCHO -->
+    <div id="scene1">
+      <div class="hook-badge">⚡ EL SECRETO AUDIOVISUAL 2026</div>
+      <div class="hook-main-title">
+        ¿SEMANAS DE RODAJE?<br>
+        <span class="highlight-terracota">¿FORTUNAS</span> EN EQUIPOS?
+      </div>
+      <div class="hook-description">
+        Si tu negocio sigue esperando 1 mes para tener 2 videos comerciales, estás perdiendo ventas todos los días frente a tu competencia.
+      </div>
+      <div class="hook-metric-bar">
+        <div class="metric-pill">
+          <div class="metric-pill-val">3 Semanas</div>
+          <div class="metric-pill-lbl">Espera Tradicional</div>
+        </div>
+        <div class="metric-pill" style="border-color: rgba(205,86,60,0.5); background: rgba(205,86,60,0.08);">
+          <div class="metric-pill-val" style="color: #FFFFFF;">48 Horas</div>
+          <div class="metric-pill-lbl" style="color: #CD563C;">Con Producciones David</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESCENA 2: LA COMPARATIVA -->
+    <div id="scene2">
+      <div class="compare-title">
+        LA DIFERENCIA ES <span>ABISMAL</span>
+      </div>
+      <div class="compare-grid">
+        <div class="card-row">
+          <!-- Tradicional -->
+          <div class="card-col traditional">
+            <div class="card-header-badge badge-trad">RODAJE COMÚN</div>
+            <div class="card-name">Modelo Antiguo</div>
+            <ul class="card-items">
+              <li class="card-item item-trad">❌ Jornadas de 8 hs en tu local</li>
+              <li class="card-item item-trad">❌ 3 semanas de edición lenta</li>
+              <li class="card-item item-trad">❌ Presupuestos que asustan</li>
+              <li class="card-item item-trad">❌ Sin foco en conversión</li>
+            </ul>
+          </div>
+          <!-- Con IA / Producciones David -->
+          <div class="card-col ai">
+            <div class="card-header-badge badge-ai">PRODUCCIONES DAVID</div>
+            <div class="card-name">Producción con IA</div>
+            <ul class="card-items">
+              <li class="card-item item-ai">✅ Sin interrumpir tu negocio</li>
+              <li class="card-item item-ai">✅ Entrega en 48 a 72 hs</li>
+              <li class="card-item item-ai">✅ Calidad 4K cinematográfica</li>
+              <li class="card-item item-ai">✅ Estructuras que venden</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESCENA 3: OUTRO & CTA -->
+    <div id="scene3">
+      <div class="outro-logo-wrap">
+        <div class="logo-main-text">DAVID<span>.</span></div>
+        <div class="logo-sub-text">PRODUCCIONES AUDIOVISUALES</div>
+      </div>
+
+      <div class="features-pill-row">
+        <div class="feature-chip">⏱️ Entrega 48–72 hs</div>
+        <div class="feature-chip">🎬 Calidad 4K Cine</div>
+        <div class="feature-chip">🎯 Foco en Ventas</div>
+      </div>
+
+      <div class="cta-card">
+        <div class="cta-pre">¿QUERÉS PROBAR EN TU MARCA?</div>
+        <div class="cta-title">Escribí "VIDEO" por mensaje privado</div>
+        <div class="cta-button">
+          MANDAR MENSAJE 💬
+        </div>
+        <div class="cta-foot">Te preparamos una muestra a medida sin compromiso</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Interpolador suave clamp01
+    function clamp(val, min, max) {
+      return Math.max(min, Math.min(max, val));
+    }
+    function smoothstep(edge0, edge1, x) {
+      const t = clamp((x - edge0) / (edge1 - edge0), 0.0, 1.0);
+      return t * t * (3.0 - 2.0 * t);
+    }
+
+    const s1 = document.getElementById('scene1');
+    const s2 = document.getElementById('scene2');
+    const s3 = document.getElementById('scene3');
+
+    // Función evaluada determinísticamente por Playwright en cada fotograma
+    window.__t = function(t) {
+      // Duración total: 10.0 segundos
+      // Escena 1: 0.0 a 3.3s
+      // Transición 1->2: 3.0 a 3.5s
+      // Escena 2: 3.5 a 6.7s
+      // Transición 2->3: 6.4 a 7.0s
+      // Escena 3: 7.0 a 10.0s
+
+      // Escena 1
+      if (t < 3.0) {
+        s1.style.opacity = 1;
+        s1.style.transform = `translateY(${Math.sin(t * 0.5) * 5}px)`;
+        s2.style.opacity = 0;
+        s3.style.opacity = 0;
+      } else if (t >= 3.0 && t < 3.6) {
+        const p = smoothstep(3.0, 3.6, t);
+        s1.style.opacity = 1 - p;
+        s1.style.transform = `translateY(${-p * 60}px) scale(${1 - p * 0.05})`;
+        s2.style.opacity = p;
+        s2.style.transform = `translateY(${(1 - p) * 60}px) scale(${0.95 + p * 0.05})`;
+        s3.style.opacity = 0;
+      } else if (t >= 3.6 && t < 6.5) {
+        s1.style.opacity = 0;
+        s2.style.opacity = 1;
+        s2.style.transform = `translateY(${Math.sin((t - 3.6) * 0.5) * 4}px)`;
+        s3.style.opacity = 0;
+      } else if (t >= 6.5 && t < 7.2) {
+        const p = smoothstep(6.5, 7.2, t);
+        s1.style.opacity = 0;
+        s2.style.opacity = 1 - p;
+        s2.style.transform = `translateY(${-p * 60}px) scale(${1 - p * 0.05})`;
+        s3.style.opacity = p;
+        s3.style.transform = `translateY(${(1 - p) * 60}px) scale(${0.95 + p * 0.05})`;
+      } else {
+        s1.style.opacity = 0;
+        s2.style.opacity = 0;
+        s3.style.opacity = 1;
+        s3.style.transform = `translateY(${Math.sin((t - 7.2) * 0.5) * 3}px)`;
+      }
+    };
+  </script>
+</body>
+</html>
