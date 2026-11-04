@@ -49,42 +49,79 @@ def save_config(cfg: dict) -> None:
     CONFIG_FILE.write_text(json.dumps(cfg, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def upload_to_catbox(local_path: str) -> str:
-    """Sube un archivo local (.mp4/.jpg/.png) a un CDN público temporal para que la API de Meta lo descargue."""
+def upload_video_direct_to_meta(local_path: str, caption: str, share_to_feed: bool = True, thumb_offset: int = 1500) -> dict:
+    """Sube videos/Reels DIRECTAMENTE a Meta (rupload.facebook.com) con cifrado TLS oficial.
+    NO utiliza ningún servicio o hosting de terceros."""
+    cfg = load_config()
+    token = cfg.get("access_token", "").strip()
+    uid = cfg.get("ig_user_id") or "me"
+    host = cfg.get("api_host", "https://graph.instagram.com/v21.0").rstrip("/")
+
     p = Path(local_path).expanduser().resolve()
     if not p.exists():
-        raise FileNotFoundError(f"No existe el archivo local: {local_path}")
+        raise FileNotFoundError(f"No existe el archivo de video local: {local_path}")
+    fsize = p.stat().st_size
 
-    # 1. Intentar con uguu.se (directo y rápido)
-    res = subprocess.run(
-        ["curl", "-sS", "-F", f"files[]=@{p}", "https://uguu.se/upload"],
-        capture_output=True,
-        text=True,
-        timeout=180,
+    # 1. Crear contenedor de video en Meta con upload_type=resumable
+    container = graph_request(
+        "POST",
+        f"{uid}/media",
+        {
+            "media_type": "REELS",
+            "upload_type": "resumable",
+            "caption": caption,
+            "share_to_feed": "true" if share_to_feed else "false",
+            "thumb_offset": str(thumb_offset),
+        },
     )
-    try:
-        j = json.loads(res.stdout)
-        if j.get("success") and j.get("files"):
-            return j["files"][0]["url"]
-    except Exception:
-        pass
+    creation_id = container["id"]
+    upload_uri = container["uri"]
 
-    # 2. Fallback a tmpfiles.org (/dl/ URL directa)
-    res2 = subprocess.run(
-        ["curl", "-sS", "-F", f"file=@{p}", "https://tmpfiles.org/api/v1/upload"],
-        capture_output=True,
-        text=True,
-        timeout=180,
+    # 2. Transmitir el video binario directamente a Meta
+    with open(p, "rb") as f:
+        video_bytes = f.read()
+
+    req = urllib.request.Request(
+        upload_uri,
+        data=video_bytes,
+        headers={
+            "Authorization": f"OAuth {token}",
+            "offset": "0",
+            "file_size": str(fsize),
+            "Content-Type": "application/octet-stream",
+        },
+        method="POST",
     )
-    try:
-        j2 = json.loads(res2.stdout)
-        raw_url = j2.get("data", {}).get("url", "")
-        if raw_url.startswith("https://tmpfiles.org/"):
-            return raw_url.replace("https://tmpfiles.org/", "https://tmpfiles.org/dl/", 1)
-    except Exception:
-        pass
 
-    raise RuntimeError(f"Error al preparar URL pública para Meta: {res.stdout} / {res2.stdout}")
+    with urllib.request.urlopen(req, timeout=300) as resp:
+        resp.read()
+
+    # 3. Esperar procesamiento en servidores oficiales de Meta
+    for _ in range(40):
+        time.sleep(5)
+        st = graph_request("GET", creation_id, {"fields": "status_code,status"})
+        code = st.get("status_code")
+        if code == "FINISHED":
+            break
+        if code in ("ERROR", "EXPIRED"):
+            raise RuntimeError(f"Instagram rechazó el procesamiento del video: {st}")
+
+    # 4. Publicar contenedor
+    published = graph_request("POST", f"{uid}/media_publish", {"creation_id": creation_id})
+    media_id = published.get("id")
+    permalink_info = {}
+    if media_id:
+        try:
+            permalink_info = graph_request("GET", media_id, {"fields": "id,permalink,shortcode"})
+        except Exception:
+            pass
+
+    return {
+        "ok": True,
+        "canal": "directo_a_meta_rupload (cero hostings publicos)",
+        "media_id": media_id,
+        "publicacion": permalink_info,
+    }
 
 
 def graph_request(method: str, endpoint: str, params: dict | None = None) -> dict:
@@ -300,9 +337,14 @@ def handle_tool_call(name: str, args: dict) -> str:
                 if rep.is_valid and branded_v.exists():
                     video_path = str(branded_v)
 
-        video_url = video_path if video_path.startswith("http") else upload_to_catbox(video_path)
-        uid = cfg.get("ig_user_id") or "me"
+        if not video_path.startswith("http"):
+            # Sube DIRECTO a Meta vía Resumable Upload (TLS cifrado directo a rupload.facebook.com)
+            res = upload_video_direct_to_meta(video_path, caption, share_to_feed, thumb_offset)
+            return json.dumps(res, indent=2, ensure_ascii=False)
 
+        # Si ya es URL remota provista explícitamente por el usuario
+        video_url = video_path
+        uid = cfg.get("ig_user_id") or "me"
         container = graph_request(
             "POST",
             f"{uid}/media",
@@ -315,8 +357,6 @@ def handle_tool_call(name: str, args: dict) -> str:
             },
         )
         creation_id = container["id"]
-
-        # Esperar a que Instagram termine de procesar el contenedor de video
         for _ in range(30):
             time.sleep(5)
             st = graph_request("GET", creation_id, {"fields": "status_code,status"})
@@ -343,13 +383,24 @@ def handle_tool_call(name: str, args: dict) -> str:
     elif name == "ig_publicar_foto":
         image_path = args["image_path"]
         caption = args["caption"]
-        image_url = image_path if image_path.startswith("http") else upload_to_catbox(image_path)
-        uid = cfg.get("ig_user_id") or "me"
+        if not image_path.startswith("http"):
+            return json.dumps(
+                {
+                    "ok": False,
+                    "seguridad": "Prohibido hostings públicos",
+                    "mensaje": "Por política estricta de privacidad de Producciones David, ningún archivo de imagen se sube a hostings públicos de terceros. Utilizá el archivo local de alta resolución para publicar directamente.",
+                    "archivo_local": image_path,
+                    "caption": caption,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
 
+        uid = cfg.get("ig_user_id") or "me"
         container = graph_request(
             "POST",
             f"{uid}/media",
-            {"image_url": image_url, "caption": caption},
+            {"image_url": image_path, "caption": caption},
         )
         creation_id = container["id"]
         time.sleep(3)
@@ -359,14 +410,27 @@ def handle_tool_call(name: str, args: dict) -> str:
     elif name == "ig_publicar_carrusel":
         image_paths = args["image_paths"]
         caption = args["caption"]
+        locales = [p for p in image_paths if not p.startswith("http")]
+        if locales:
+            return json.dumps(
+                {
+                    "ok": False,
+                    "seguridad": "Prohibido hostings públicos",
+                    "mensaje": "Por política estricta de privacidad de Producciones David, las placas locales no se suben a hostings públicos de terceros. Las imágenes están listas en alta resolución para publicarse desde la app de Instagram o Meta Business Suite con el copete aprobado.",
+                    "archivos_locales": image_paths,
+                    "caption": caption,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+
         uid = cfg.get("ig_user_id") or "me"
         child_ids = []
         for p in image_paths:
-            img_url = p if p.startswith("http") else upload_to_catbox(p)
             item = graph_request(
                 "POST",
                 f"{uid}/media",
-                {"image_url": img_url, "is_carousel_item": "true"},
+                {"image_url": p, "is_carousel_item": "true"},
             )
             child_ids.append(item["id"])
             time.sleep(1)
@@ -392,13 +456,24 @@ def handle_tool_call(name: str, args: dict) -> str:
     elif name == "ig_publicar_historia":
         media_path = args["media_path"]
         es_video = args.get("es_video", False)
-        media_url = media_path if media_path.startswith("http") else upload_to_catbox(media_path)
+        if not media_path.startswith("http"):
+            return json.dumps(
+                {
+                    "ok": False,
+                    "seguridad": "Prohibido hostings públicos",
+                    "mensaje": "Por política de privacidad, las historias no se suben a hostings públicos de terceros. Usá el archivo local directamente en la app para agregar stickers nativos interactivos.",
+                    "archivo_local": media_path,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+
         uid = cfg.get("ig_user_id") or "me"
         params = {"media_type": "STORIES"}
         if es_video:
-            params["video_url"] = media_url
+            params["video_url"] = media_path
         else:
-            params["image_url"] = media_url
+            params["image_url"] = media_path
         container = graph_request("POST", f"{uid}/media", params)
         creation_id = container["id"]
         for _ in range(20):
