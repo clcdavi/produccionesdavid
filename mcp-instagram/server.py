@@ -24,7 +24,7 @@ try:
 except Exception:
     BRAND_ENGINE_AVAILABLE = False
 
-BASE_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando")
+BASE_DIR = Path(__file__).resolve().parent.parent  # raíz del repo
 CONFIG_FILE = BASE_DIR / "instagram_credenciales.json"
 EXTRACTOR_SCRIPT = Path("/Users/davidcorrea/.gemini/config/skills/adrian-saenz-video-negocio/scripts/extraer_instagram.py")
 VENV_PYTHON = Path("/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/.venv/bin/python")
@@ -508,7 +508,7 @@ def handle_tool_call(name: str, args: dict) -> str:
         destino = args["carpeta_destino"]
         limite = str(args.get("limite", 12))
         proc = subprocess.run(
-            [str(VENV_PYTHON), str(EXTRACTOR_SCRIPT), usuario, "--carpeta", destino, "--limite", limite],
+            [str(VENV_PYTHON), str(EXTRACTOR_SCRIPT), "--negocio", destino, "--usuario", usuario, "--max-posts", limite],
             capture_output=True,
             text=True,
             timeout=180,

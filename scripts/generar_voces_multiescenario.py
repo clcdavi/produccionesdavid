@@ -8,8 +8,8 @@ import urllib.request
 import subprocess
 from pathlib import Path
 
-KEY_FILE = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/claves_ia.json")
-OUT_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/assets/david")
+KEY_FILE = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/claves_ia.json")
+OUT_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/assets/david")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 claves = json.loads(KEY_FILE.read_text(encoding="utf-8"))

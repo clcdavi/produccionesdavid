@@ -12,7 +12,7 @@ import os
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-BASE_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando")
+BASE_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david")
 BRAND_DIR = BASE_DIR / "assets" / "branding" / "producciones-david"
 CAMP_DIR = BASE_DIR / "campana-lanzamiento-pd"
 REEL_DIR = BASE_DIR / "campana-publicitaria-nueva-marca" / "reel"

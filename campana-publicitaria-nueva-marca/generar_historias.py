@@ -6,7 +6,7 @@ Pack de 3 Stories interactivas de captación con zonas para stickers de Instagra
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
-BASE_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando")
+BASE_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david")
 BRAND_DIR = BASE_DIR / "assets" / "branding" / "producciones-david"
 FONTS_DIR = BRAND_DIR / "fonts"
 OUT_DIR = BASE_DIR / "campana-publicitaria-nueva-marca" / "historias"

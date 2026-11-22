@@ -19,7 +19,7 @@ from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("tiktok-producciones-david")
 
-DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/mcp-tiktok")
+DIR = Path(__file__).resolve().parent
 PYTHON_BIN = "/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/.venv/bin/python"
 
 @mcp.tool()

@@ -6,8 +6,8 @@ utilizando el servidor MCP de Instagram (subida a Uguu + creación de contenedor
 import json, subprocess, time, urllib.request
 from pathlib import Path
 
-DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/campana-lanzamiento-pd")
-CREDS = json.loads(Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/instagram_credenciales.json").read_text())
+DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/campana-lanzamiento-pd")
+CREDS = json.loads(Path("/Users/davidcorrea/Documents/code_projects/producciones-david/instagram_credenciales.json").read_text())
 VIDEO_FILE = DIR / "reel_avatares_veo31_final_aprobado.mp4"
 
 token = CREDS["access_token"]

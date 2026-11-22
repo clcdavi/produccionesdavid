@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
-SESSION_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/mcp-tiktok/tiktok_user_session")
+SESSION_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/mcp-tiktok/tiktok_user_session")
 SESSION_DIR.mkdir(parents=True, exist_ok=True)
 
 print("🚀 Abriendo ventana de Chrome para conectar tu cuenta de TikTok...")

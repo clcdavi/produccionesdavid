@@ -12,7 +12,7 @@ claves = leer_claves()
 api_key = claves["apimartKey"]
 headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
 
-base_dir = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/sw-store")
+base_dir = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/negocios/sw-store")
 out_dir = base_dir / "anuncio" / "planos"
 out_dir.mkdir(parents=True, exist_ok=True)
 

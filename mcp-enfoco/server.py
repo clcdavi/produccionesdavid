@@ -99,6 +99,52 @@ TOOLS = [
         }
     },
     {
+        "name": "enfoco_listar_tareas",
+        "description": "Lista las tareas de Enfoco con su id, estado, fechas y prioridad. Filtros opcionales. Usar antes de actualizar o borrar.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "status": {"type": "string", "enum": ["inbox", "todo", "doing", "waiting", "done"]},
+                "project": {"type": "string", "description": "Nombre exacto del proyecto"},
+                "area": {"type": "string", "enum": ["Trabajo", "Proyectos", "Personal", "Estudio", "Iglesia"]},
+                "planDate": {"type": "string", "description": "AAAA-MM-DD (vacío para tareas sin fecha planificada)"},
+                "q": {"type": "string", "description": "Texto a buscar en título o notas"},
+                "limit": {"type": "integer", "description": "Máximo de resultados (1-500, por defecto 200)"}
+            }
+        }
+    },
+    {
+        "name": "enfoco_actualizar_tarea",
+        "description": "Edita una tarea existente por su id (uuid). Permite cambiar cualquier campo, incluido status 'done' para completarla. Las fechas aceptan '' para quitarlas.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "id": {"type": "string", "description": "UUID de la tarea (de enfoco_listar_tareas)"},
+                "title": {"type": "string"},
+                "area": {"type": "string", "enum": ["Trabajo", "Proyectos", "Personal", "Estudio", "Iglesia"]},
+                "project": {"type": "string"},
+                "notes": {"type": "string"},
+                "priority": {"type": "integer", "enum": [1, 2, 3], "description": "1 Baja, 2 Media, 3 Alta"},
+                "minutes": {"type": "integer"},
+                "status": {"type": "string", "enum": ["inbox", "todo", "doing", "waiting", "done"]},
+                "planDate": {"type": "string"},
+                "deadline": {"type": "string"},
+                "followUp": {"type": "string"},
+                "top": {"type": "boolean"}
+            },
+            "required": ["id"]
+        }
+    },
+    {
+        "name": "enfoco_borrar_tarea",
+        "description": "Borra definitivamente una tarea por su id. Irreversible: confirmar con el usuario qué tareas se borran antes de llamar.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"id": {"type": "string", "description": "UUID de la tarea"}},
+            "required": ["id"]
+        }
+    },
+    {
         "name": "enfoco_cargar_pipeline_agencia",
         "description": "Sincroniza en lote las tareas prioritarias de lanzamiento, ventas y producción de Producciones David en Enfoco.",
         "inputSchema": {
@@ -146,6 +192,23 @@ def handle_tool_call(name: str, args: dict) -> str:
             follow_up=args.get("followUp")
         )
         return json.dumps(res, indent=2, ensure_ascii=False)
+
+    elif name == "enfoco_listar_tareas":
+        res = enfoco_client.listar_tareas(
+            status=args.get("status"), project=args.get("project"), area=args.get("area"),
+            plan_date=args.get("planDate"), q=args.get("q"), limit=args.get("limit", 200))
+        if "tasks" in res:
+            campos = ["id", "externalId", "title", "area", "project", "status", "priority",
+                      "minutes", "planDate", "deadline", "followUp", "top"]
+            res["tasks"] = [{k: t.get(k) for k in campos} for t in res["tasks"]]
+        return json.dumps(res, indent=2, ensure_ascii=False)
+
+    elif name == "enfoco_actualizar_tarea":
+        campos = {k: v for k, v in args.items() if k != "id"}
+        return json.dumps(enfoco_client.actualizar_tarea(args["id"], campos), indent=2, ensure_ascii=False)
+
+    elif name == "enfoco_borrar_tarea":
+        return json.dumps(enfoco_client.borrar_tarea(args["id"]), indent=2, ensure_ascii=False)
 
     elif name == "enfoco_cargar_pipeline_agencia":
         tareas = enfoco_client.pipeline_inicial_producciones_david()

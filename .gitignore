@@ -29,3 +29,7 @@ mcp-tiktok/screenshots/
 # Claves y config local de Claude Code
 *.key
 .claude/settings.local.json
+
+# Datos de clientes y prospectos: solo locales (la convención está en negocios/README.md)
+negocios/*/
+operacion-despedida-2026/

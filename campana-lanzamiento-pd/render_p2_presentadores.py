@@ -2,9 +2,9 @@
 import json, subprocess, time, urllib.request
 from pathlib import Path
 
-CLAVES_FILE = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/claves_ia.json")
+CLAVES_FILE = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/claves_ia.json")
 api_key = json.loads(CLAVES_FILE.read_text())["apimartKey"]
-DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/campana-lanzamiento-pd")
+DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/campana-lanzamiento-pd")
 OUT_MP4 = DIR / "veo31_clip_02_presentadores.mp4"
 
 # Frase exacta pedida por el usuario

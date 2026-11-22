@@ -68,6 +68,48 @@ def enviar_tareas(tareas: list, api_key: str = None) -> dict:
     except Exception as e:
         return {"error": str(e), "status_code": 500}
 
+def _solicitud(metodo: str, ruta: str = "", payload: dict = None, query: dict = None) -> dict:
+    """Llamada genérica a /api/integrations/tasks[/ruta] con la API Key guardada."""
+    import urllib.parse
+    cfg = cargar_config()
+    token = (cfg.get("api_key") or "").strip()
+    if not token:
+        raise ValueError("Falta configurar la API Key de Enfoco (enf_live_...).")
+    url = cfg.get("endpoint", DEFAULT_ENDPOINT).rstrip("/")
+    if ruta:
+        url += "/" + urllib.parse.quote(ruta, safe="")
+    if query:
+        qs = urllib.parse.urlencode({k: v for k, v in query.items() if v not in (None, "")})
+        if qs:
+            url += "?" + qs
+    data = json.dumps(payload).encode("utf-8") if payload is not None else None
+    req = urllib.request.Request(
+        url, data=data, method=metodo,
+        headers={"Authorization": f"Bearer {token}", "Content-Type": "application/json",
+                 "User-Agent": "ProduccionesDavid-Sync/1.0"},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        raw = e.read().decode("utf-8", errors="replace")
+        try:
+            return {"error": json.loads(raw).get("error", raw), "status_code": e.code}
+        except Exception:
+            return {"error": raw, "status_code": e.code}
+    except Exception as e:
+        return {"error": str(e), "status_code": 500}
+
+def listar_tareas(status=None, project=None, area=None, plan_date=None, q=None, limit=200) -> dict:
+    return _solicitud("GET", query={"status": status, "project": project, "area": area,
+                                    "planDate": plan_date, "q": q, "limit": limit})
+
+def actualizar_tarea(task_id: str, campos: dict) -> dict:
+    return _solicitud("PATCH", task_id, payload=campos)
+
+def borrar_tarea(task_id: str) -> dict:
+    return _solicitud("DELETE", task_id)
+
 def crear_tarea(
     title: str,
     external_id: str = None,

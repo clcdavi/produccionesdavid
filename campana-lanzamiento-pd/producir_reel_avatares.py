@@ -16,9 +16,9 @@ from pathlib import Path
 import edge_tts
 from PIL import Image, ImageDraw, ImageFont
 
-OUT_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/campana-lanzamiento-pd")
-CLAVES_FILE = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/claves_ia.json")
-COSTOS_FILE = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/proyectos_costos.json")
+OUT_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/campana-lanzamiento-pd")
+CLAVES_FILE = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/claves_ia.json")
+COSTOS_FILE = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/proyectos_costos.json")
 FFMPEG = Path("/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/ffmpeg/ffmpeg")
 INST_JSON = Path.home() / "Library" / "Application Support" / "adrian-saenz-video-negocio" / "instalacion.json"
 CHROME_BIN = json.loads(INST_JSON.read_text(encoding="utf-8"))["chrome"]
@@ -27,7 +27,7 @@ IMG_1 = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb
 IMG_2 = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb52-8122d7fbdd7d/avatar_02_institucional_empresa_jpg_1793569138758.jpg")
 IMG_3 = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb52-8122d7fbdd7d/avatar_03_eventos_entretenimiento_jpg_1793569163999.jpg")
 CLOSING_JPG = OUT_DIR / "reel_scene_05.jpg"
-MUSIC_MP3 = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/sw-store/musica/musica.mp3")
+MUSIC_MP3 = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/negocios/sw-store/musica/musica.mp3")
 
 SCENES = [
     {

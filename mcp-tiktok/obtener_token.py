@@ -10,7 +10,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-CREDS_FILE = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/tiktok_credenciales.json")
+CREDS_FILE = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/tiktok_credenciales.json")
 creds = json.loads(CREDS_FILE.read_text())
 
 CLIENT_KEY = creds["client_key"]

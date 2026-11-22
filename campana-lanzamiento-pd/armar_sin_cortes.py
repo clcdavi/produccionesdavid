@@ -9,7 +9,7 @@ Ensambla el Reel de Veo 3.1 sin cortar ni una sola décima de segundo:
 import subprocess, json
 from pathlib import Path
 
-DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/campana-lanzamiento-pd")
+DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/campana-lanzamiento-pd")
 ART = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb52-8122d7fbdd7d")
 FFMPEG = "/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/ffmpeg/ffmpeg"
 INST = json.load(open("/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/instalacion.json"))
@@ -110,7 +110,7 @@ subprocess.run([
 
 # 3. Concatenación final (5.8s + 5.8s + 5.8s + 3.5s = 20.9s totales)
 final_mp4 = DIR / "reel_avatares_veo31_sin_cortes.mp4"
-music_mp3 = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/sw-store/musica/musica.mp3")
+music_mp3 = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/negocios/sw-store/musica/musica.mp3")
 
 cmd_final = [
     FFMPEG, "-y",

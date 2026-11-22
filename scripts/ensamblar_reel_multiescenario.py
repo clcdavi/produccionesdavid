@@ -9,7 +9,7 @@ Ensambla el Reel Publicitario Multiescenario de Producciones David:
 import subprocess
 from pathlib import Path
 
-BASE_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando")
+BASE_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david")
 ASSETS_DIR = BASE_DIR / "assets" / "david"
 FFMPEG = Path("/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/ffmpeg/ffmpeg")
 FFPROBE = Path("/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/ffmpeg/ffprobe")

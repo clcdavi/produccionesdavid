@@ -8,7 +8,7 @@ import time
 import requests
 from pathlib import Path
 
-BASE_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando")
+BASE_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david")
 ASSETS_DIR = BASE_DIR / "assets" / "david"
 CLAVES_FILE = BASE_DIR / "claves_ia.json"
 

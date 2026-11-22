@@ -4,8 +4,8 @@ import subprocess
 import urllib.request
 from pathlib import Path
 
-DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/campana-lanzamiento-pd")
-CREDS = json.loads(Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/tiktok_credenciales.json").read_text())
+DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/campana-lanzamiento-pd")
+CREDS = json.loads(Path("/Users/davidcorrea/Documents/code_projects/producciones-david/tiktok_credenciales.json").read_text())
 
 token = CREDS.get("access_token")
 print("Access token configurado:", "SÍ" if token else "NO")

@@ -88,7 +88,7 @@ Los Reels suben directo a Meta por carga resumible (sin hosting público interme
 
 Cliente y servidor de tareas (`enfoco-tareas`) para llevar el pipeline de la agencia.
 
-> **Importante:** los MCP configurados en Claude Code hoy corren desde la copia original (`~/.gemini/antigravity/scratch/anuncios-san-fernando`), no desde este repo. Ver `docs/pendientes.md`.
+> Los MCP de Claude Code apuntan a `mcp-*/server.py` de este repo (migrado el 2026-11-22 desde `~/.gemini/antigravity/scratch/anuncios-san-fernando`). Hay que reiniciar Claude Code y validar los tres; ver `docs/pendientes.md`.
 
 ---
 

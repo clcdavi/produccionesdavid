@@ -20,8 +20,8 @@ try:
 except Exception:
     BRAND_ENGINE_AVAILABLE = False
 
-SESSION_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/mcp-tiktok/tiktok_user_session")
-SCREENSHOT_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/mcp-tiktok/screenshots")
+SESSION_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/mcp-tiktok/tiktok_user_session")
+SCREENSHOT_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/mcp-tiktok/screenshots")
 SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
 
 def limpiar_overlays(page):

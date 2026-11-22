@@ -12,19 +12,19 @@ import subprocess
 from pathlib import Path
 from PIL import Image
 
-OUT_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/campana-lanzamiento-pd")
+OUT_DIR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/campana-lanzamiento-pd")
 OUT_DIR.mkdir(parents=True, exist_ok=True)
 
 INST_JSON = Path.home() / "Library" / "Application Support" / "adrian-saenz-video-negocio" / "instalacion.json"
 CHROME_BIN = json.loads(INST_JSON.read_text(encoding="utf-8"))["chrome"]
 FFMPEG = Path("/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/ffmpeg/ffmpeg")
 
-LOGO_COLOR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/marca-producciones-david/logo_color_sin_fondo.png")
+LOGO_COLOR = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/marca-producciones-david/logo_color_sin_fondo.png")
 VIS_COMERCIOS = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb52-8122d7fbdd7d/vis_comercios_vibrante_1793567883788.jpg")
 VIS_AVATAR = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb52-8122d7fbdd7d/vis_presentador_avatar_1793567901573.jpg")
 VIS_INSTITUCIONAL = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb52-8122d7fbdd7d/vis_institucional_privados_1793567925648.jpg")
 VIS_FIESTAS = Path("/Users/davidcorrea/.gemini/antigravity/brain/1bd34c74-87eb-4a6f-bb52-8122d7fbdd7d/vis_fiestas_entretenimiento_1793567953216.jpg")
-MUSIC_MP3 = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando/negocios/sw-store/musica/musica.mp3")
+MUSIC_MP3 = Path("/Users/davidcorrea/Documents/code_projects/producciones-david/negocios/sw-store/musica/musica.mp3")
 
 
 def to_data_uri(path: Path) -> str:

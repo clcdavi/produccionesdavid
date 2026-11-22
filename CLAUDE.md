@@ -7,7 +7,8 @@ Agencia de contenido y video con IA para negocios e instituciones ([@produccione
 - `negocios/<slug>/`: **una carpeta por negocio** (cliente o prospecto). Convención en `negocios/README.md`.
 - `contenido/reels|carruseles|historias/`: piezas propias nuevas por formato.
 - `planificacion/`: planes semanales y bancos de ideas.
-- `campana-lanzamiento-pd/`, `campana-publicitaria-nueva-marca/`: campañas históricas de la propia agencia (con sus scripts). No mover: los scripts usan rutas relativas.
+- `campana-lanzamiento-pd/`, `campana-publicitaria-nueva-marca/`, `campana-cinematica-david/`: campañas de la propia agencia (con sus scripts). No mover: los scripts usan rutas fijas.
+- `operacion-despedida-2026/`: proyecto de cliente, **solo local** (ignorado por git); pendiente de mover a `negocios/`.
 - `scripts/`, `animaciones-programaticas/`: pipelines de video (Seedance, voces, ensamblado, motion graphics).
 - `mcp-instagram/`, `mcp-tiktok/`, `mcp-enfoco/`: código de los servidores MCP.
 - `assets/david/`: fotos de referencia de David para avatares.
