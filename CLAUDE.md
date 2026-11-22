@@ -15,6 +15,7 @@ Agencia de contenido y video para negocios. Este proyecto concentra marca, plani
 ## Herramientas (disponibles en Claude Code)
 - MCP: `instagram-producciones-david`, `tiktok-producciones-david`, `enfoco-tareas`, `stitch`.
 - Skills: `ig-*` (captions, carruseles, hashtags, plan semanal, perfil), `motion-graphics-engine`, `adrian-saenz-video-negocio`.
+- Skills del proyecto (`.claude/skills/pd-*`): `pd-reel-guion`, `pd-stories`, `pd-dm-ventas`, `pd-oferta-precios`, `pd-auditar-pieza`, `pd-banco-ideas`, `pd-cta`, `pd-prospecto-video` (idea de prospecto → video demo para vender).
 
 ## Reglas
 - Confirmar con el usuario antes de publicar en Instagram o TikTok.
