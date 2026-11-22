@@ -29,8 +29,10 @@ Los scripts de `campana-*`, `negocios/*` y `operacion-despedida-2026` usan rutas
 
 ## 5. Privacidad y tamaño
 - El repo pesa ~170 MB versionado (imágenes, fuentes, `reviews.db`, datos crudos de scraping); la carpeta local ~1,1 GB con los renders ignorados.
-- **El repo de GitHub es público** (verificado el 2026-11-22). `negocios/*/maps/` de los tres negocios ya publicados incluye reseñas con nombre y foto de personas. Decidir si pasar el repo a privado o quitar esas carpetas del seguimiento (el historial seguiría público).
-- Regla vigente: `negocios/*/` y `operacion-despedida-2026/` no se versionan (ver `.gitignore`).
+- **El repo de GitHub es público** (verificado el 2026-11-22). `negocios/*/maps/` de los tres negocios ya publicados incluye reseñas con nombre y foto de personas, todavía visibles en el historial. Ver la nota de historial más abajo.
+- Regla vigente (2026-11-22): el repo versiona **solo documentación, skills y MCP** (lista blanca en `.gitignore`). Marca, campañas, scripts, `negocios/*/` y renders son solo locales.
+- **Historial:** quitar archivos del seguimiento no los borra de commits anteriores. `main` y el historial de esta rama conservan los 3 negocios publicados (con reseñas y fotos de personas), la marca y las campañas. Para eliminarlos de verdad hay que pasar el repo a privado o reescribir el historial (`git filter-repo` + force-push, decisión de David).
+- Las rutas de los MCP contienen el nombre de usuario de macOS (no son credenciales); se pueden pasar a `Path.home()` si el repo se comparte.
 - Evaluar mover `negocios/*/maps/_raw/` y `snapshots/` a `.gitignore` o a almacenamiento aparte.
 
 ## 6. Costos

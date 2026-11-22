@@ -33,6 +33,14 @@ producciones-david/
 
 ---
 
+## 📦 Qué se versiona y qué es local
+
+Este repo (público) contiene **solo**: documentación (`README.md`, `CLAUDE.md`, `docs/`), skills de Claude Code (`.claude/skills/`) y el código de los MCP (`mcp-*`), más `requirements.txt` y `negocios/README.md`.
+
+Todo lo demás del árbol de arriba (marca, campañas, scripts, animaciones, `negocios/<slug>/`, renders, `proyectos_costos.json`) existe **solo en la máquina local** y está excluido por `.gitignore`. Ningún dato de clientes, prospectos ni producción de cliente se sube. Para versionar algo nuevo hay que habilitarlo explícitamente en `.gitignore` (lista blanca).
+
+---
+
 ## 🧭 Flujo de trabajo
 
 ```
@@ -96,7 +104,7 @@ Cliente y servidor de tareas (`enfoco-tareas`) para llevar el pipeline de la age
 
 - **Veo 3.1** (`campana-lanzamiento-pd/generar_reel_veo31.py`): video con voz y lip-sync en español rioplatense.
 - **Seedance multiescena + voz clonada** (`scripts/generar_video_seedance_multiescenario.py`, `generar_voces_multiescenario.py`, `ensamblar_reel_multiescenario.py`): avatares con varios looks.
-- **Kling 3.0** (`negocios/sw-store/lanzar_kling.py`): planos de producto; los costos quedan en `proyectos_costos.json`.
+- **Kling 3.0** (`lanzar_kling.py`, dentro de la carpeta del negocio): planos de producto; los costos quedan en `proyectos_costos.json`.
 - **HyperFrames + GSAP** (`negocios/*/anuncio/video-anuncio/`): anuncios de negocio diseñados y renderizados desde HTML.
 - **Zona segura:** subtítulos a más de 390 px de la base para no chocar con la interfaz de Instagram/TikTok.
 - **Hooks:** `scripts/buscar_hook.py` consulta la base de 1000 hooks virales.

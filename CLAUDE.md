@@ -3,6 +3,8 @@
 Agencia de contenido y video con IA para negocios e instituciones ([@produccionesdavid.ar](https://www.instagram.com/produccionesdavid.ar/)). Este repo concentra marca, código de producción y publicación, negocios atendidos y planificación de contenido. Documentación completa en `README.md`; pendientes en `docs/pendientes.md`.
 
 ## Estructura
+> **Versionado:** solo documentación, skills y MCP (lista blanca en `.gitignore`). El resto de lo listado abajo es **local** y no se sube a GitHub; no agregar al seguimiento marca, campañas, datos de clientes ni renders.
+
 - `assets/branding/producciones-david/`: **fuente oficial de la marca** (logos, isotipos, Montserrat, plantillas, `brand_engine.py`, outros). `brand_engine.py` en la raíz es un symlink a ese archivo.
 - `negocios/<slug>/`: **una carpeta por negocio** (cliente o prospecto). Convención en `negocios/README.md`.
 - `contenido/reels|carruseles|historias/`: piezas propias nuevas por formato.

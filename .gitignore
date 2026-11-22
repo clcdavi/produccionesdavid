@@ -1,35 +1,38 @@
-# Credenciales y Secretos
+# ──────────────────────────────────────────────────────────────
+# Este repo versiona SOLO: documentación, skills de Claude Code y
+# código de los MCP. Todo lo demás (marca, campañas, negocios,
+# renders, datos de clientes) vive únicamente en la máquina local.
+# ──────────────────────────────────────────────────────────────
+/*
+!/.gitignore
+!/README.md
+!/CLAUDE.md
+!/requirements.txt
+!/docs/
+!/.claude/
+!/mcp-instagram/
+!/mcp-tiktok/
+!/mcp-enfoco/
+!/negocios/
+/negocios/*
+!/negocios/README.md
+
+# Credenciales y secretos (siempre ignorados, también dentro de lo permitido)
 *credenciales*.json
 claves_*.json
 *.env
 *.env.*
 .enfoco_config.json
+.claude/settings.local.json
+*.key
 
-# Entornos virtuales y caches
+# Entornos, caches y temporales
 __pycache__/
 *.py[cod]
-*$py.class
 .venv/
 node_modules/
 .DS_Store
-
-# Archivos temporales de render
-*.aac
-*.mp3
-_concat_list.txt
-_tmp_*.html
 *.log
-*.mp4
-!assets/branding/producciones-david/outro-logo*.mp4
-
-# Sesiones de navegador y capturas locales
+*.bak
 mcp-tiktok/tiktok_user_session/
 mcp-tiktok/screenshots/
-
-# Claves y config local de Claude Code
-*.key
-.claude/settings.local.json
-
-# Datos de clientes y prospectos: solo locales (la convención está en negocios/README.md)
-negocios/*/
-operacion-despedida-2026/
