@@ -36,5 +36,7 @@ Los scripts de `campana-*`, `negocios/*` y `operacion-despedida-2026` usan rutas
 ## 6. Costos
 `proyectos_costos.json` registra proveedor, modelo, créditos y USD por generación. Falta una vista resumen por negocio y mes.
 
+**Ojo:** la versión local tiene entradas nuevas con nombres de clientes y quedó **sin commitear a propósito** (el archivo aparece modificado en `git status`). Para versionarlo hay que anonimizar el campo `cliente` o mover el registro a un archivo local ignorado.
+
 ## 7. Prospección (nuevo)
 La skill `pd-prospecto-video` define el flujo idea → video demo → DM → seguimiento y guarda `negocios/<slug>/prospecto.md`. Falta probarla con un prospecto real y decidir dónde se lleva el estado global (por ejemplo, un tablero en `enfoco-tareas`).
