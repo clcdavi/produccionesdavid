@@ -1,0 +1,578 @@
+#!/usr/bin/env python3
+"""
+Servidor MCP de Instagram para Producciones David (Stdio JSON-RPC 2.0).
+Soporta:
+1. Instagram API Oficial (Instagram Login / Graph API) para publicar Reels, Fotos, leer métricas y responder comentarios.
+2. Analizador local de perfiles de clientes (Playwright) sin costo.
+"""
+from __future__ import annotations
+import json
+import os
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+# Integración con Brand Identity Engine
+try:
+    sys.path.insert(0, str(Path(__file__).parent.parent.resolve()))
+    from brand_engine import BrandIdentityEngine
+    BRAND_ENGINE_AVAILABLE = True
+except Exception:
+    BRAND_ENGINE_AVAILABLE = False
+
+BASE_DIR = Path("/Users/davidcorrea/.gemini/antigravity/scratch/anuncios-san-fernando")
+CONFIG_FILE = BASE_DIR / "instagram_credenciales.json"
+EXTRACTOR_SCRIPT = Path("/Users/davidcorrea/.gemini/config/skills/adrian-saenz-video-negocio/scripts/extraer_instagram.py")
+VENV_PYTHON = Path("/Users/davidcorrea/Library/Application Support/adrian-saenz-video-negocio/.venv/bin/python")
+
+
+def load_config() -> dict:
+    if CONFIG_FILE.exists():
+        try:
+            return json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
+        except Exception:
+            pass
+    return {
+        "username": "",
+        "ig_user_id": "",
+        "access_token": "",
+        "api_host": "https://graph.instagram.com/v21.0",
+    }
+
+
+def save_config(cfg: dict) -> None:
+    CONFIG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    CONFIG_FILE.write_text(json.dumps(cfg, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def upload_video_direct_to_meta(local_path: str, caption: str, share_to_feed: bool = True, thumb_offset: int = 1500) -> dict:
+    """Sube videos/Reels DIRECTAMENTE a Meta (rupload.facebook.com) con cifrado TLS oficial.
+    NO utiliza ningún servicio o hosting de terceros."""
+    cfg = load_config()
+    token = cfg.get("access_token", "").strip()
+    uid = cfg.get("ig_user_id") or "me"
+    host = cfg.get("api_host", "https://graph.instagram.com/v21.0").rstrip("/")
+
+    p = Path(local_path).expanduser().resolve()
+    if not p.exists():
+        raise FileNotFoundError(f"No existe el archivo de video local: {local_path}")
+    fsize = p.stat().st_size
+
+    # 1. Crear contenedor de video en Meta con upload_type=resumable
+    container = graph_request(
+        "POST",
+        f"{uid}/media",
+        {
+            "media_type": "REELS",
+            "upload_type": "resumable",
+            "caption": caption,
+            "share_to_feed": "true" if share_to_feed else "false",
+            "thumb_offset": str(thumb_offset),
+        },
+    )
+    creation_id = container["id"]
+    upload_uri = container["uri"]
+
+    # 2. Transmitir el video binario directamente a Meta
+    with open(p, "rb") as f:
+        video_bytes = f.read()
+
+    req = urllib.request.Request(
+        upload_uri,
+        data=video_bytes,
+        headers={
+            "Authorization": f"OAuth {token}",
+            "offset": "0",
+            "file_size": str(fsize),
+            "Content-Type": "application/octet-stream",
+        },
+        method="POST",
+    )
+
+    with urllib.request.urlopen(req, timeout=300) as resp:
+        resp.read()
+
+    # 3. Esperar procesamiento en servidores oficiales de Meta
+    for _ in range(40):
+        time.sleep(5)
+        st = graph_request("GET", creation_id, {"fields": "status_code,status"})
+        code = st.get("status_code")
+        if code == "FINISHED":
+            break
+        if code in ("ERROR", "EXPIRED"):
+            raise RuntimeError(f"Instagram rechazó el procesamiento del video: {st}")
+
+    # 4. Publicar contenedor
+    published = graph_request("POST", f"{uid}/media_publish", {"creation_id": creation_id})
+    media_id = published.get("id")
+    permalink_info = {}
+    if media_id:
+        try:
+            permalink_info = graph_request("GET", media_id, {"fields": "id,permalink,shortcode"})
+        except Exception:
+            pass
+
+    return {
+        "ok": True,
+        "canal": "directo_a_meta_rupload (cero hostings publicos)",
+        "media_id": media_id,
+        "publicacion": permalink_info,
+    }
+
+
+def graph_request(method: str, endpoint: str, params: dict | None = None) -> dict:
+    cfg = load_config()
+    token = cfg.get("access_token", "").strip()
+    if not token:
+        raise RuntimeError(
+            "Falta configurar el access_token de Instagram. Usa 'ig_configurar_credenciales' primero."
+        )
+    host = cfg.get("api_host", "https://graph.instagram.com/v21.0").rstrip("/")
+    params = dict(params or {})
+    params["access_token"] = token
+
+    if method.upper() == "GET":
+        qs = urllib.parse.urlencode(params)
+        url = f"{host}/{endpoint.lstrip('/')}?{qs}"
+        req = urllib.request.Request(url, method="GET")
+    else:
+        url = f"{host}/{endpoint.lstrip('/')}"
+        data = urllib.parse.urlencode(params).encode("utf-8")
+        req = urllib.request.Request(url, data=data, method=method.upper())
+
+    try:
+        with urllib.request.urlopen(req, timeout=60) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        err_body = e.read().decode("utf-8", errors="replace")
+        raise RuntimeError(f"Error de Instagram API ({e.code}): {err_body}")
+
+
+TOOLS = [
+    {
+        "name": "ig_estado_cuenta",
+        "description": "Verifica el estado de la configuración de la cuenta de Instagram de Producciones David y, si hay token activo, consulta los datos del perfil en vivo.",
+        "inputSchema": {"type": "object", "properties": {}},
+    },
+    {
+        "name": "ig_configurar_credenciales",
+        "description": "Guarda en disco el @usuario, el Access Token de Instagram API y detecta automáticamente el ig_user_id de la cuenta.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "username": {"type": "string", "description": "Nombre de usuario de Instagram (ej. produccionesdavid.ar)"},
+                "access_token": {"type": "string", "description": "Token de acceso de Instagram Graph API (IG... o EAA...)"},
+                "ig_user_id": {"type": "string", "description": "Opcional: ID numérico de usuario de Instagram (se autodetecta si se omite)"},
+            },
+        },
+    },
+    {
+        "name": "ig_publicar_reel",
+        "description": "Publica un video vertical (.mp4 local o URL) directamente como Reel en la cuenta de Instagram de Producciones David usando la API oficial de Meta.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "video_path": {"type": "string", "description": "Ruta absoluta en tu Mac al archivo .mp4 (o URL pública https://)"},
+                "caption": {"type": "string", "description": "Texto del Reel (incluyendo gancho inicial, cuerpo y hashtags)"},
+                "share_to_feed": {"type": "boolean", "description": "Si es true (por defecto), también aparece en la grilla principal del perfil", "default": True},
+                "thumb_offset_ms": {"type": "integer", "description": "Milisegundos del fotograma que se usará como portada (ej. 2000 para el segundo 2)", "default": 1500},
+                "es_contenido_propio": {"type": "boolean", "description": "True si es de Producciones David, False si es contenido de un cliente", "default": True},
+                "aplicar_branding": {"type": "boolean", "description": "Si es True, aplica automáticamente la marca de agua y outro corporativo oficial", "default": False},
+            },
+            "required": ["video_path", "caption"],
+        },
+    },
+    {
+        "name": "ig_publicar_foto",
+        "description": "Publica una imagen (.jpg o .png local o URL) en el feed de Instagram con su descripción.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "image_path": {"type": "string", "description": "Ruta absoluta en tu Mac a la imagen .jpg/.png (o URL pública)"},
+                "caption": {"type": "string", "description": "Texto de la publicación"},
+            },
+            "required": ["image_path", "caption"],
+        },
+    },
+    {
+        "name": "ig_publicar_carrusel",
+        "description": "Publica un carrusel de 2 a 10 imágenes (.jpg/.png locales o URLs) en el feed de Instagram con su descripción.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "image_paths": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                    "description": "Lista de rutas absolutas a las imágenes del carrusel en orden (2 a 10 imágenes)",
+                },
+                "caption": {"type": "string", "description": "Texto del carrusel (gancho, packs, precios y hashtags)"},
+            },
+            "required": ["image_paths", "caption"],
+        },
+    },
+    {
+        "name": "ig_publicar_historia",
+        "description": "Publica una Historia (Story) de imagen o video vertical en la cuenta de Instagram.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "media_path": {"type": "string", "description": "Ruta absoluta a la imagen (.jpg/.png) o video (.mp4)"},
+                "es_video": {"type": "boolean", "description": "True si es un video .mp4, False si es imagen", "default": False},
+            },
+            "required": ["media_path"],
+        },
+    },
+    {
+        "name": "ig_listar_publicaciones",
+        "description": "Obtiene las últimas publicaciones y Reels de tu cuenta de Instagram con sus métricas (likes, comentarios, enlace directo).",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "limite": {"type": "integer", "description": "Cantidad de publicaciones a listar (por defecto 10)", "default": 10},
+            },
+        },
+    },
+    {
+        "name": "ig_responder_comentario",
+        "description": "Responde a un comentario específico en una publicación o Reel de tu cuenta de Instagram.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "comment_id": {"type": "string", "description": "ID del comentario al que se desea responder"},
+                "mensaje": {"type": "string", "description": "Texto de la respuesta"},
+            },
+            "required": ["comment_id", "mensaje"],
+        },
+    },
+    {
+        "name": "ig_espiar_cliente",
+        "description": "Extrae sin gastar API los datos públicos, biografía y últimas fotos de cualquier cuenta de Instagram de un potencial cliente.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "usuario_o_url": {"type": "string", "description": "Usuario (ej. @sw.store_ar) o URL del perfil de Instagram"},
+                "carpeta_destino": {"type": "string", "description": "Carpeta donde guardar el reporte y fotos descargadas"},
+                "limite": {"type": "integer", "description": "Cantidad máxima de posts a extraer (por defecto 12)", "default": 12},
+            },
+            "required": ["usuario_o_url", "carpeta_destino"],
+        },
+    },
+]
+
+
+def handle_tool_call(name: str, args: dict) -> str:
+    cfg = load_config()
+
+    if name == "ig_estado_cuenta":
+        if not cfg.get("access_token"):
+            return json.dumps(
+                {
+                    "conectado_api": False,
+                    "username": cfg.get("username") or "(no configurado)",
+                    "archivo_config": str(CONFIG_FILE),
+                    "mensaje": "Falta cargar el Access Token de Meta Developers con 'ig_configurar_credenciales'.",
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+        try:
+            uid = cfg.get("ig_user_id") or "me"
+            fields = (
+                "id,username,name,biography,followers_count,follows_count,media_count,profile_picture_url"
+                if uid != "me"
+                else "id,user_id,username,name,account_type,followers_count,media_count"
+            )
+            me = graph_request("GET", uid, {"fields": fields})
+            return json.dumps({"conectado_api": True, "perfil": me}, indent=2, ensure_ascii=False)
+        except Exception as e:
+            return json.dumps({"conectado_api": False, "error": str(e)}, indent=2, ensure_ascii=False)
+
+    elif name == "ig_configurar_credenciales":
+        if args.get("username"):
+            cfg["username"] = args["username"].lstrip("@").strip()
+        if args.get("access_token"):
+            token = args["access_token"].strip()
+            cfg["access_token"] = token
+            # Si el token empieza con IG..., usa graph.instagram.com; si empieza con EAA..., soporta graph.facebook.com
+            cfg["api_host"] = (
+                "https://graph.instagram.com/v21.0"
+                if token.startswith("IG")
+                else "https://graph.facebook.com/v21.0"
+            )
+        if args.get("ig_user_id"):
+            cfg["ig_user_id"] = args["ig_user_id"].strip()
+        save_config(cfg)
+
+        if cfg.get("access_token") and not cfg.get("ig_user_id"):
+            try:
+                me = graph_request("GET", "me", {"fields": "id,user_id,username,name"})
+                cfg["ig_user_id"] = str(me.get("user_id") or me.get("id") or "")
+                if me.get("username"):
+                    cfg["username"] = me["username"]
+                save_config(cfg)
+                return json.dumps({"ok": True, "config": cfg, "verificado_en_vivo": me}, indent=2, ensure_ascii=False)
+            except Exception as e:
+                return json.dumps({"ok": True, "config": cfg, "aviso_verificacion": str(e)}, indent=2, ensure_ascii=False)
+
+        return json.dumps({"ok": True, "config": cfg}, indent=2, ensure_ascii=False)
+
+    elif name == "ig_publicar_reel":
+        video_path = args["video_path"]
+        caption = args["caption"]
+        share_to_feed = args.get("share_to_feed", True)
+        thumb_offset = args.get("thumb_offset_ms", 1500)
+
+        # Aplicar Brand Identity Engine si fue solicitado y no es URL remota
+        if args.get("aplicar_branding") and BRAND_ENGINE_AVAILABLE and not video_path.startswith("http"):
+            es_propio = args.get("es_contenido_propio", True)
+            if es_propio:
+                engine = BrandIdentityEngine()
+                v_path = Path(video_path)
+                branded_v = v_path.parent / f"{v_path.stem}_ig_branded.mp4"
+                rep = engine.process_video_complete(str(v_path), str(branded_v), is_own_content=True)
+                if rep.is_valid and branded_v.exists():
+                    video_path = str(branded_v)
+
+        if not video_path.startswith("http"):
+            # Sube DIRECTO a Meta vía Resumable Upload (TLS cifrado directo a rupload.facebook.com)
+            res = upload_video_direct_to_meta(video_path, caption, share_to_feed, thumb_offset)
+            return json.dumps(res, indent=2, ensure_ascii=False)
+
+        # Si ya es URL remota provista explícitamente por el usuario
+        video_url = video_path
+        uid = cfg.get("ig_user_id") or "me"
+        container = graph_request(
+            "POST",
+            f"{uid}/media",
+            {
+                "media_type": "REELS",
+                "video_url": video_url,
+                "caption": caption,
+                "share_to_feed": "true" if share_to_feed else "false",
+                "thumb_offset": str(thumb_offset),
+            },
+        )
+        creation_id = container["id"]
+        for _ in range(30):
+            time.sleep(5)
+            st = graph_request("GET", creation_id, {"fields": "status_code,status"})
+            code = st.get("status_code")
+            if code == "FINISHED":
+                break
+            if code in ("ERROR", "EXPIRED"):
+                raise RuntimeError(f"Instagram rechazó el procesamiento del video: {st}")
+
+        published = graph_request("POST", f"{uid}/media_publish", {"creation_id": creation_id})
+        media_id = published.get("id")
+        permalink_info = {}
+        if media_id:
+            try:
+                permalink_info = graph_request("GET", media_id, {"fields": "id,permalink,shortcode"})
+            except Exception:
+                pass
+        return json.dumps(
+            {"ok": True, "media_id": media_id, "video_url_usada": video_url, "publicacion": permalink_info},
+            indent=2,
+            ensure_ascii=False,
+        )
+
+    elif name == "ig_publicar_foto":
+        image_path = args["image_path"]
+        caption = args["caption"]
+        if not image_path.startswith("http"):
+            return json.dumps(
+                {
+                    "ok": False,
+                    "seguridad": "Prohibido hostings públicos",
+                    "mensaje": "Por política estricta de privacidad de Producciones David, ningún archivo de imagen se sube a hostings públicos de terceros. Utilizá el archivo local de alta resolución para publicar directamente.",
+                    "archivo_local": image_path,
+                    "caption": caption,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+
+        uid = cfg.get("ig_user_id") or "me"
+        container = graph_request(
+            "POST",
+            f"{uid}/media",
+            {"image_url": image_path, "caption": caption},
+        )
+        creation_id = container["id"]
+        time.sleep(3)
+        published = graph_request("POST", f"{uid}/media_publish", {"creation_id": creation_id})
+        return json.dumps({"ok": True, "published": published}, indent=2, ensure_ascii=False)
+
+    elif name == "ig_publicar_carrusel":
+        image_paths = args["image_paths"]
+        caption = args["caption"]
+        locales = [p for p in image_paths if not p.startswith("http")]
+        if locales:
+            return json.dumps(
+                {
+                    "ok": False,
+                    "seguridad": "Prohibido hostings públicos",
+                    "mensaje": "Por política estricta de privacidad de Producciones David, las placas locales no se suben a hostings públicos de terceros. Las imágenes están listas en alta resolución para publicarse desde la app de Instagram o Meta Business Suite con el copete aprobado.",
+                    "archivos_locales": image_paths,
+                    "caption": caption,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+
+        uid = cfg.get("ig_user_id") or "me"
+        child_ids = []
+        for p in image_paths:
+            item = graph_request(
+                "POST",
+                f"{uid}/media",
+                {"image_url": p, "is_carousel_item": "true"},
+            )
+            child_ids.append(item["id"])
+            time.sleep(1)
+
+        carousel_container = graph_request(
+            "POST",
+            f"{uid}/media",
+            {
+                "media_type": "CAROUSEL",
+                "children": ",".join(child_ids),
+                "caption": caption,
+            },
+        )
+        creation_id = carousel_container["id"]
+        for _ in range(15):
+            time.sleep(3)
+            st = graph_request("GET", creation_id, {"fields": "status_code"})
+            if st.get("status_code") == "FINISHED":
+                break
+        published = graph_request("POST", f"{uid}/media_publish", {"creation_id": creation_id})
+        return json.dumps({"ok": True, "child_ids": child_ids, "published": published}, indent=2, ensure_ascii=False)
+
+    elif name == "ig_publicar_historia":
+        media_path = args["media_path"]
+        es_video = args.get("es_video", False)
+        if not media_path.startswith("http"):
+            return json.dumps(
+                {
+                    "ok": False,
+                    "seguridad": "Prohibido hostings públicos",
+                    "mensaje": "Por política de privacidad, las historias no se suben a hostings públicos de terceros. Usá el archivo local directamente en la app para agregar stickers nativos interactivos.",
+                    "archivo_local": media_path,
+                },
+                indent=2,
+                ensure_ascii=False,
+            )
+
+        uid = cfg.get("ig_user_id") or "me"
+        params = {"media_type": "STORIES"}
+        if es_video:
+            params["video_url"] = media_path
+        else:
+            params["image_url"] = media_path
+        container = graph_request("POST", f"{uid}/media", params)
+        creation_id = container["id"]
+        for _ in range(20):
+            time.sleep(3)
+            st = graph_request("GET", creation_id, {"fields": "status_code"})
+            if st.get("status_code") == "FINISHED":
+                break
+        published = graph_request("POST", f"{uid}/media_publish", {"creation_id": creation_id})
+        return json.dumps({"ok": True, "published": published}, indent=2, ensure_ascii=False)
+
+    elif name == "ig_listar_publicaciones":
+        uid = cfg.get("ig_user_id") or "me"
+        limite = args.get("limite", 10)
+        res = graph_request(
+            "GET",
+            f"{uid}/media",
+            {
+                "fields": "id,caption,media_type,media_url,permalink,timestamp,like_count,comments_count",
+                "limit": str(limite),
+            },
+        )
+        return json.dumps(res, indent=2, ensure_ascii=False)
+
+    elif name == "ig_responder_comentario":
+        cid = args["comment_id"]
+        msg = args["mensaje"]
+        res = graph_request("POST", f"{cid}/replies", {"message": msg})
+        return json.dumps({"ok": True, "respuesta": res}, indent=2, ensure_ascii=False)
+
+    elif name == "ig_espiar_cliente":
+        usuario = args["usuario_o_url"]
+        destino = args["carpeta_destino"]
+        limite = str(args.get("limite", 12))
+        proc = subprocess.run(
+            [str(VENV_PYTHON), str(EXTRACTOR_SCRIPT), usuario, "--carpeta", destino, "--limite", limite],
+            capture_output=True,
+            text=True,
+            timeout=180,
+        )
+        return proc.stdout or proc.stderr
+
+    raise ValueError(f"Herramienta desconocida: {name}")
+
+
+def main() -> None:
+    for line in sys.stdin:
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            req = json.loads(line)
+        except Exception:
+            continue
+
+        req_id = req.get("id")
+        method = req.get("method", "")
+        params = req.get("params") or {}
+
+        if method == "initialize":
+            resp = {
+                "jsonrpc": "2.0",
+                "id": req_id,
+                "result": {
+                    "protocolVersion": "2024-11-05",
+                    "capabilities": {"tools": {}},
+                    "serverInfo": {"name": "instagram-producciones-david", "version": "1.0.0"},
+                },
+            }
+            sys.stdout.write(json.dumps(resp) + "\n")
+            sys.stdout.flush()
+        elif method.startswith("notifications/"):
+            continue
+        elif method == "tools/list":
+            resp = {"jsonrpc": "2.0", "id": req_id, "result": {"tools": TOOLS}}
+            sys.stdout.write(json.dumps(resp) + "\n")
+            sys.stdout.flush()
+        elif method == "tools/call":
+            t_name = params.get("name", "")
+            t_args = params.get("arguments") or {}
+            try:
+                out = handle_tool_call(t_name, t_args)
+                resp = {
+                    "jsonrpc": "2.0",
+                    "id": req_id,
+                    "result": {"content": [{"type": "text", "text": out}], "isError": False},
+                }
+            except Exception as e:
+                resp = {
+                    "jsonrpc": "2.0",
+                    "id": req_id,
+                    "result": {"content": [{"type": "text", "text": f"Error: {e}"}], "isError": True},
+                }
+            sys.stdout.write(json.dumps(resp) + "\n")
+            sys.stdout.flush()
+        elif req_id is not None:
+            resp = {"jsonrpc": "2.0", "id": req_id, "result": {}}
+            sys.stdout.write(json.dumps(resp) + "\n")
+            sys.stdout.flush()
+
+
+if __name__ == "__main__":
+    main()

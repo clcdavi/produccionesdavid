@@ -24,7 +24,7 @@ Objetivo: que el prospecto vea, antes de contratar, un video hecho con **su** ne
 7. **Seguimiento:** plan de 2 toques (a las 48 h y a los 5-7 días) con `pd-dm-ventas`. Si aparece interés, pasá a `pd-oferta-precios`.
 
 ## Entrega
-Guardá en `clientes/<negocio>/prospecto.md` con: datos reales verificados, hipótesis, concepto, guion, mensajes y estado (`por contactar / enviado / respondió / cerrado`). Terminá con la lista de insumos pendientes y la aprobación que necesitás de David antes de enviar.
+Guardá en `negocios/<negocio>/prospecto.md` con: datos reales verificados, hipótesis, concepto, guion, mensajes y estado (`por contactar / enviado / respondió / cerrado`). Terminá con la lista de insumos pendientes y la aprobación que necesitás de David antes de enviar.
 
 ## Criterios
 - Un prospecto, un video, una idea. Si hay varios, procesalos de a uno.

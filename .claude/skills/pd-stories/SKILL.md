@@ -7,7 +7,7 @@ description: Diseña secuencias de Stories de Instagram para clientes de Producc
 
 ## Reglas fijas
 - Voseo rioplatense. Marca: Marfil, Carbón, Terracota, Montserrat. Formato 9:16.
-- Leé `clientes/<cliente>/` si existe. **No inventes** datos, testimonios ni resultados; si falta algo, preguntá.
+- Leé `negocios/<cliente>/` si existe (`material/dossier.md`, `maps/resumen.md`). **No inventes** datos, testimonios ni resultados; si falta algo, preguntá.
 - Nada se publica sin confirmación de David (las historias se publican con `ig_publicar_historia` solo tras aprobación).
 
 ## Tipos

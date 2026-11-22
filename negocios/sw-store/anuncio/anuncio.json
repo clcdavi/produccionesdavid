@@ -1,0 +1,20 @@
+{
+  "titulo": "SW Store — Cuadernos y Agendas Personalizadas",
+  "formato": "vertical",
+  "fuentes": ["Playfair Display:600,700", "Montserrat:500,700,800"],
+  "musica": {
+    "archivo": "musica/musica.mp3",
+    "volumen": 0.95
+  },
+  "planos": [
+    {"id": "gancho",         "medio": "anuncio/planos/01_gancho.mp4",        "desde": 0.2, "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "logo",           "medio": "anuncio/planos/01_gancho.mp4",        "desde": 2.0, "compases": 1.5, "encuadre": "50% 50%"},
+    {"id": "kraft",          "medio": "anuncio/planos/02_kraft.mp4",         "desde": 0.0, "compases": 1.5, "encuadre": "50% 50%", "antes": 0.2},
+    {"id": "interior",       "medio": "anuncio/planos/02_kraft.mp4",         "desde": 2.2, "compases": 1.5, "encuadre": "50% 50%"},
+    {"id": "tamanos",        "medio": "anuncio/planos/03_universitario.mp4", "desde": 0.0, "compases": 1,   "encuadre": "50% 50%", "antes": 0.2},
+    {"id": "personalizados", "medio": "anuncio/planos/03_universitario.mp4", "desde": 2.1, "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "cierre",         "medio": "anuncio/planos/01_gancho.mp4",        "desde": 1.5, "compases": 1.5, "extra": 1.2, "encuadre": "50% 50%", "antes": 0.25}
+  ],
+  "diseno": "anuncio/diseno",
+  "salida": "sw-store-kling-anuncio.mp4"
+}

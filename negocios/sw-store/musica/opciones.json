@@ -1,0 +1,151 @@
+[
+  {
+    "id": 371,
+    "titulo": "Cat Walk",
+    "artista": "Arulo",
+    "genero": "House",
+    "duracion": 124,
+    "mp3": "https://assets.mixkit.co/music/371/371.mp3",
+    "generos": [
+      "edm",
+      "house"
+    ],
+    "ritmo": {
+      "bpm": 130.01,
+      "pulso": 0.4615,
+      "compas": 1.846,
+      "inicio": 27.623,
+      "caida": 29.469,
+      "compases": 9,
+      "fin": 46.084,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 2.36
+    },
+    "nota": 8.36
+  },
+  {
+    "id": 1012,
+    "titulo": "Take this Higher",
+    "artista": "Michael Ramir C.",
+    "genero": "EDM",
+    "duracion": 99,
+    "mp3": "https://assets.mixkit.co/music/1012/1012.mp3",
+    "generos": [
+      "pop",
+      "edm"
+    ],
+    "ritmo": {
+      "bpm": 123.99,
+      "pulso": 0.4839,
+      "compas": 1.9356,
+      "inicio": 9.612,
+      "caida": 11.548,
+      "compases": 8,
+      "fin": 27.033,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 2.11
+    },
+    "nota": 8.11
+  },
+  {
+    "id": 196,
+    "titulo": "Deep House",
+    "artista": "Arulo",
+    "genero": "House",
+    "duracion": 157,
+    "mp3": "https://assets.mixkit.co/music/196/196.mp3",
+    "generos": [
+      "house"
+    ],
+    "ritmo": {
+      "bpm": 124.0,
+      "pulso": 0.4839,
+      "compas": 1.9355,
+      "inicio": 58.723,
+      "caida": 60.658,
+      "compases": 9,
+      "fin": 78.077,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 1.95
+    },
+    "nota": 7.95
+  },
+  {
+    "id": 1109,
+    "titulo": "My Mind Goes Wah Wah",
+    "artista": "Michael Ramir C.",
+    "genero": "Funk",
+    "duracion": 114,
+    "mp3": "https://assets.mixkit.co/music/1109/1109.mp3",
+    "generos": [
+      "funk",
+      "funk-rock"
+    ],
+    "ritmo": {
+      "bpm": 90.0,
+      "pulso": 0.6667,
+      "compas": 2.6667,
+      "inicio": 90.604,
+      "caida": 93.27,
+      "compases": 7,
+      "fin": 111.937,
+      "final_natural": true,
+      "caida_con_subida": true,
+      "claridad": 2.65
+    },
+    "nota": 6.65
+  },
+  {
+    "id": 868,
+    "titulo": "Dry Gin",
+    "artista": "Michael Ramir C.",
+    "genero": "Funk",
+    "duracion": 109,
+    "mp3": "https://assets.mixkit.co/music/868/868.mp3",
+    "generos": [
+      "funk",
+      "acid-jazz"
+    ],
+    "ritmo": {
+      "bpm": 120.0,
+      "pulso": 0.5,
+      "compas": 2.0,
+      "inicio": 61.43,
+      "caida": 63.43,
+      "compases": 8,
+      "fin": 79.43,
+      "final_natural": false,
+      "caida_con_subida": false,
+      "claridad": 3.61
+    },
+    "nota": 5.61
+  },
+  {
+    "id": 632,
+    "titulo": "Whill Chake",
+    "artista": "Eugenio Mininni",
+    "genero": "Indie Pop",
+    "duracion": 216,
+    "mp3": "https://assets.mixkit.co/music/632/632.mp3",
+    "generos": [
+      "indie-pop",
+      "pop"
+    ],
+    "ritmo": {
+      "bpm": 100.0,
+      "pulso": 0.6,
+      "compas": 2.4,
+      "inicio": 136.734,
+      "caida": 139.134,
+      "compases": 8,
+      "fin": 158.334,
+      "final_natural": false,
+      "caida_con_subida": false,
+      "claridad": 3.32
+    },
+    "nota": 5.32
+  }
+]

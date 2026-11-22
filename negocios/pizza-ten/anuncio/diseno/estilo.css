@@ -1,0 +1,405 @@
+:root {
+  --rojo-pizza: #d92b2b;
+  --verde-albahaca: #1b8a4b;
+  --amarillo-muzza: #ffbe0b;
+  --crema-masa: #fff9f0;
+  --negro-horno: #111114;
+}
+
+#root > .capa {
+  position: absolute;
+  inset: 0;
+  z-index: 65;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 165px 90px 295px 90px;
+}
+
+.atmosfera-pizza {
+  position: absolute;
+  inset: 0;
+  z-index: 55;
+  pointer-events: none;
+  background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0) 45%, rgba(10,10,12,0.58) 100%);
+}
+
+.borde-tricolor {
+  position: absolute;
+  top: 138px;
+  left: 90px;
+  right: 90px;
+  height: 8px;
+  z-index: 58;
+  display: flex;
+  border-radius: 99px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+}
+
+.franja-verde { flex: 1; background: var(--verde-albahaca); }
+.franja-blanca { flex: 1; background: var(--crema-masa); }
+.franja-roja { flex: 1; background: var(--rojo-pizza); }
+
+/* Top ticket */
+.top-ticket {
+  position: absolute;
+  top: 168px;
+  left: 90px;
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(17, 17, 20, 0.90);
+  border: 2px solid var(--crema-masa);
+  border-radius: 14px;
+  padding: 12px 26px;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.55);
+}
+
+.top-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--verde-albahaca);
+  box-shadow: 0 0 10px var(--verde-albahaca);
+}
+
+.top-brand {
+  font-family: "Unbounded", sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--crema-masa);
+}
+
+.top-tag {
+  font-family: "Plex Mono", monospace;
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--amarillo-muzza);
+}
+
+/* Overlays */
+.sombra-piso {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.08) 40%, rgba(14,14,18,0.88) 80%, rgba(12,12,15,0.96) 100%);
+  z-index: -1;
+}
+
+.sombra-total {
+  position: absolute;
+  inset: 0;
+  background: rgba(14, 14, 18, 0.84);
+  z-index: -1;
+}
+
+.sombra-centro {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 55%, rgba(14,14,18,0.76) 0%, rgba(14,14,18,0.52) 100%);
+  z-index: -1;
+}
+
+.sombra-cierre {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(14,14,18,0.86) 0%, rgba(14,14,18,0.95) 60%, rgba(10,10,12,0.98) 100%);
+  z-index: -1;
+}
+
+/* 1. GANCHO */
+.caja-gancho {
+  width: 100%;
+  text-align: left;
+}
+
+.sticker-amarillo {
+  display: inline-block;
+  font-family: "Unbounded", sans-serif;
+  font-size: 25px;
+  font-weight: 800;
+  color: var(--negro-horno);
+  background: var(--amarillo-muzza);
+  padding: 12px 26px;
+  border-radius: 12px;
+  margin-bottom: 24px;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.5);
+}
+
+.tit-pop {
+  font-family: "Unbounded", sans-serif;
+  font-size: 74px;
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--crema-masa);
+  margin: 0;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.9);
+}
+
+.tit-pop em {
+  font-style: normal;
+  color: var(--amarillo-muzza);
+  white-space: nowrap;
+}
+
+.destello-rojo {
+  position: absolute;
+  inset: -40px;
+  background: radial-gradient(circle, rgba(255, 190, 11, 0.95) 0%, rgba(217, 43, 43, 0.88) 60%, rgba(0,0,0,0) 100%);
+}
+
+/* 2. LOGO */
+.centro-logo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 34px;
+}
+
+.medallon-logo {
+  background: var(--rojo-pizza);
+  border: 6px solid var(--crema-masa);
+  border-radius: 44px;
+  padding: 40px 54px;
+  box-shadow: 0 26px 64px rgba(0,0,0,0.88);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pt-logo-img {
+  width: 520px;
+  height: auto;
+  display: block;
+}
+
+.banda-verde {
+  font-family: "Unbounded", sans-serif;
+  font-size: 29px;
+  font-weight: 800;
+  color: var(--crema-masa);
+  background: var(--verde-albahaca);
+  border: 3px solid var(--crema-masa);
+  padding: 16px 32px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.65);
+}
+
+/* 3-6. ETIQUETA CAJA */
+.etiqueta-caja {
+  width: 100%;
+  background: rgba(17, 17, 20, 0.92);
+  border: 3px solid var(--crema-masa);
+  border-top: 12px solid var(--rojo-pizza);
+  border-radius: 26px;
+  padding: 34px 38px;
+  box-shadow: 0 22px 52px rgba(0,0,0,0.82);
+}
+
+.etiq-Sup {
+  font-family: "Plex Mono", monospace;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--amarillo-muzza);
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+}
+
+.etiq-Nom {
+  font-family: "Unbounded", sans-serif;
+  font-size: 42px;
+  font-weight: 900;
+  line-height: 1.08;
+  color: var(--crema-masa);
+  margin-bottom: 14px;
+}
+
+.etiq-Sub {
+  font-family: "Montserrat", sans-serif;
+  font-size: 33px;
+  font-weight: 600;
+  line-height: 1.26;
+  color: #e2dcd5;
+}
+
+/* 7-9. PASTILLA POP */
+.pastilla-pop {
+  margin: auto 0;
+  width: 100%;
+  border: 5px solid var(--crema-masa);
+  border-radius: 32px;
+  padding: 40px 44px;
+  text-align: center;
+  box-shadow: 0 26px 60px rgba(0,0,0,0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pastilla-roja { background: var(--rojo-pizza); color: var(--crema-masa); }
+.pastilla-amarilla { background: var(--amarillo-muzza); color: var(--negro-horno); border-color: var(--negro-horno); }
+.pastilla-verde { background: var(--verde-albahaca); color: var(--crema-masa); }
+
+.pop-mini {
+  font-family: "Plex Mono", monospace;
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.pop-maxi {
+  font-family: "Unbounded", sans-serif;
+  font-size: 58px;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+/* 10. TICKET RESENA */
+.ticket-resena {
+  margin: auto 0;
+  width: 100%;
+  background: var(--crema-masa);
+  color: var(--negro-horno);
+  border: 4px solid var(--rojo-pizza);
+  border-radius: 28px;
+  padding: 44px 42px;
+  box-shadow: 0 28px 65px rgba(0,0,0,0.88);
+}
+
+.tr-top {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 24px;
+}
+
+.tr-stars {
+  font-size: 46px;
+  color: var(--rojo-pizza);
+  letter-spacing: 5px;
+}
+
+.tr-score {
+  font-family: "Plex Mono", monospace;
+  font-size: 26px;
+  font-weight: 600;
+  color: #44403c;
+}
+
+.tr-quote {
+  font-family: "Montserrat", sans-serif;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 1.28;
+  color: var(--negro-horno);
+  margin: 0 0 30px 0;
+}
+
+.tr-bot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 2px dashed rgba(17,17,20,0.25);
+  padding-top: 22px;
+}
+
+.tr-src {
+  font-family: "Montserrat", sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  color: #57534e;
+}
+
+.tr-badge {
+  font-family: "Unbounded", sans-serif;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--crema-masa);
+  background: var(--verde-albahaca);
+  padding: 10px 22px;
+  border-radius: 10px;
+}
+
+/* 11. CIERRE */
+.caja-cierre-pt {
+  margin: auto 0;
+  width: 100%;
+  background: rgba(17, 17, 20, 0.95);
+  border: 4px solid var(--crema-masa);
+  border-radius: 34px;
+  padding: 40px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow: 0 28px 68px rgba(0,0,0,0.92);
+}
+
+.cierre-medallon {
+  background: var(--rojo-pizza);
+  border: 4px solid var(--crema-masa);
+  border-radius: 28px;
+  padding: 22px 36px;
+}
+
+.cierre-logo-img {
+  width: 340px;
+  height: auto;
+  display: block;
+}
+
+.pt-cta-btn {
+  font-family: "Unbounded", sans-serif;
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--negro-horno);
+  background: var(--amarillo-muzza);
+  padding: 16px 32px;
+  border-radius: 14px;
+  text-align: center;
+  width: 100%;
+}
+
+.pt-info-grid {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pt-info-item {
+  background: rgba(255,255,255,0.06);
+  border-left: 8px solid var(--verde-albahaca);
+  border-radius: 14px;
+  padding: 16px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pt-highlight {
+  border-left-color: var(--rojo-pizza);
+  background: rgba(217, 43, 43, 0.18);
+}
+
+.pt-lbl {
+  font-family: "Plex Mono", monospace;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--amarillo-muzza);
+  letter-spacing: 1.5px;
+}
+
+.pt-val {
+  font-family: "Montserrat", sans-serif;
+  font-size: 31px;
+  font-weight: 800;
+  color: var(--crema-masa);
+  line-height: 1.22;
+}

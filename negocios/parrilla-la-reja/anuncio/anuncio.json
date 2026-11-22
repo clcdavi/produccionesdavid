@@ -1,0 +1,24 @@
+{
+  "titulo": "Parrilla La Reja",
+  "formato": "vertical",
+  "fuentes": ["Anton", "Fraunces", "Caveat", "Plex Mono"],
+  "musica": {
+    "archivo": "musica/musica.mp3",
+    "volumen": 0.95
+  },
+  "planos": [
+    {"id": "gancho",    "medio": "maps/fotos/0004.jpg",                          "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "logo",      "medio": "maps/fotos/0001.jpg",                          "compases": 1,   "encuadre": "50% 40%"},
+    {"id": "salon",     "medio": "maps/fotos/0007.jpg",                          "compases": 1,   "encuadre": "50% 50%", "antes": 0.35},
+    {"id": "parrilla",  "medio": "maps/fotos_reseñas/0002_claudia-francalancia_1.jpg", "compases": 1.5, "encuadre": "50% 65%", "antes": 0.35},
+    {"id": "asado",     "medio": "maps/fotos/0005.jpg",                          "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "achuras",   "medio": "maps/fotos_reseñas/0004_mariana-tortelli_3.jpg", "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "mila",      "medio": "maps/fotos_reseñas/0003_matias-romero_1.jpg",  "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "r1",        "medio": "maps/fotos/0003.jpg",                          "pulsos": 2,     "encuadre": "50% 60%"},
+    {"id": "r2",        "medio": "maps/fotos/0010.jpg",                          "pulsos": 2,     "encuadre": "50% 55%"},
+    {"id": "resena",    "medio": "maps/fotos_reseñas/0003_matias-romero_2.jpg",  "compases": 1.5, "encuadre": "50% 50%", "antes": 0.35},
+    {"id": "cierre",    "medio": "maps/fotos/0009.jpg",                          "compases": 1,   "extra": 1.4, "encuadre": "50% 35%", "antes": 0.4}
+  ],
+  "diseno": "anuncio/diseno",
+  "salida": "parrilla-la-reja-anuncio.mp4"
+}

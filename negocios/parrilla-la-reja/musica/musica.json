@@ -1,0 +1,25 @@
+{
+  "titulo": "Funky Triplets",
+  "artista": "Michael Ramir C.",
+  "genero": "Funk",
+  "duracion": 109,
+  "fuente": "Mixkit",
+  "mp3": "https://assets.mixkit.co/music/1141/1141.mp3",
+  "licencia": "Mixkit Stock Music Free License",
+  "licencia_url": "https://mixkit.co/license/#musicFree",
+  "atribucion_obligatoria": false,
+  "archivo": "musica/musica.mp3",
+  "ritmo": {
+    "bpm": 99.99,
+    "pulso": 0.6001,
+    "compas": 2.4002,
+    "inicio": 79.142,
+    "caida": 81.542,
+    "compases": 10,
+    "fin": 105.545,
+    "final_natural": true,
+    "caida_con_subida": true,
+    "claridad": 2.37
+  },
+  "creditos": "Música: «Funky Triplets» de Michael Ramir C. (Mixkit)"
+}

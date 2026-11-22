@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="es" data-resolution="portrait">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=1080, height=1920" />
+<title>SW Store — Cuadernos y Agendas Personalizadas</title>
+<script src="assets/gsap.min.js"></script>
+<style>@font-face { font-family: "Playfair Display"; src: url("assets/fuentes/playfair-display-anPXJzDwcbmjWBN2PKebukDQ.ttf") format("truetype"); font-weight: 600; font-style: normal; }
+@font-face { font-family: "Playfair Display"; src: url("assets/fuentes/playfair-display-anPXJzDwcbmjWBN2PKeiukDQ.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Montserrat"; src: url("assets/fuentes/montserrat-CHKm4532VJOt5QNFgpCtZ6Ew.ttf") format("truetype"); font-weight: 500; font-style: normal; }
+@font-face { font-family: "Montserrat"; src: url("assets/fuentes/montserrat-CHKm4532VJOt5QNFgpCuM70w.ttf") format("truetype"); font-weight: 700; font-style: normal; }
+@font-face { font-family: "Montserrat"; src: url("assets/fuentes/montserrat-CHKm4532VJOt5QNFgpCvr70w.ttf") format("truetype"); font-weight: 800; font-style: normal; }
+@font-face { font-family: "Inter"; src: url("assets/fuentes/Inter.ttf") format("truetype"); font-weight: 100 900; font-style: normal; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+#root { position: relative; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: "Inter", sans-serif; }
+.plano { position: absolute; inset: 0; overflow: hidden; }
+.cam { position: absolute; inset: 0; }
+.medio { position: absolute; left: 0; top: 0; width: 100%; height: 100%; object-fit: cover; }
+.l, .w { display: inline-block; white-space: pre; }
+:root {
+  --color-kraft-claro: #f7dfc0;
+  --color-tinta: #12100e;
+  --color-crema: #ffffff;
+  --color-acento: #e8b068;
+  --fuente-editorial: "Playfair Display", Georgia, serif;
+  --fuente-moderna: "Montserrat", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.capa {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* Only bottom gradient so the video action in the top 75% is 100% clean and bright */
+.gradiente-inferior {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 620px;
+  background: linear-gradient(180deg, transparent 0%, rgba(10, 8, 6, 0.72) 55%, rgba(10, 8, 6, 0.94) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.sombra-cierre {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, rgba(14, 11, 9, 0.78) 0%, rgba(8, 6, 5, 0.94) 100%);
+  z-index: 1;
+}
+
+.destello-calido {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 220, 170, 0.65) 0%, transparent 75%);
+  z-index: 2;
+}
+
+/* Top pill */
+.top-tag {
+  position: absolute;
+  top: 72px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(14, 11, 9, 0.82);
+  border: 1px solid rgba(232, 176, 104, 0.45);
+  padding: 9px 22px;
+  border-radius: 99px;
+  backdrop-filter: blur(10px);
+  z-index: 20;
+}
+
+.punto-acento {
+  width: 8px;
+  height: 8px;
+  background: var(--color-acento);
+  border-radius: 50%;
+}
+
+.marca-top {
+  font-family: var(--fuente-moderna);
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--color-crema);
+  letter-spacing: 2px;
+}
+
+.sep-top {
+  color: var(--color-acento);
+  font-size: 18px;
+}
+
+.desc-top {
+  font-family: var(--fuente-moderna);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-kraft-claro);
+  letter-spacing: 1px;
+}
+
+/* 1. Gancho */
+.caja-gancho {
+  position: absolute;
+  bottom: 150px;
+  left: 65px;
+  right: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  z-index: 10;
+}
+
+.tag-pildora {
+  display: inline-block;
+  background: var(--color-acento);
+  color: var(--color-tinta);
+  font-family: var(--fuente-moderna);
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 8px 20px;
+  border-radius: 30px;
+}
+
+.tit-editorial {
+  font-family: var(--fuente-editorial);
+  font-size: 66px;
+  font-weight: 700;
+  color: var(--color-crema);
+  line-height: 1.12;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.95);
+}
+
+.tit-editorial em {
+  font-style: italic;
+  color: var(--color-acento);
+}
+
+/* 2. Logo */
+.caja-logo-flotante {
+  position: absolute;
+  bottom: 150px;
+  left: 65px;
+  right: 65px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.medallon-logo {
+  background: rgba(14, 11, 9, 0.86);
+  border: 1px solid rgba(232, 176, 104, 0.55);
+  border-radius: 26px;
+  padding: 28px 46px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.65);
+}
+
+.logo-img {
+  height: 155px;
+  width: auto;
+  display: block;
+}
+
+.lema-logo {
+  font-family: var(--fuente-moderna);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-crema);
+  letter-spacing: 1.8px;
+  text-align: center;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.95);
+}
+
+/* 3-6. Compact lower-third floating badge */
+.etiqueta-flotante {
+  position: absolute;
+  bottom: 145px;
+  left: 60px;
+  right: 60px;
+  background: rgba(14, 11, 9, 0.88);
+  border-left: 5px solid var(--color-acento);
+  border-radius: 18px;
+  padding: 26px 34px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.7);
+  z-index: 10;
+}
+
+.prod-tag {
+  font-family: var(--fuente-moderna);
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--color-acento);
+  letter-spacing: 2.5px;
+  margin-bottom: 6px;
+}
+
+.prod-tit {
+  font-family: var(--fuente-editorial);
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--color-crema);
+  line-height: 1.12;
+  margin-bottom: 8px;
+}
+
+.prod-desc {
+  font-family: var(--fuente-moderna);
+  font-size: 21px;
+  font-weight: 500;
+  color: #f5efe8;
+  line-height: 1.3;
+}
+
+/* 7. Cierre */
+.caja-cierre {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 900px;
+  background: rgba(14, 11, 9, 0.92);
+  border: 1px solid rgba(232, 176, 104, 0.55);
+  border-radius: 28px;
+  padding: 50px 44px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 26px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+  z-index: 10;
+}
+
+.logo-cierre-img {
+  height: 170px;
+  width: auto;
+  display: block;
+}
+
+.cierre-frase {
+  font-family: var(--fuente-editorial);
+  font-size: 34px;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--color-kraft-claro);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.dato-linea {
+  font-family: var(--fuente-moderna);
+  font-size: 21px;
+  font-weight: 600;
+  color: var(--color-crema);
+}
+
+.cierre-cta-boton {
+  background: var(--color-acento);
+  color: var(--color-tinta);
+  font-family: var(--fuente-moderna);
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 18px 38px;
+  border-radius: 40px;
+  box-shadow: 0 10px 25px rgba(232, 176, 104, 0.4);
+}
+</style>
+</head>
+<body>
+<div id="root" data-composition-id="main" data-start="0" data-duration="17.814" data-width="1080" data-height="1920">
+<div class="plano" id="plano-gancho" style="z-index:11"><div class="cam" id="cam-gancho" data-layout-allow-overflow><video id="medio-gancho" class="clip medio" src="assets/a01.mp4" data-start="0.0000" data-duration="1.8460" data-media-start="0.200" data-track-index="1" muted playsinline style="object-position:50% 50%"></video></div></div>
+<div class="plano" id="plano-logo" style="z-index:12"><div class="cam" id="cam-logo" data-layout-allow-overflow><video id="medio-logo" class="clip medio" src="assets/a01.mp4" data-start="1.8460" data-duration="2.7690" data-media-start="2.000" data-track-index="0" muted playsinline style="object-position:50% 50%"></video></div></div>
+<div class="plano" id="plano-kraft" style="z-index:13"><div class="cam" id="cam-kraft" data-layout-allow-overflow><video id="medio-kraft" class="clip medio" src="assets/a02.mp4" data-start="4.6150" data-duration="2.7690" data-media-start="0.000" data-track-index="1" muted playsinline style="object-position:50% 50%"></video></div></div>
+<div class="plano" id="plano-interior" style="z-index:14"><div class="cam" id="cam-interior" data-layout-allow-overflow><video id="medio-interior" class="clip medio" src="assets/a02.mp4" data-start="7.3840" data-duration="2.7690" data-media-start="2.200" data-track-index="0" muted playsinline style="object-position:50% 50%"></video></div></div>
+<div class="plano" id="plano-tamanos" style="z-index:15"><div class="cam" id="cam-tamanos" data-layout-allow-overflow><video id="medio-tamanos" class="clip medio" src="assets/a03.mp4" data-start="10.1531" data-duration="1.8460" data-media-start="0.000" data-track-index="1" muted playsinline style="object-position:50% 50%"></video></div></div>
+<div class="plano" id="plano-personalizados" style="z-index:16"><div class="cam" id="cam-personalizados" data-layout-allow-overflow><video id="medio-personalizados" class="clip medio" src="assets/a03.mp4" data-start="11.9991" data-duration="1.8460" data-media-start="2.100" data-track-index="0" muted playsinline style="object-position:50% 50%"></video></div></div>
+<div class="plano" id="plano-cierre" style="z-index:17"><div class="cam" id="cam-cierre" data-layout-allow-overflow><video id="medio-cierre" class="clip medio" src="assets/a01.mp4" data-start="13.5951" data-duration="4.2190" data-media-start="0.803" data-track-index="1" muted playsinline style="object-position:50% 50%"></video></div></div>
+<!-- Persistent subtle top badge -->
+<div class="clip capa" id="clip-top" data-start="4.615" data-duration="9.2301" data-track-index="2">
+  <div class="top-tag" id="top-tag">
+    <span class="punto-acento"></span>
+    <span class="marca-top">SW.STORE</span>
+    <span class="sep-top">·</span>
+    <span class="desc-top">SAN FERNANDO, BS. AS.</span>
+  </div>
+</div>
+
+<!-- 1. GANCHO -->
+<div class="clip capa" id="clip-gancho" data-start="0" data-duration="1.846" data-track-index="3">
+  <div class="gradiente-inferior"></div>
+  <div class="caja-gancho">
+    <div class="tag-pildora" id="sw-g-tag" data-layout-allow-overflow>CUADERNOS & AGENDAS ARTESANALES</div>
+    <h1 class="tit-editorial" id="sw-g-tit"><span class="w">Tus</span> <span class="w">ideas</span> <span class="w">merecen</span> <span class="w">un</span> <span class="w">lugar</span> <em><span class="w">único</span></em></h1>
+  </div>
+</div>
+
+<!-- Flash al drop -->
+<div class="clip capa" id="clip-flash" data-start="1.846" data-duration="0.28" data-track-index="18">
+  <div class="destello-calido" id="sw-flash"></div>
+</div>
+
+<!-- 2. LOGO -->
+<div class="clip capa" id="clip-logo" data-start="1.846" data-duration="2.769" data-track-index="4">
+  <div class="gradiente-inferior"></div>
+  <div class="caja-logo-flotante">
+    <div class="medallon-logo" id="sw-logo-box" data-layout-allow-overflow>
+      <img class="logo-img" src="assets/a04.png" alt="SW Store" data-layout-allow-overflow />
+    </div>
+    <div class="lema-logo" id="sw-logo-lema" data-layout-allow-overflow>DISEÑOS PERSONALIZADOS · ENVÍOS A TODO EL PAÍS 🇦🇷</div>
+  </div>
+</div>
+
+<!-- 3. KRAFT -->
+<div class="clip capa" id="clip-kraft" data-start="4.615" data-duration="2.769" data-track-index="5">
+  <div class="gradiente-inferior"></div>
+  <div class="etiqueta-flotante" id="card-kraft" data-layout-allow-overflow>
+    <div class="prod-tag">TEXTURA NATURAL</div>
+    <h2 class="prod-tit" id="tit-kraft"><span class="l">T</span><span class="l">A</span><span class="l">P</span><span class="l">A</span><span class="l">&nbsp;</span><span class="l">P</span><span class="l">A</span><span class="l">P</span><span class="l">E</span><span class="l">L</span><span class="l">&nbsp;</span><span class="l">K</span><span class="l">R</span><span class="l">A</span><span class="l">F</span><span class="l">T</span><span class="l">&nbsp;</span><span class="l">2</span><span class="l">2</span><span class="l">5</span><span class="l">g</span></h2>
+    <p class="prod-desc" id="sub-kraft">Tapa blanda liviana y resistente · Anillado metálico</p>
+  </div>
+</div>
+
+<!-- 4. INTERIOR -->
+<div class="clip capa" id="clip-interior" data-start="7.384" data-duration="2.769" data-track-index="6">
+  <div class="gradiente-inferior"></div>
+  <div class="etiqueta-flotante" id="card-interior" data-layout-allow-overflow>
+    <div class="prod-tag">INTERIOR A ELECCIÓN</div>
+    <h2 class="prod-tit" id="tit-interior"><span class="l">H</span><span class="l">O</span><span class="l">J</span><span class="l">A</span><span class="l">S</span><span class="l">&nbsp;</span><span class="l">L</span><span class="l">I</span><span class="l">S</span><span class="l">A</span><span class="l">S</span><span class="l">&nbsp;</span><span class="l">O</span><span class="l">&nbsp;</span><span class="l">R</span><span class="l">A</span><span class="l">Y</span><span class="l">A</span><span class="l">D</span><span class="l">A</span><span class="l">S</span></h2>
+    <p class="prod-desc" id="sub-interior">Para organizarte, estudiar, bocetar o regalar</p>
+  </div>
+</div>
+
+<!-- 5. TAMAÑOS -->
+<div class="clip capa" id="clip-tamanos" data-start="10.1531" data-duration="1.846" data-track-index="7">
+  <div class="gradiente-inferior"></div>
+  <div class="etiqueta-flotante" id="card-tamanos" data-layout-allow-overflow>
+    <div class="prod-tag">DOS MEDIDAS</div>
+    <h2 class="prod-tit" id="tit-tamanos"><span class="l">1</span><span class="l">0</span><span class="l">×</span><span class="l">1</span><span class="l">5</span><span class="l">&nbsp;</span><span class="l">c</span><span class="l">m</span><span class="l">&nbsp;</span><span class="l">&amp;</span><span class="l">&nbsp;</span><span class="l">U</span><span class="l">N</span><span class="l">I</span><span class="l">V</span><span class="l">E</span><span class="l">R</span><span class="l">S</span><span class="l">I</span><span class="l">T</span><span class="l">A</span><span class="l">R</span><span class="l">I</span><span class="l">O</span></h2>
+    <p class="prod-desc" id="sub-tamanos">Compacto de bolsillo o formato grande de escritorio</p>
+  </div>
+</div>
+
+<!-- 6. PERSONALIZADOS -->
+<div class="clip capa" id="clip-personalizados" data-start="11.9991" data-duration="1.846" data-track-index="8">
+  <div class="gradiente-inferior"></div>
+  <div class="etiqueta-flotante" id="card-personalizados" data-layout-allow-overflow>
+    <div class="prod-tag">EMPRENDIMIENTOS & REGALOS</div>
+    <h2 class="prod-tit" id="tit-personalizados"><span class="l">1</span><span class="l">0</span><span class="l">0</span><span class="l">%</span><span class="l">&nbsp;</span><span class="l">P</span><span class="l">E</span><span class="l">R</span><span class="l">S</span><span class="l">O</span><span class="l">N</span><span class="l">A</span><span class="l">L</span><span class="l">I</span><span class="l">Z</span><span class="l">A</span><span class="l">D</span><span class="l">O</span><span class="l">S</span></h2>
+    <p class="prod-desc" id="sub-personalizados">Con tu idea, tu frase o el logo de tu empresa</p>
+  </div>
+</div>
+
+<!-- 7. CIERRE -->
+<div class="clip capa" id="clip-cierre" data-start="13.8451" data-duration="3.969" data-track-index="10">
+  <div class="sombra-cierre"></div>
+  <div class="caja-cierre" id="sw-cierre-box" data-layout-allow-overflow>
+    <div class="cierre-logo-wrap" id="sw-cierre-logo" data-layout-allow-overflow>
+      <img class="logo-cierre-img" src="assets/a04.png" alt="SW Store" data-layout-allow-overflow />
+    </div>
+    <div class="cierre-frase" id="sw-cierre-frase">
+      Personalizamos tus ideas para convertirlas en regalos únicos.
+    </div>
+    <div class="cierre-datos" id="sw-cierre-datos">
+      <div class="dato-linea">📍 San Fernando, Buenos Aires · 📦 Envíos a todo el país</div>
+    </div>
+    <div class="cierre-cta-boton" id="sw-cierre-cta" data-layout-allow-overflow>
+      <span class="cta-txt">PEDÍ TU CATÁLOGO POR WHATSAPP / MD</span>
+    </div>
+  </div>
+</div>
+
+<audio id="musica" data-timeline-role="music" src="assets/a05.mp3" data-start="0" data-duration="17.814" data-media-start="27.623" data-track-index="20" data-volume="1" data-automation='{"version": 1, "lanes": [{"target": "volume", "points": [{"t": 0, "v": 0}, {"t": 0.08, "v": 0.95}, {"t": 16.41, "v": 0.95}, {"t": 17.81, "v": 0}]}]}'></audio>
+</div>
+<script>
+const P = {"gancho": {"ini": 0.0, "dur": 1.846, "fin": 1.846}, "logo": {"ini": 1.846, "dur": 2.769, "fin": 4.615}, "kraft": {"ini": 4.615, "dur": 2.769, "fin": 7.384}, "interior": {"ini": 7.384, "dur": 2.769, "fin": 10.153}, "tamanos": {"ini": 10.1531, "dur": 1.846, "fin": 11.9991}, "personalizados": {"ini": 11.9991, "dur": 1.846, "fin": 13.8451}, "cierre": {"ini": 13.8451, "dur": 3.969, "fin": 17.8141}};
+const TOTAL = 17.814, COMPAS = 1.846, PULSO = 0.4615, W = 1080, H = 1920;
+const tl = gsap.timeline({ paused: true });
+const swIds = ["gancho", "logo", "kraft", "interior", "tamanos", "personalizados", "cierre"];
+
+// Subtle extra dynamic zoom punch on each video cut
+swIds.forEach((id, idx) => {
+  const p = P[id];
+  const s0 = idx % 2 === 0 ? 1.05 : 1.0;
+  const s1 = idx % 2 === 0 ? 1.0 : 1.05;
+  tl.fromTo(`#cam-${id}`, { scale: s0 }, { scale: s1, duration: p.dur, ease: "none" }, p.ini);
+});
+
+// Quick punchy crossfades
+tl.fromTo("#plano-kraft",   { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, P.kraft.ini - 0.2);
+tl.fromTo("#plano-tamanos", { opacity: 0 }, { opacity: 1, duration: 0.2, ease: "power2.out" }, P.tamanos.ini - 0.2);
+tl.fromTo("#plano-cierre",  { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power2.out" }, P.cierre.ini - 0.25);
+
+// Persistent top tag
+tl.fromTo("#top-tag", { opacity: 0, y: -20 }, { opacity: 1, y: 0, duration: 0.28, ease: "back.out(1.6)" }, P.kraft.ini);
+
+// 1. GANCHO
+tl.fromTo("#sw-g-tag", { opacity: 0, scale: 1.25 }, { opacity: 1, scale: 1, duration: 0.25, ease: "back.out(1.8)" }, P.gancho.ini + 0.05);
+tl.fromTo("#sw-g-tit .w", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.25, stagger: 0.04, ease: "power3.out" }, P.gancho.ini + 0.14);
+
+// 2. LOGO
+tl.fromTo("#sw-flash", { opacity: 0.85 }, { opacity: 0, duration: 0.28, ease: "power2.out" }, P.logo.ini);
+tl.fromTo("#sw-logo-box", { opacity: 0, scale: 1.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, P.logo.ini);
+tl.fromTo("#sw-logo-lema", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, P.logo.ini + 0.22);
+
+// 3-6. PRODUCT LOWER THIRDS
+function animarCard(cardSel, titSel, subSel, tIni) {
+  tl.fromTo(cardSel, { opacity: 0, y: 40, scale: 0.95 }, { opacity: 1, y: 0, scale: 1, duration: 0.28, ease: "back.out(1.5)" }, tIni);
+  tl.fromTo(`${titSel} .l`, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.01, ease: "power2.out" }, tIni + 0.06);
+  tl.fromTo(subSel, { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.25, ease: "power2.out" }, tIni + 0.2);
+}
+
+animarCard("#card-kraft",          "#tit-kraft",          "#sub-kraft",          P.kraft.ini);
+animarCard("#card-interior",       "#tit-interior",       "#sub-interior",       P.interior.ini);
+animarCard("#card-tamanos",        "#tit-tamanos",        "#sub-tamanos",        P.tamanos.ini);
+animarCard("#card-personalizados", "#tit-personalizados", "#sub-personalizados", P.personalizados.ini);
+
+// 7. CIERRE
+tl.fromTo("#sw-cierre-box",   { opacity: 0, y: 35, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: "back.out(1.5)" }, P.cierre.ini);
+tl.fromTo("#sw-cierre-logo",  { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.7)" }, P.cierre.ini + 0.12);
+tl.fromTo("#sw-cierre-frase", { opacity: 0, y: 15 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, P.cierre.ini + 0.25);
+tl.fromTo("#sw-cierre-datos", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.3, ease: "power2.out" }, P.cierre.ini + 0.38);
+tl.fromTo("#sw-cierre-cta",   { opacity: 0, scale: 1.2 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(1.8)" }, P.cierre.ini + 0.52);
+
+window.__timelines["main"] = tl;
+</script>
+</body>
+</html>

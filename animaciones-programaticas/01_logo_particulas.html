@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Animación 01 — Logo de Partículas (Producciones David)</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: #F5F2EC;
+      color: #191919;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', sans-serif;
+    }
+    #stage {
+      position: relative;
+      width: 1080px;
+      height: 1350px;
+      background: #F5F2EC;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1080px;
+      height: 1350px;
+    }
+    .hud {
+      position: absolute;
+      bottom: 80px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      pointer-events: none;
+    }
+    .hud-tag {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: #FFFFFF;
+      border: 2px solid #DED9D1;
+      color: #191919;
+      transition: all 0.3s ease;
+    }
+    .hud-sub {
+      margin-top: 14px;
+      font-size: 24px;
+      font-weight: 600;
+      color: #737373;
+    }
+    .shard {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 180px;
+      height: 180px;
+      background: #CD563C;
+      clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <canvas id="c" width="1080" height="1350"></canvas>
+    <div class="hud">
+      <div id="statusTag" class="hud-tag">PRODUCCIÓN AUDIOVISUAL</div>
+      <div id="statusSub" class="hud-sub">Inteligencia Artificial · 2026</div>
+    </div>
+    <div class="shard"></div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const statusTag = document.getElementById('statusTag');
+    const statusSub = document.getElementById('statusSub');
+
+    const COLOR_CARBON = '#191919';
+    const COLOR_TERRACOTA = '#CD563C';
+    const COLOR_MUTED = '#8A8378';
+
+    // 1. Crear canvas oculto para extraer coordenadas de la marca "DAVID"
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = 1080;
+    offCanvas.height = 1350;
+    const offCtx = offCanvas.getContext('2d');
+
+    // Dibujar texto de alta definición
+    offCtx.fillStyle = '#000000';
+    offCtx.font = '900 190px -apple-system, sans-serif';
+    offCtx.textAlign = 'center';
+    offCtx.textBaseline = 'middle';
+    offCtx.fillText('DAVID', 540, 620);
+
+    // Muestreo de píxeles
+    const imgData = offCtx.getImageData(0, 0, 1080, 1350).data;
+    const targets = [];
+    const step = 14; // resolución de partículas
+    for (let y = 300; y < 900; y += step) {
+      for (let x = 80; x < 1000; x += step) {
+        const idx = (y * 1080 + x) * 4;
+        if (imgData[idx + 3] > 128) {
+          // Determinar si cae en la 'V' (aproximado x=480..600) para acento terracota
+          const isTerracota = (x > 490 && x < 580 && y < 650);
+          targets.push({ x, y, isTerracota });
+        }
+      }
+    }
+
+    // 2. Generar partículas
+    const N = targets.length;
+    const particles = [];
+    for (let i = 0; i < N; i++) {
+      const tgt = targets[i];
+      // Posición inicial flotante aleatoria en la pantalla
+      const angle = Math.random() * Math.PI * 2;
+      const dist = 300 + Math.random() * 450;
+      const startX = 540 + Math.cos(angle) * dist;
+      const startY = 620 + Math.sin(angle) * dist;
+      
+      particles.push({
+        startX,
+        startY,
+        targetX: tgt.x,
+        targetY: tgt.y,
+        radius: 4.5 + Math.random() * 2,
+        color: tgt.isTerracota ? COLOR_TERRACOTA : (Math.random() < 0.25 ? COLOR_TERRACOTA : COLOR_CARBON),
+        delay: (i / N) * 1.5, // Retraso escalonado para efecto de ola / montaje
+        seed: Math.random() * 100
+      });
+    }
+
+    // Función de interpolación suave (easeInOutCubic)
+    function easeInOutCubic(t) {
+      return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    // Función determinística para renderizar en cualquier instante t (0 a 8s)
+    window.__t = function(t) {
+      t = t % 8.0; // Ciclo exacto de 8 segundos
+      ctx.clearRect(0, 0, 1080, 1350);
+
+      // Estado 1 (0–0.5s): Flotación inicial
+      // Estado 2 (0.5–3.0s): Viaje escalonado de partículas hacia su posición
+      // Estado 3 (3.0–5.5s): Logo armado quieto, rótulo activo
+      // Estado 4 (5.5–8.0s): Dispersión armónica de vuelta al origen
+
+      let assemblyProgress = 0; // 0 = disperso, 1 = logo completo
+      if (t < 0.5) {
+        assemblyProgress = 0;
+      } else if (t < 3.0) {
+        assemblyProgress = (t - 0.5) / 2.5;
+      } else if (t < 5.5) {
+        assemblyProgress = 1;
+      } else {
+        assemblyProgress = 1 - (t - 5.5) / 2.5;
+      }
+
+      // Dibujar subtítulo superior oficial "PRODUCCIONES"
+      const subAlpha = Math.max(0, Math.min(1, (assemblyProgress - 0.5) * 2));
+      if (subAlpha > 0) {
+        ctx.save();
+        ctx.globalAlpha = subAlpha;
+        ctx.fillStyle = COLOR_CARBON;
+        ctx.font = '700 34px -apple-system, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.letterSpacing = '0.45em';
+        ctx.fillText('PRODUCCIONES', 540, 480);
+        ctx.restore();
+      }
+
+      // Actualizar HUD
+      if (t >= 2.8 && t < 5.8) {
+        statusTag.textContent = 'PRODUCCIONES DAVID';
+        statusTag.style.borderColor = COLOR_TERRACOTA;
+        statusTag.style.color = COLOR_TERRACOTA;
+        statusSub.textContent = 'Videos comerciales con IA para marcas';
+      } else {
+        statusTag.textContent = 'PROCESANDO SEÑAL AUDIOVISUAL';
+        statusTag.style.borderColor = '#DED9D1';
+        statusTag.style.color = COLOR_CARBON;
+        statusSub.textContent = 'Cine · Publicidad · Impacto';
+      }
+
+      // Renderizar partículas
+      for (let i = 0; i < N; i++) {
+        const p = particles[i];
+        // Calcular progreso individual con retraso
+        let pProg = 0;
+        if (assemblyProgress === 1) {
+          pProg = 1;
+        } else if (assemblyProgress > 0) {
+          // Entrada o salida
+          const isEntering = t < 4.0;
+          if (isEntering) {
+            const localT = Math.max(0, Math.min(1, ((t - 0.5) - p.delay * 0.7) / 1.5));
+            pProg = easeInOutCubic(localT);
+          } else {
+            const localT = Math.max(0, Math.min(1, ((t - 5.5) - (1.5 - p.delay * 0.7)) / 1.5));
+            pProg = 1 - easeInOutCubic(Math.max(0, localT));
+          }
+        }
+
+        // Flotación ambiental natural (seno/coseno)
+        const floatX = Math.cos(t * 1.5 + p.seed) * 8 * (1 - pProg * 0.8);
+        const floatY = Math.sin(t * 1.2 + p.seed) * 8 * (1 - pProg * 0.8);
+
+        const currentX = p.startX + (p.targetX - p.startX) * pProg + floatX;
+        const currentY = p.startY + (p.targetY - p.startY) * pProg + floatY;
+
+        ctx.fillStyle = p.color;
+        ctx.beginPath();
+        ctx.arc(currentX, currentY, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    };
+
+    // Modo interactivo en navegador en tiempo real
+    let startTime = null;
+    function loop(now) {
+      if (!startTime) startTime = now;
+      const t = (now - startTime) / 1000;
+      window.__t(t);
+      requestAnimationFrame(loop);
+    }
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>

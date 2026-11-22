@@ -1,0 +1,202 @@
+{
+  "longitude": -58.5717899,
+  "input_id": "10b51abc-7274-46b4-b3ef-c487b8d4a4df",
+  "link": "https://www.google.com/maps/place/Pizza+Ten/@-34.4515081,-58.5717899,17z/data=!3m1!4b1!4m6!3m5!1s0x95bca56a1b93afcd:0x3421ce1911fee756!8m2!3d-34.4515081!4d-58.5717899!16s%2Fg%2F1tdskzkx?hl=es?hl=es&entry=ttu&g_ep=EgoyMDI2MTAxOC4wIKXMDSoASAFQAw%3D%3D",
+  "cid": "3756510171275126614",
+  "title": "Pizza Ten",
+  "categories": [
+    "Pizzería"
+  ],
+  "category": "Pizzería",
+  "address": "Suipacha 1108, B1646BLX San Fernando, Provincia de Buenos Aires",
+  "open_hours": {
+    "domingo": [
+      "7:30–10:30 p. m."
+    ],
+    "jueves": [
+      "7:30–10:30 p. m."
+    ],
+    "lunes": [
+      "Cerrado"
+    ],
+    "martes": [
+      "7:30–10:30 p. m."
+    ],
+    "miércoles": [
+      "7:30–10:30 p. m."
+    ],
+    "sábado": [
+      "7:30–10:30 p. m."
+    ],
+    "viernes": [
+      "7:30–10:30 p. m."
+    ]
+  },
+  "popular_times": {},
+  "web_site": "http://instagram.com/pizzaten_sanfer",
+  "phone": "011 6623-7552",
+  "plus_code": "GCXH+97 San Fernando, Provincia de Buenos Aires",
+  "review_count": 156,
+  "review_rating": 4.4,
+  "reviews_per_rating": {
+    "1": 5,
+    "2": 2,
+    "3": 17,
+    "4": 29,
+    "5": 103
+  },
+  "latitude": -34.4515081,
+  "longtitude": -58.5717899,
+  "status": "",
+  "description": "",
+  "reviews_link": "https://search.google.com/local/reviews?placeid=ChIJza-TG2qlvJURVuf-ERnOITQ&q=Pizza+Ten&authuser=0&hl=es&gl=AR",
+  "thumbnail": "https://lh3.googleusercontent.com/grass-cs/AABkmLe3G5dk8k2H7m1mNNV4CTbt-FbeXL3ONqTUsCP920JxTt_sEsEwefUMgQcOSbc4HeEmNemhERFReXBjBk0s5iJhFZwitAaco4KVZrSTwQzxpAJMyVZMImYM5RfGv4OEkMKgQdYRnQ=w408-h544-k-no",
+  "timezone": "America/Buenos_Aires",
+  "price_range": "",
+  "data_id": "0x95bca56a1b93afcd:0x3421ce1911fee756",
+  "street_view_url": "",
+  "place_id": "ChIJza-TG2qlvJURVuf-ERnOITQ",
+  "images": [],
+  "reservations": null,
+  "order_online": null,
+  "menu": {
+    "link": "",
+    "source": ""
+  },
+  "owner": {
+    "id": "100040651359808598568",
+    "name": "Pizza Ten (propietario)",
+    "link": "https://www.google.com/maps/contrib/100040651359808598568"
+  },
+  "complete_address": {
+    "borough": "",
+    "street": "Suipacha 1108",
+    "city": "San Fernando",
+    "postal_code": "B1646",
+    "state": "Provincia de Buenos Aires",
+    "country": "AR"
+  },
+  "credit_cards_accepted": null,
+  "about": [
+    {
+      "id": "accessibility",
+      "name": "Accesibilidad",
+      "options": [
+        {
+          "name": "Estacionamiento accesible para personas en silla de ruedas",
+          "enabled": false
+        },
+        {
+          "name": "Sanitarios accesibles para personas en silla de ruedas",
+          "enabled": false
+        }
+      ]
+    }
+  ],
+  "user_reviews": [
+    {
+      "Name": "Tatiana",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjXhA5Yfm4oGYidscUpylpvur1PCjNr0tdsmx1rCDMCnVwmkfHs=s120-c-rp-mo-ba12-br100",
+      "Rating": 5,
+      "Description": "Primera vez que pedimos, somos de Tigre, a unas cuadras del acceso. Y la verdad nos encantó, súper rica, nos pedimos la pizza napolitana con jamón. Llego súper rápido, en 15 min de no creer un viernes a la noche! Un 10 todo… muy rica pizza, fresca. Excelente servicio. Los felicito, volveremos a comprar!",
+      "Images": [
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLc3Eb7VM-pbbw31_wJMz-r41Rl3i7lobZ6lCSnjnKtckE2unnapy7RXlsX_SDlYD-ZYsDnFRzxZg1GLOEYZV4Kc1BNNzsDUqM6If6xHnsMY6b4wt5DaOySEHQhrYBNk4hLG3VgC65MO0bsf=k-no"
+      ],
+      "When": "Hace 6 meses",
+      "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2poRlRGUk5TVTg0V0dOSWJEZHdObFJJV0daVVdHYxAB",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 5,
+      "author_url": "https://www.google.com/maps/contrib/102805753793691776191/reviews?hl=es-419",
+      "posted_at_unix_micros": 1776474792030657,
+      "updated_at_unix_micros": 1776474792030657,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Primera vez que pedimos, somos de Tigre, a unas cuadras del acceso. Y la verdad nos encantó, súper rica, nos pedimos la pizza napolitana con jamón. Llego súper rápido, en 15 min de no creer un viernes a la noche! Un 10 todo… muy rica pizza, fresca. Excelente servicio. Los felicito, volveremos a comprar!",
+      "text_translated": "",
+      "published_at": "2026-04-18T01:13:12.030657Z"
+    },
+    {
+      "Name": "Sabrina",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjX47czlWej6CT89mLSnsajwnENj71wemAaNr9Y26ejKt29U3805=s120-c-rp-mo-br100",
+      "Rating": 5,
+      "Description": "Buena relación preció calidad la muzza no es grasosa la aceitunas no son duras el tamaño es estadar y el tiempo de espera es mínimo. Atienden de martes a domingo y hasta las 22:30 podes hacer tu pedido.🍕",
+      "Images": null,
+      "When": "Hace un año",
+      "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2pOT01FWTNSREphUlU5cFRsQlRkMGxVVEVWSVFsRRAB",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 5,
+      "author_url": "https://www.google.com/maps/contrib/114940764400297213127/reviews?hl=es-419",
+      "posted_at_unix_micros": 1752113784666725,
+      "updated_at_unix_micros": 1752113784666725,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Buena relación preció calidad la muzza no es grasosa la aceitunas no son duras el tamaño es estadar y el tiempo de espera es mínimo. Atienden de martes a domingo y hasta las 22:30 podes hacer tu pedido.🍕",
+      "text_translated": "",
+      "published_at": "2025-07-10T02:16:24.666725Z"
+    },
+    {
+      "Name": "Romina Andrea Maldonado",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjVqBGUg5PYz0mrXC2MQPyi_LelaiF2ApHlgKkTQFb3hsbK3_43gEw=s120-c-rp-mo-ba12-br100",
+      "Rating": 1,
+      "Description": "Horribles! Después de un tiempo compramos hoy, espantosas! Parecen prepizzas viejas, encima viviendo a 15 cuadras de distancia del lugar llegaron congeladas! Les daría 0 estrella pero no está la opción. Como se nota que no les importa el trabajo, encima que abren solo 2 hrs y media venden esto?? Les importa muu poco perder clientes. NUNCA MÁS",
+      "Images": null,
+      "When": "Hace 7 años",
+      "review_id": "ChZDSUhNMG9nS0VJQ0FnSUNvbmVId0lBEAE",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 1,
+      "author_url": "https://www.google.com/maps/contrib/110677015692501236075/reviews?hl=es-419",
+      "posted_at_unix_micros": 1550973696067806,
+      "updated_at_unix_micros": 1550973696067806,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Horribles! Después de un tiempo compramos hoy, espantosas! Parecen prepizzas viejas, encima viviendo a 15 cuadras de distancia del lugar llegaron congeladas! Les daría 0 estrella pero no está la opción. Como se nota que no les importa el trabajo, encima que abren solo 2 hrs y media venden esto?? Les importa muu poco perder clientes. NUNCA MÁS",
+      "text_translated": "",
+      "published_at": "2019-02-24T02:01:36.067806Z"
+    },
+    {
+      "Name": "Juan Villanueva",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJB0Ha0OJTGXKi3YpfcY0utu-1a4fCi__OkiecfW661I431Xw=s120-c-rp-mo-br100",
+      "Rating": 5,
+      "Description": "Muy ricas tanto las pizzas como las empanadas. Tienen variedad y buen precio.  Excelente atención y puntualidad en la entrega. Muy recomendable. Juan y Bárbara.",
+      "Images": null,
+      "When": "Hace 9 años",
+      "review_id": "ChZDSUhNMG9nS0VJQ0FnSURRemJHWUVnEAE",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 5,
+      "author_url": "https://www.google.com/maps/contrib/100768358245537580852/reviews?hl=es-419",
+      "posted_at_unix_micros": 1499462669907000,
+      "updated_at_unix_micros": 1499462808532000,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Muy ricas tanto las pizzas como las empanadas. Tienen variedad y buen precio.  Excelente atención y puntualidad en la entrega. Muy recomendable. Juan y Bárbara.",
+      "text_translated": "",
+      "published_at": "2017-07-07T21:24:29.907Z"
+    },
+    {
+      "Name": "Luciano Manfredi",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjV8LstFmiV3i2uzuT9YOw7FBU7NxCp99PhQoVDCOf9WKRqWSp-B=s120-c-rp-mo-ba12-br100",
+      "Rating": 4,
+      "Description": "Si vivís en San Fernando no podes dejar de probar estás riquísimas pizza (la especialidad) entre otras comidas que ofrecen. La atención excelente y los precios son económicos, tiene envío a domicilio. Recomendado lugar.",
+      "Images": null,
+      "When": "Hace 9 años",
+      "review_id": "ChZDSUhNMG9nS0VJQ0FnSUNRNUotVUVnEAE",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 4,
+      "author_url": "https://www.google.com/maps/contrib/114877825490260407532/reviews?hl=es-419",
+      "posted_at_unix_micros": 1493935884907000,
+      "updated_at_unix_micros": 1493936034625000,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Si vivís en San Fernando no podes dejar de probar estás riquísimas pizza (la especialidad) entre otras comidas que ofrecen. La atención excelente y los precios son económicos, tiene envío a domicilio. Recomendado lugar.",
+      "text_translated": "",
+      "published_at": "2017-05-04T22:11:24.907Z"
+    }
+  ],
+  "user_reviews_extended": null,
+  "emails": null
+}

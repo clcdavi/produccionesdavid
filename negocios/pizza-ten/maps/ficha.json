@@ -1,0 +1,82 @@
+{
+  "extraccion": {
+    "fecha": "2026-10-20 19:58",
+    "url_entrada": "https://www.google.com/maps/place/Pizza+Ten/data=!4m7!3m6!1s0x95bca56a1b93afcd:0x3421ce1911fee756!8m2!3d-34.4515081!4d-58.5717899!16s%2Fg%2F1tdskzkx!19sChIJza-TG2qlvJURVuf-ERnOITQ",
+    "url_completa": "https://www.google.com/maps/place/Pizza+Ten/data=!4m7!3m6!1s0x95bca56a1b93afcd:0x3421ce1911fee756!8m2!3d-34.4515081!4d-58.5717899!16s%2Fg%2F1tdskzkx!19sChIJza-TG2qlvJURVuf-ERnOITQ",
+    "fuente": "local"
+  },
+  "nombre": "Pizza Ten",
+  "categoria": "Pizzería",
+  "categorias": [
+    "Pizzería"
+  ],
+  "subtitulo_google": null,
+  "descripcion": null,
+  "direccion": "Suipacha 1108, B1646BLX San Fernando, Provincia de Buenos Aires",
+  "direccion_completa": {
+    "borough": "",
+    "street": "Suipacha 1108",
+    "city": "San Fernando",
+    "postal_code": "B1646",
+    "state": "Provincia de Buenos Aires",
+    "country": "AR"
+  },
+  "telefono": "011 6623-7552",
+  "web": "http://instagram.com/pizzaten_sanfer",
+  "emails": [],
+  "horarios": {
+    "lunes": "Cerrado",
+    "martes": "7:30–10:30 p. m.",
+    "miércoles": "7:30–10:30 p. m.",
+    "jueves": "7:30–10:30 p. m.",
+    "viernes": "7:30–10:30 p. m.",
+    "sábado": "7:30–10:30 p. m.",
+    "domingo": "7:30–10:30 p. m."
+  },
+  "rango_precios": null,
+  "valoracion": 4.4,
+  "num_resenas": 156,
+  "reparto_estrellas": {
+    "5": 103,
+    "4": 29,
+    "3": 17,
+    "2": 2,
+    "1": 5
+  },
+  "coordenadas": {
+    "lat": -34.4515081,
+    "lng": -58.5717899
+  },
+  "plus_code": "GCXH+97 San Fernando, Provincia de Buenos Aires",
+  "zona_horaria": "America/Buenos_Aires",
+  "propietario": {
+    "id": "100040651359808598568",
+    "name": "Pizza Ten (propietario)",
+    "link": "https://www.google.com/maps/contrib/100040651359808598568"
+  },
+  "carta": null,
+  "reservas": null,
+  "pedidos_online": null,
+  "tarjetas_aceptadas": null,
+  "atributos": {
+    "Accesibilidad": {
+      "si": [],
+      "no": [
+        "Estacionamiento accesible para personas en silla de ruedas",
+        "Sanitarios accesibles para personas en silla de ruedas"
+      ]
+    }
+  },
+  "horas_punta": {},
+  "miniatura": "https://lh3.googleusercontent.com/grass-cs/AABkmLe3G5dk8k2H7m1mNNV4CTbt-FbeXL3ONqTUsCP920JxTt_sEsEwefUMgQcOSbc4HeEmNemhERFReXBjBk0s5iJhFZwitAaco4KVZrSTwQzxpAJMyVZMImYM5RfGv4OEkMKgQdYRnQ=w408-h544-k-no",
+  "ids": {
+    "place_id": "ChIJza-TG2qlvJURVuf-ERnOITQ",
+    "cid": "3756510171275126614",
+    "data_id": "0x95bca56a1b93afcd:0x3421ce1911fee756"
+  },
+  "enlaces": {
+    "maps": "https://www.google.com/maps/place/Pizza+Ten/@-34.4515081,-58.5717899,17z/data=!3m1!4b1!4m6!3m5!1s0x95bca56a1b93afcd:0x3421ce1911fee756!8m2!3d-34.4515081!4d-58.5717899!16s%2Fg%2F1tdskzkx?hl=es&hl=es&entry=ttu&g_ep=EgoyMDI2MTAxOC4wIKXMDSoASAFQAw%3D%3D",
+    "resenas": "https://search.google.com/local/reviews?placeid=ChIJza-TG2qlvJURVuf-ERnOITQ&q=Pizza+Ten&authuser=0&hl=es&gl=AR",
+    "street_view": null
+  }
+}

@@ -8,7 +8,7 @@ description: Escribe guiones de Reel para clientes de Producciones David (15, 30
 ## Reglas fijas
 - Español rioplatense con voseo (vos, tenés, escribinos, mirá). Nunca tuteo neutro.
 - Marca: Marfil, Carbón, Terracota, Montserrat. Horarios en GMT-3.
-- Si existe `clientes/<cliente>/`, leelo antes (rubro, oferta, zona, fotos y videos disponibles). Si no hay datos, preguntá; **no inventes** cifras, reseñas, precios ni resultados.
+- Si existe `negocios/<cliente>/`, leelo antes (`material/dossier.md`, `maps/resumen.md`, fotos en `maps/fotos/` y `aportado/`). Si no hay datos, preguntá; **no inventes** cifras, reseñas, precios ni resultados.
 - Nada se publica sin confirmación explícita de David en el chat.
 
 ## Entradas (pedí solo lo que falte)

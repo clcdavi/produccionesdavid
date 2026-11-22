@@ -6,7 +6,7 @@ description: Genera bancos de ideas de contenido para un cliente de Producciones
 # Banco de ideas
 
 ## Reglas fijas
-- Voseo rioplatense. Leé `clientes/<cliente>/` y `marca/` si existen. Sin datos del rubro o del cliente ideal, preguntá antes de generar.
+- Voseo rioplatense. Leé `negocios/<cliente>/` (empezá por `material/dossier.md` y `maps/resumen.md`) y la marca en `assets/branding/producciones-david/` si existen. Sin datos del rubro o del cliente ideal, preguntá antes de generar.
 - **No inventes** estadísticas ni casos. Si una idea necesita un dato, marcala `[dato a confirmar]`.
 - Ideas distintas entre sí: cero variaciones superficiales del mismo tema.
 

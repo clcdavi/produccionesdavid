@@ -1,0 +1,25 @@
+{
+  "titulo": "What About Action?",
+  "artista": "Diego Nava",
+  "genero": "Dance-Pop",
+  "duracion": 117,
+  "fuente": "Mixkit",
+  "mp3": "https://assets.mixkit.co/music/474/474.mp3",
+  "licencia": "Mixkit Stock Music Free License",
+  "licencia_url": "https://mixkit.co/license/#musicFree",
+  "atribucion_obligatoria": false,
+  "archivo": "musica/musica.mp3",
+  "ritmo": {
+    "bpm": 120.99,
+    "pulso": 0.4959,
+    "compas": 1.9836,
+    "inicio": 16.539,
+    "caida": 18.523,
+    "compases": 15,
+    "fin": 48.277,
+    "final_natural": true,
+    "caida_con_subida": true,
+    "claridad": 3.08
+  },
+  "creditos": "Música: «What About Action?» de Diego Nava (Mixkit)"
+}

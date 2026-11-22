@@ -1,0 +1,24 @@
+{
+  "titulo": "Pizza Ten",
+  "formato": "vertical",
+  "fuentes": ["Unbounded", "Montserrat", "Space Grotesk", "Plex Mono"],
+  "musica": {
+    "archivo": "musica/musica.mp3",
+    "volumen": 0.95
+  },
+  "planos": [
+    {"id": "gancho",   "medio": "maps/fotos/0009.jpg", "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "logo",     "medio": "maps/fotos/0001.jpg", "compases": 1.5, "encuadre": "55% 25%"},
+    {"id": "napo",     "medio": "maps/fotos/0006.jpg", "compases": 2,   "encuadre": "50% 50%", "antes": 0.35},
+    {"id": "rucula",   "medio": "maps/fotos/0008.jpg", "compases": 1.5, "encuadre": "50% 50%"},
+    {"id": "roquefort","medio": "maps/fotos/0002.jpg", "compases": 1.5, "encuadre": "50% 50%"},
+    {"id": "emp1",     "medio": "maps/fotos/0003.jpg", "compases": 1.5, "encuadre": "50% 50%"},
+    {"id": "r1",       "medio": "maps/fotos/0004.jpg", "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "r2",       "medio": "maps/fotos/0005.jpg", "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "r3",       "medio": "maps/fotos/0007.jpg", "compases": 1,   "encuadre": "50% 50%"},
+    {"id": "resena",   "medio": "maps/fotos/0006.jpg", "compases": 2,   "encuadre": "50% 60%", "antes": 0.35},
+    {"id": "cierre",   "medio": "maps/fotos/0009.jpg", "compases": 2,   "extra": 1.3, "encuadre": "50% 45%", "antes": 0.4}
+  ],
+  "diseno": "anuncio/diseno",
+  "salida": "pizza-ten-anuncio.mp4"
+}

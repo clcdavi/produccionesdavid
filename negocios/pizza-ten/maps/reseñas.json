@@ -1,0 +1,81 @@
+[
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2poRlRGUk5TVTg0V0dOSWJEZHdObFJJV0daVVdHYxAB",
+    "autor": "Tatiana",
+    "url_autor": "https://www.google.com/maps/contrib/102805753793691776191/reviews?hl=es",
+    "foto_autor": "https://lh3.googleusercontent.com/a-/ALV-UjXhA5Yfm4oGYidscUpylpvur1PCjNr0tdsmx1rCDMCnVwmkfHs=s256-c",
+    "valoracion": 5.0,
+    "fecha": "2026-04-23",
+    "texto": "Primera vez que pedimos, somos de Tigre, a unas cuadras del acceso. Y la verdad nos encantó, súper rica, nos pedimos la pizza napolitana con jamón. Llego súper rápido, en 15 min de no creer un viernes a la noche! Un 10 todo… muy rica pizza, fresca. Excelente servicio. Los felicito, volveremos a comprar!",
+    "textos_por_idioma": null,
+    "respuesta_propietario": null,
+    "me_gusta": 0,
+    "subvaloraciones": null,
+    "fotos": [
+      "https://lh3.googleusercontent.com/grass-cs/AABkmLc3Eb7VM-pbbw31_wJMz-r41Rl3i7lobZ6lCSnjnKtckE2unnapy7RXlsX_SDlYD-ZYsDnFRzxZg1GLOEYZV4Kc1BNNzsDUqM6If6xHnsMY6b4wt5DaOySEHQhrYBNk4hLG3VgC65MO0bsf=w2048-h2048-k-no"
+    ],
+    "fotos_locales": [
+      "fotos_reseñas/0001_tatiana_1.jpg"
+    ]
+  },
+  {
+    "id": "Ci9DQUlRQUNvZENodHljRjlvT2pOT01FWTNSREphUlU5cFRsQlRkMGxVVEVWSVFsRRAB",
+    "autor": "Sabrina",
+    "url_autor": "https://www.google.com/maps/contrib/114940764400297213127/reviews?hl=es",
+    "foto_autor": "https://lh3.googleusercontent.com/a-/ALV-UjX47czlWej6CT89mLSnsajwnENj71wemAaNr9Y26ejKt29U3805=s256-c",
+    "valoracion": 5.0,
+    "fecha": "2025-10-20",
+    "texto": "Buena relación preció calidad la muzza no es grasosa la aceitunas no son duras el tamaño es estadar y el tiempo de espera es mínimo. Atienden de martes a domingo y hasta las 22:30 podes hacer tu pedido.🍕",
+    "textos_por_idioma": null,
+    "respuesta_propietario": null,
+    "me_gusta": 0,
+    "subvaloraciones": null,
+    "fotos": [],
+    "fotos_locales": []
+  },
+  {
+    "id": "ChZDSUhNMG9nS0VJQ0FnSUNvbmVId0lBEAE",
+    "autor": "Romina Andrea Maldonado",
+    "url_autor": "https://www.google.com/maps/contrib/110677015692501236075/reviews?hl=es",
+    "foto_autor": "https://lh3.googleusercontent.com/a-/ALV-UjVqBGUg5PYz0mrXC2MQPyi_LelaiF2ApHlgKkTQFb3hsbK3_43gEw=s256-c",
+    "valoracion": 1.0,
+    "fecha": "2019-10-22",
+    "texto": "Horribles! Después de un tiempo compramos hoy, espantosas! Parecen prepizzas viejas, encima viviendo a 15 cuadras de distancia del lugar llegaron congeladas! Les daría 0 estrella pero no está la opción. Como se nota que no les importa el trabajo, encima que abren solo 2 hrs y media venden esto?? Les importa muu poco perder clientes. NUNCA MÁS",
+    "textos_por_idioma": null,
+    "respuesta_propietario": null,
+    "me_gusta": 0,
+    "subvaloraciones": null,
+    "fotos": [],
+    "fotos_locales": []
+  },
+  {
+    "id": "ChZDSUhNMG9nS0VJQ0FnSUNRNUotVUVnEAE",
+    "autor": "Luciano Manfredi",
+    "url_autor": "https://www.google.com/maps/contrib/114877825490260407532/reviews?hl=es",
+    "foto_autor": "https://lh3.googleusercontent.com/a-/ALV-UjV8LstFmiV3i2uzuT9YOw7FBU7NxCp99PhQoVDCOf9WKRqWSp-B=s256-c",
+    "valoracion": 4.0,
+    "fecha": "2017-10-22",
+    "texto": "Si vivís en San Fernando no podes dejar de probar estás riquísimas pizza (la especialidad) entre otras comidas que ofrecen. La atención excelente y los precios son económicos, tiene envío a domicilio. Recomendado lugar.",
+    "textos_por_idioma": null,
+    "respuesta_propietario": null,
+    "me_gusta": 0,
+    "subvaloraciones": null,
+    "fotos": [],
+    "fotos_locales": []
+  },
+  {
+    "id": "ChZDSUhNMG9nS0VJQ0FnSURRemJHWUVnEAE",
+    "autor": "Juan Villanueva",
+    "url_autor": "https://www.google.com/maps/contrib/100768358245537580852/reviews?hl=es",
+    "foto_autor": "https://lh3.googleusercontent.com/a/ACg8ocJB0Ha0OJTGXKi3YpfcY0utu-1a4fCi__OkiecfW661I431Xw=s256-c",
+    "valoracion": 5.0,
+    "fecha": "2017-10-22",
+    "texto": "Muy ricas tanto las pizzas como las empanadas. Tienen variedad y buen precio.  Excelente atención y puntualidad en la entrega. Muy recomendable. Juan y Bárbara.",
+    "textos_por_idioma": null,
+    "respuesta_propietario": null,
+    "me_gusta": 0,
+    "subvaloraciones": null,
+    "fotos": [],
+    "fotos_locales": []
+  }
+]

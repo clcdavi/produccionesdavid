@@ -1,4 +1,31 @@
-.env
-.DS_Store
-*.key
+# Credenciales y Secretos
+*credenciales*.json
+claves_*.json
+*.env
+*.env.*
+.enfoco_config.json
+
+# Entornos virtuales y caches
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
 node_modules/
+.DS_Store
+
+# Archivos temporales de render
+*.aac
+*.mp3
+_concat_list.txt
+_tmp_*.html
+*.log
+*.mp4
+!assets/branding/producciones-david/outro-logo*.mp4
+
+# Sesiones de navegador y capturas locales
+mcp-tiktok/tiktok_user_session/
+mcp-tiktok/screenshots/
+
+# Claves y config local de Claude Code
+*.key
+.claude/settings.local.json

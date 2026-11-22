@@ -1,0 +1,214 @@
+{
+  "longitude": -58.5658253,
+  "input_id": "136a67cb-b14e-4ed5-84cd-c447b79ac5fd",
+  "link": "https://www.google.com/maps/place/Parrilla+La+Reja/@-34.448636,-58.5658253,17z/data=!3m1!4b1!4m6!3m5!1s0x95bca529a770d72f:0xee58326e16d2618a!8m2!3d-34.448636!4d-58.5658253!16s%2Fg%2F11bbrlpn1j?hl=es?hl=es&entry=ttu&g_ep=EgoyMDI2MTAxOC4wIKXMDSoASAFQAw%3D%3D",
+  "cid": "17174532627388064138",
+  "title": "Parrilla La Reja",
+  "categories": [
+    "Restaurante"
+  ],
+  "category": "Restaurante",
+  "address": "Av. Hipólito Yrigoyen 2393, B1646 San Fernando, Provincia de Buenos Aires",
+  "open_hours": {
+    "domingo": [
+      "12–4 p. m.",
+      "8 p. m.–12 a. m."
+    ],
+    "jueves": [
+      "12–4 p. m.",
+      "8 p. m.–12 a. m."
+    ],
+    "lunes": [
+      "Cerrado"
+    ],
+    "martes": [
+      "12–4 p. m."
+    ],
+    "miércoles": [
+      "12–4 p. m."
+    ],
+    "sábado": [
+      "12–4 p. m.",
+      "8 p. m.–12 a. m."
+    ],
+    "viernes": [
+      "12–4 p. m.",
+      "8 p. m.–12 a. m."
+    ]
+  },
+  "popular_times": {},
+  "web_site": "",
+  "phone": "011 4549-2942",
+  "plus_code": "HC2M+GM San Fernando, Provincia de Buenos Aires",
+  "review_count": 2178,
+  "review_rating": 4.2,
+  "reviews_per_rating": {
+    "1": 116,
+    "2": 75,
+    "3": 217,
+    "4": 514,
+    "5": 1256
+  },
+  "latitude": -34.448636,
+  "longtitude": -58.5658253,
+  "status": "",
+  "description": "",
+  "reviews_link": "https://search.google.com/local/reviews?placeid=ChIJL9dwpymlvJURimHSFm4yWO4&q=Parrilla+La+Reja&authuser=0&hl=es&gl=AR",
+  "thumbnail": "https://lh3.googleusercontent.com/grass-cs/AABkmLfSNikLsJoYKR1ywyq4O4rVJb-ekSVNckkOHX3Gw-1TfKoRsbjDEruwvMXOMjVStNg-Oj_78VXIc4JRBCktaj7Q6Yp1u3jgLrQqZlbrPvCzMJQyZp6stV6_nlKjJPEuR5JMg0lu=w426-h240-k-no",
+  "timezone": "America/Buenos_Aires",
+  "price_range": "",
+  "data_id": "0x95bca529a770d72f:0xee58326e16d2618a",
+  "street_view_url": "",
+  "place_id": "ChIJL9dwpymlvJURimHSFm4yWO4",
+  "images": [],
+  "reservations": null,
+  "order_online": null,
+  "menu": {
+    "link": "",
+    "source": ""
+  },
+  "owner": {
+    "id": "",
+    "name": "Parrilla La Reja (propietario)",
+    "link": ""
+  },
+  "complete_address": {
+    "borough": "",
+    "street": "Av. Hipólito Yrigoyen 2393",
+    "city": "San Fernando",
+    "postal_code": "B1646",
+    "state": "Provincia de Buenos Aires",
+    "country": "AR"
+  },
+  "credit_cards_accepted": null,
+  "about": [
+    {
+      "id": "accessibility",
+      "name": "Accesibilidad",
+      "options": [
+        {
+          "name": "Entrada accesible para personas en silla de ruedas",
+          "enabled": true
+        }
+      ]
+    }
+  ],
+  "user_reviews": [
+    {
+      "Name": "gabriela fabiana sosa claverí",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjWsSocp6MCxCwW8zV4TH5bzCRRXofNlyGb8dRro0FmGNdC9Q6GgNA=s120-c-rp-mo-ba12-br100",
+      "Rating": 5,
+      "Description": "Hoy domingo fui por primera vez...y pedimos un mix de achuras...A comparación del bodegón de Tigre x ejemplo, aquí el plato era más chico, pero estaba todo rico. El servicio de 10, la atención excelente...súper amables. El lugar muy familiar, cálido. Y las empanadas riquísimas, una delicia. Y como broche de oro, no te vallas sin probar las frutillas con crema😋, me encantó!!! Gracias por todo. Saluditos",
+      "Images": null,
+      "When": "Hace 2 meses",
+      "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2xaWVIzbHRRMUpZV0dKWFlYRmFYM290UkhKUVNWRRAB",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 5,
+      "author_url": "https://www.google.com/maps/contrib/117724443716247570467/reviews?hl=es-419",
+      "posted_at_unix_micros": 1785695264797480,
+      "updated_at_unix_micros": 1785695264797480,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Hoy domingo fui por primera vez...y pedimos un mix de achuras...A comparación del bodegón de Tigre x ejemplo, aquí el plato era más chico, pero estaba todo rico. El servicio de 10, la atención excelente...súper amables. El lugar muy familiar, cálido. Y las empanadas riquísimas, una delicia. Y como broche de oro, no te vallas sin probar las frutillas con crema😋, me encantó!!! Gracias por todo. Saluditos",
+      "text_translated": "",
+      "published_at": "2026-08-02T18:27:44.79748Z"
+    },
+    {
+      "Name": "Lorena Costilla",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjVDnDcuaIW9w8tgWkCSw_s7vzGFhi5LRgklJFnB_67bh7loJwy8=s120-c-rp-mo-br100",
+      "Rating": 3,
+      "Description": "Hola vine a mandar esta reseña por que. El choripan y la primer milanesa estaba rica. Pero se tardaron mucho y el ambiente no era tan bueno que digamos. La segunda milanesa está muy abombada y el precio era muy alto más con un milanesa que era inaceptable el sabor y parecía que era recalentada o que llevaba meses sin sacar. Para algo pagamos, nuestra plata les da su sueldo y nos parece una falta de respeto que nos manden tal cosa a la mesa. ¡Mal servicio nunca mas! 😠🤌",
+      "Images": [
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLday3VObzMc0jObYiWoTIQPpw-wpTSu2Rvf8fIsqy_zELggmbH0eeHEyR_gaiWdCnLHyeuZHRBL0_7QVIiH4jcJ6evuFW_-qztu9IYze8_Z_xu_y_vqA67Nau5w5Z_ggqRKtZ9_=k-no",
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLcd8D8wbAyZNqv2QZTiZIkpPExjyTeoItkqZfthNJA1WOAiMlqefHlIcZAEm6E2nfSAabyCBxii7SsMb5dwVnCjISMmvgQ6_UrPOgGbU8keo2ZNhqPksd2yGOTukIMJxXyICmDT=k-no",
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLchisFBQfPUACKfdxbv70CZO-TYdkQ7I40Lla0_aOWa8f4drmAoe9UpTygXfBOC2UxzIMKOh8VCSLro2OhL4tX-GlGHYRqVy6JMS2BCmO85K2V7nGIxe5_UvpTMHFOUOyQSjyqK=k-no"
+      ],
+      "When": "Hace 2 años",
+      "review_id": "ChdDSUhNMG9nS0VJQ0FnSUQ5N3YzbnVRRRAB",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 3,
+      "author_url": "https://www.google.com/maps/contrib/112054205554959941395/reviews?hl=es-419",
+      "posted_at_unix_micros": 1710642376255787,
+      "updated_at_unix_micros": 1710713558339363,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Hola vine a mandar esta reseña por que. El choripan y la primer milanesa estaba rica. Pero se tardaron mucho y el ambiente no era tan bueno que digamos. La segunda milanesa está muy abombada y el precio era muy alto más con un milanesa que era inaceptable el sabor y parecía que era recalentada o que llevaba meses sin sacar. Para algo pagamos, nuestra plata les da su sueldo y nos parece una falta de respeto que nos manden tal cosa a la mesa. ¡Mal servicio nunca mas! 😠🤌",
+      "text_translated": "",
+      "published_at": "2024-03-17T02:26:16.255787Z"
+    },
+    {
+      "Name": "Matias Romero",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a/ACg8ocJ4Y9GoLE3iqjdvDLZvZs_anOAZCT4RuxRMPfQLOUhIHk0q9Q=s120-c-rp-mo-br100",
+      "Rating": 1,
+      "Description": "Las últimas 2 veces que fui la comida un asco toda recalentada seca incomible un desastre la parrilla ma ultima vez que fui pedí una milanesa que dice para 2 no come ni 1 persona y un asco la.milanesa y el pure incomible no recomiendo para nada y encima los precios muy caro para la calidad que te venden",
+      "Images": [
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLdFjor05MIgg_McYRg2U7EF8Q0OuOC6XwaT3IPWJtQ3s2708Vw83vgsrL3dS7huuTQFPNDD_RRoqs5UsyYKagJriTl_CdbcVclYM8lCw8xDXccSgALbdovhlifVW7XW4Vys_IF38ES4DgD_=k-no",
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLe8i85jqYV1Y5vsr9hSFOCXcqw27KTCqfRgbErJl0_VWJqpAiLw9orSAS2-Pl-MKEFsQ_3dCTxB99ENpOjfxZkoiDLRPHT9AvbWJudxHL9-mJFlCO-buhkzsnQ0Xar88oF7FEXL_NOYJJU=k-no"
+      ],
+      "When": "Hace 11 meses",
+      "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2xaR1dsQm5SRUZ6TVVoUVRGZENXV3R4Tm5CamQzYxAB",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 1,
+      "author_url": "https://www.google.com/maps/contrib/102090732436767978589/reviews?hl=es-419",
+      "posted_at_unix_micros": 1761601775839164,
+      "updated_at_unix_micros": 1761601775839164,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Las últimas 2 veces que fui la comida un asco toda recalentada seca incomible un desastre la parrilla ma ultima vez que fui pedí una milanesa que dice para 2 no come ni 1 persona y un asco la.milanesa y el pure incomible no recomiendo para nada y encima los precios muy caro para la calidad que te venden",
+      "text_translated": "",
+      "published_at": "2025-10-27T21:49:35.839164Z"
+    },
+    {
+      "Name": "Mariana Tortelli",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjVYIwPnlnMNJfkb1eRvP-2NozHGx3D_1IgWHoB3wZYAKSPN800y=s120-c-rp-mo-ba12-br100",
+      "Rating": 4,
+      "Description": "El lugar está bueno. Se puede conversar porque no es muy ruidoso. No sobra el lugar. Fui en un día de lluvia y estaba lleno. La comida es buena y hay buena relación calidad y precio. Éramos 6 y pedimos parrillada, 2 ensaladas, 2 porciones de papas fritas, postre y 1 botella de vino y gastamos a razón de $11000 c/u pagando en efectivo (abril 2024).\nTe hacen un descuento del 20% por pago efectivo.",
+      "Images": [
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLdcnWVV_mD9X-rj_4NFOORhROp78pwYCGPHepD7IwJ0hxEuXlps8_-FKvMxpRor6jB0qPXKRw4Ik9cseKTXEy8HmLq9bmbJFeNBzNcvGlyac3KOtuPzLFrh58HzcQWSecYJEB6N=k-no",
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLceAgWXY-1PX2kFg0cG0jls7f4E9TjM1YrJ3xs1DmdOauSLAYleBghYT6zhLctbBzUlMbD35dOmCJgpYXjKuID6z1IGpA8Wnq7IhV0-X3IiPiE9ZPieEw1tS5xdD-o9piPENvxw=k-no",
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLeIPjdDGaS7jGRIogaG19YU1n3d-CmstP7zFze5LxZ_f9DsSVw2rjvHCZXwXhZU_AEQ0kpWpriA3FWPiBhFX1wcagh0nKodX8d7GvVZDPzBORWiNgLi2SgQjLBGLcaJTH8W-YipWA=k-no"
+      ],
+      "When": "Hace 2 años",
+      "review_id": "ChZDSUhNMG9nS0VJQ0FnSUNqN3AtM0J3EAE",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 4,
+      "author_url": "https://www.google.com/maps/contrib/112685339297079581538/reviews?hl=es-419",
+      "posted_at_unix_micros": 1713742757211223,
+      "updated_at_unix_micros": 1713742757211223,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "El lugar está bueno. Se puede conversar porque no es muy ruidoso. No sobra el lugar. Fui en un día de lluvia y estaba lleno. La comida es buena y hay buena relación calidad y precio. Éramos 6 y pedimos parrillada, 2 ensaladas, 2 porciones de papas fritas, postre y 1 botella de vino y gastamos a razón de $11000 c/u pagando en efectivo (abril 2024).\nTe hacen un descuento del 20% por pago efectivo.",
+      "text_translated": "",
+      "published_at": "2024-04-21T23:39:17.211223Z"
+    },
+    {
+      "Name": "Claudia Francalancia",
+      "ProfilePicture": "https://lh3.googleusercontent.com/a-/ALV-UjUl9Cl2U2r_O7L6C3SoVLU_afpYuQsllGBWUXpH-vKFFwuAjC5Kgw=s120-c-rp-mo-ba12-br100",
+      "Rating": 4,
+      "Description": "Buena porción Buena carne Bien precio Excelente servicio ...Super recomendable 💙❤️💙",
+      "Images": [
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLeZrlrMcLlcb__ZHWMy21IXHPJkwoJqPiWxAExtfhiLOBdYjN-OiWfgsXqSiRzB3EgCnCfLeU2CU1DA8ga_de0s0NDe8swbUw7Qu_qVaz0K3sJ4hFSNFuGdoYudlbA9z2LWZpivUWBCcEmd=k-no",
+        "https://lh3.googleusercontent.com/grass-cs/AABkmLcWGmOJwyzqnnypGCXpyhwVKA3nepIhgr-S5uC0Cja2scwE_jkN6eJf-CZKSGnGreE9ewmRub_3r5kk88s7rV3AUmQqJ89prGwltJtRPXj6c5RKMLtKnqxNqrwfZBMOiaBR8C_hDYWlGdn3=k-no"
+      ],
+      "When": "Editado Hace 3 meses",
+      "review_id": "Ci9DQUlRQUNvZENodHljRjlvT2t4MWJVVjZhMHd5YzNSa1VITlNOVzlGWXkxc1dYYxAB",
+      "source": "Google",
+      "rating_scale": 5,
+      "rating_float": 4,
+      "author_url": "https://www.google.com/maps/contrib/118186885898678237955/reviews?hl=es-419",
+      "posted_at_unix_micros": 1776014380631015,
+      "updated_at_unix_micros": 1782067529936879,
+      "language": "es",
+      "translated_lang": "",
+      "text_original": "Buena porción Buena carne Bien precio Excelente servicio ...Super recomendable 💙❤️💙",
+      "text_translated": "",
+      "published_at": "2026-04-12T17:19:40.631015Z"
+    }
+  ],
+  "user_reviews_extended": null,
+  "emails": null
+}
